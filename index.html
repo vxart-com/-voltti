@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Streaming</title>
+    <title>VOLTTI - Streaming Profissional</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,20 +12,20 @@
         <div class="logo">VOLTTI</div>
         <nav>
             <ul>
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Filmes</a></li>
-                <li><a href="#">Séries</a></li>
-                <li><a href="#">TV</a></li>
+                <li><a href="#" onclick="carregarConteudo('todos')">Início</a></li>
+                <li><a href="#" onclick="carregarConteudo('filme')">Filmes</a></li>
+                <li><a href="#" onclick="carregarConteudo('tv')">TV Aberta</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="catalogo"></main>
+    <main id="catalogo">
+        </main>
 
     <div id="videoPlayer" class="modal">
         <div class="modal-content">
             <span class="close" onclick="fecharPlayer()">&times;</span>
-            <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="videoFrame" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
         </div>
     </div>
 
