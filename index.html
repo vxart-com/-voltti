@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Filmes e Séries</title>
+    <title>VOLTTI - Streaming Profissional</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,11 +12,9 @@
     <header>
         <div class="header-container">
             <div class="logo" onclick="carregarConteudo('todos')">VOLT<span>TI</span></div>
-            
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Pesquisar filme..." onkeyup="buscarFilme()">
+                <input type="text" id="searchInput" placeholder="Pesquisar..." onkeyup="buscarFilme()">
             </div>
-
             <nav>
                 <ul>
                     <li><a href="#" onclick="carregarConteudo('todos')">Início</a></li>
@@ -28,6 +26,20 @@
     </header>
 
     <main id="catalogo"></main>
+
+    <div id="detalhesModal" class="modal">
+        <div class="modal-content-detalhes">
+            <span class="close" onclick="fecharDetalhes()">×</span>
+            <div class="detalhes-flex">
+                <img id="detalheCapa" src="" alt="">
+                <div class="detalhe-info">
+                    <h2 id="detalheTitulo"></h2>
+                    <p id="detalheSinopse"></p>
+                    <button id="btnPlay" class="play-btn">Assistir Agora</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="videoPlayer" class="modal">
         <div class="modal-content">
