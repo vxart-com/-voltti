@@ -1,10 +1,15 @@
-// Banco de dados do VOLTTI
+// BANCO DE DADOS DO VOLTTI
 const baseDeDados = [
     {
         titulo: "A Morte Pede Carona (2007)",
-        // Pegamos o ID da sua capa e usamos o link de exportação direta do Google
-        capa: "https://lh3.googleusercontent.com/d/13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q",
+        capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q",
         videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo",
+        tipo: "filme"
+    },
+    {
+        titulo: "Cão de Briga (2005)",
+        capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0",
+        videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH",
         tipo: "filme"
     }
 ];
@@ -13,7 +18,7 @@ const catalogo = document.getElementById('catalogo');
 const modal = document.getElementById('videoPlayer');
 const iframe = document.getElementById('videoFrame');
 
-// Função para renderizar os filmes na tela
+// Função para mostrar os filmes no site
 function carregarConteudo(filtro = 'todos') {
     catalogo.innerHTML = "";
     
@@ -22,50 +27,43 @@ function carregarConteudo(filtro = 'todos') {
             const card = document.createElement('div');
             card.classList.add('card');
             
-            // Estrutura do Card
+            // Link que transforma o ID do Drive em imagem visível
+            const urlCapa = `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
+            
             card.innerHTML = `
-                <img src="${item.capa}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/300x450?text=Carregando...'">
+                <img src="${urlCapa}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/300x450?text=Capa+Indisponível'">
                 <div class="card-info">
                     <h3>${item.titulo}</h3>
                 </div>
             `;
             
-            // Ação de clique para abrir o player
-            card.onclick = () => abrirPlayer(item.videoID, item.tipo);
+            card.onclick = () => abrirPlayer(item.videoID);
             catalogo.appendChild(card);
         }
     });
 }
 
-// Função para abrir o Player Modal
-function abrirPlayer(id, tipo) {
-    let urlFinal = "";
-    
-    if (tipo === "filme") {
-        // Link de preview do Drive (mais estável para players)
-        urlFinal = `https://drive.google.com/file/d/${id}/preview`;
-    } else {
-        urlFinal = id; // Para links externos de TV
-    }
-
-    iframe.src = urlFinal;
+// Abre o player dentro do site
+function abrirPlayer(id) {
+    const urlVideo = `https://drive.google.com/file/d/${id}/preview`;
+    iframe.src = urlVideo;
     modal.style.display = "block";
-    document.body.style.overflow = "hidden"; // Trava o scroll da página atrás
+    document.body.style.overflow = "hidden"; // Trava o scroll do site ao assistir
 }
 
-// Função para fechar o Player
+// Fecha o player e para o vídeo
 function fecharPlayer() {
     modal.style.display = "none";
-    iframe.src = ""; // Mata o processo do vídeo
-    document.body.style.overflow = "auto"; // Libera o scroll
+    iframe.src = "";
+    document.body.style.overflow = "auto";
 }
 
-// Fecha o player se clicar fora do vídeo
+// Fecha o player se clicar fora da tela do vídeo
 window.onclick = function(event) {
     if (event.target == modal) {
         fecharPlayer();
     }
 }
 
-// Inicia o site
+// Inicia o site carregando tudo
 carregarConteudo();
