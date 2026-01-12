@@ -1,64 +1,96 @@
-/* Geral */
-body {
-    background-color: #060606;
-    color: white;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+/* Importação de fonte profissional */
+:root {
+    --primary-color: #e50914; /* Vermelho Netflix */
+    --accent-color: #ff3d47;
+    --bg-color: #060606;
+    --card-bg: #141414;
 }
 
-/* Header Estilo Netflix */
+body {
+    background-color: var(--bg-color);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Sofisticado */
 header {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
-    padding: 20px 5%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0) 100%);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background 0.5s;
+}
+
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top: 0; width: 90%; z-index: 1000;
+    padding: 15px 5%;
 }
 
+/* Logo Estilizada */
 .logo {
-    color: #e50914;
-    font-size: 30px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 32px;
+    letter-spacing: -1px;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
+.logo span {
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
+}
+
+/* Menu de Navegação */
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    margin: 0;
 }
 
 nav a {
     color: #e5e5e5;
     text-decoration: none;
     font-size: 14px;
-    transition: 0.3s;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-nav a:hover { color: white; }
+nav a:hover {
+    color: var(--primary-color);
+}
 
-/* Grid de Filmes Responsivo */
+/* Catálogo */
 #catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 25px;
-    padding: 100px 5% 50px 5%;
+    gap: 30px;
+    padding: 120px 5% 50px 5%;
 }
 
-/* Cards */
+/* Cards de Filmes */
 .card {
-    cursor: pointer;
-    transition: transform 0.3s;
-    background: #141414;
-    border-radius: 4px;
+    position: relative;
+    border-radius: 8px;
     overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-.card:hover { transform: scale(1.08); z-index: 2; }
+.card:hover {
+    transform: scale(1.1);
+    z-index: 5;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
 
 .card img {
     width: 100%;
@@ -68,51 +100,54 @@ nav a:hover { color: white; }
 }
 
 .card h3 {
-    font-size: 13px;
-    padding: 10px;
+    background: linear-gradient(transparent, black);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     margin: 0;
+    padding: 20px 10px 10px;
+    font-size: 14px;
     text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-/* Player Modal (O Profissional) */
+/* Player Modal */
 .modal {
     display: none;
     position: fixed;
     z-index: 2000;
     left: 0; top: 0;
     width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.95);
+    background-color: rgba(0,0,0,0.98);
 }
 
 .modal-content {
     position: relative;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 1000px;
+    max-width: 1100px;
     aspect-ratio: 16/9;
 }
 
 #videoFrame {
     width: 100%; height: 100%;
-    border: none;
-    box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+    border: 1px solid #333;
+    border-radius: 4px;
 }
 
 .close {
     position: absolute;
-    top: -45px; right: 0;
+    top: -50px; right: 0;
     color: white; font-size: 40px;
     cursor: pointer;
+    opacity: 0.7;
 }
 
-/* Celular */
-@media (max-width: 600px) {
-    #catalogo { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-    .logo { font-size: 22px; }
-    nav ul { gap: 10px; }
+.close:hover { opacity: 1; }
+
+/* Responsividade Celular */
+@media (max-width: 768px) {
+    .header-container { flex-direction: column; gap: 10px; }
+    .logo { font-size: 26px; }
+    #catalogo { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); padding-top: 150px; }
 }
