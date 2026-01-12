@@ -1,153 +1,68 @@
-/* Importação de fonte profissional */
-:root {
-    --primary-color: #e50914; /* Vermelho Netflix */
-    --accent-color: #ff3d47;
-    --bg-color: #060606;
-    --card-bg: #141414;
-}
-
+/* RESET BÁSICO PARA NÃO FICAR TUDO BAGUNÇADO */
 body {
-    background-color: var(--bg-color);
-    color: white;
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
+    background-color: #060606;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Header Sofisticado */
 header {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0) 100%);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: background 0.5s;
+    background-color: #141414;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #e50914;
 }
 
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-}
-
-/* Logo Estilizada */
 .logo {
-    font-family: 'Oswald', sans-serif;
-    font-size: 32px;
-    letter-spacing: -1px;
-    color: white;
-    text-transform: uppercase;
-    cursor: pointer;
+    color: #e50914;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-.logo span {
-    color: var(--primary-color);
-    text-shadow: 0 0 10px rgba(229, 9, 20, 0.6);
-}
-
-/* Menu de Navegação */
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
 }
 
 nav a {
-    color: #e5e5e5;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
 }
 
-nav a:hover {
-    color: var(--primary-color);
-}
-
-/* Catálogo */
+/* CATÁLOGO PARA AS IMAGENS NÃO FICAREM GIGANTES */
 #catalogo {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 30px;
-    padding: 120px 5% 50px 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
-/* Cards de Filmes */
 .card {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-
-.card:hover {
-    transform: scale(1.1);
-    z-index: 5;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    background: #1c1c1c;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
 }
 
 .card img {
-    width: 100%;
-    aspect-ratio: 2/3;
-    object-fit: cover;
-    display: block;
+    width: 100%; /* Isso impede a imagem de ficar gigante como no seu print */
+    aspect-ratio: 2/3;
+    object-fit: cover;
 }
 
 .card h3 {
-    background: linear-gradient(transparent, black);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    margin: 0;
-    padding: 20px 10px 10px;
-    font-size: 14px;
-    text-align: center;
+    font-size: 14px;
+    padding: 10px;
 }
 
-/* Player Modal */
+/* PLAYER MODAL */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.98);
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
 }
-
-.modal-content {
-    position: relative;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 1100px;
-    aspect-ratio: 16/9;
-}
-
-#videoFrame {
-    width: 100%; height: 100%;
-    border: 1px solid #333;
-    border-radius: 4px;
-}
-
-.close {
-    position: absolute;
-    top: -50px; right: 0;
-    color: white; font-size: 40px;
-    cursor: pointer;
-    opacity: 0.7;
-}
-
-.close:hover { opacity: 1; }
-
-/* Responsividade Celular */
-@media (max-width: 768px) {
-    .header-container { flex-direction: column; gap: 10px; }
-    .logo { font-size: 26px; }
-    #catalogo { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); padding-top: 150px; }
-} css padrao mano nao quero outro 
