@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Premium Streaming</title>
+    <title>VOLTTI - Streaming & IPTV</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
 
@@ -25,10 +26,9 @@
     <main id="catalogo"></main>
 
     <div id="videoPlayer" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" id="modalContent">
             <span class="close" onclick="fecharPlayer()">×</span>
-            <iframe id="videoFrame" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
+            </div>
     </div>
 
     <script src="script.js"></script>
