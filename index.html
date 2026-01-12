@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Streaming & IPTV</title>
+    <title>VOLTTI - Filmes e Séries</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
 
-    <header id="mainHeader">
+    <header>
         <div class="header-container">
-            <div class="logo">VOLT<span>TI</span></div>
+            <div class="logo" onclick="carregarConteudo('todos')">VOLT<span>TI</span></div>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Pesquisar filme..." onkeyup="buscarFilme()">
+            </div>
+
             <nav>
                 <ul>
                     <li><a href="#" onclick="carregarConteudo('todos')">Início</a></li>
                     <li><a href="#" onclick="carregarConteudo('filme')">Filmes</a></li>
-                    <li><a href="#" onclick="carregarConteudo('tv')">TV Aberta</a></li>
+                    <li><a href="#" onclick="carregarConteudo('serie')">Séries</a></li>
                 </ul>
             </nav>
         </div>
@@ -26,9 +30,10 @@
     <main id="catalogo"></main>
 
     <div id="videoPlayer" class="modal">
-        <div class="modal-content" id="modalContent">
+        <div class="modal-content">
             <span class="close" onclick="fecharPlayer()">×</span>
-            </div>
+            <iframe id="videoFrame" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+        </div>
     </div>
 
     <script src="script.js"></script>
