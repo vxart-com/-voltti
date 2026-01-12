@@ -1,4 +1,3 @@
-// Aqui você vai adicionando mais filmes e canais seguindo o modelo
 const baseDeDados = [
     {
         titulo: "A Morte Pede Carona (2007)",
