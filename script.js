@@ -1,28 +1,42 @@
-// Lista de filmes (depois vamos alimentar isso com o Google Drive)
-const meusFilmes = [
+// Lista de Filmes, Séries e Canais
+const baseDeDados = [
     {
-        titulo: "Bem-vindo ao VOLTTI",
-        capa: "https://via.placeholder.com/300x450?text=Capa+do+Filme",
-        link: "#"
+        titulo: "A Morte Pede Carona (2007)",
+        capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q",
+        videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo",
+        categoria: "filme"
     }
 ];
 
 const catalogo = document.getElementById('catalogo');
 
-// Função para exibir os filmes na tela
-function carregarFilmes() {
-    catalogo.innerHTML = ""; // Limpa o texto de "carregando"
-    
-    meusFilmes.forEach(filme => {
-        const html = `
-            <div class="card">
-                <img src="${filme.capa}" alt="${filme.titulo}">
-                <h3>${filme.titulo}</h3>
+function carregarConteudo() {
+    catalogo.innerHTML = ""; 
+
+    baseDeDados.forEach(item => {
+        // Link direto para a imagem da capa
+        const urlCapa = `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
+        
+        // Link para o player do Google Drive
+        const urlVideo = `https://drive.google.com/file/d/${item.videoID}/preview`;
+
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.innerHTML = `
+            <img src="${urlCapa}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/300x450?text=Erro+na+Capa'">
+            <div class="filme-info">
+                <h3>${item.titulo}</h3>
             </div>
         `;
-        catalogo.innerHTML += html;
+
+        // Ao clicar, abre o vídeo em uma nova aba (por enquanto)
+        card.onclick = () => {
+            window.open(urlVideo, '_blank');
+        };
+
+        catalogo.appendChild(card);
     });
 }
 
-// Executa a função ao abrir o site
-carregarFilmes();
+// Inicia o site
+carregarConteudo();
