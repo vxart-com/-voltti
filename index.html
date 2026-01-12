@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Streaming</title>
+    <title>VOLTTI - Filmes e Séries</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,7 +13,7 @@
         <div class="header-container">
             <div class="logo" onclick="carregarConteudo('todos')">VOLT<span>TI</span></div>
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Pesquisar..." onkeyup="buscarFilme()">
+                <input type="text" id="searchInput" placeholder="Pesquisar filme..." onkeyup="buscarFilme()">
             </div>
             <nav>
                 <ul>
@@ -24,11 +24,11 @@
             </nav>
         </div>
         <div class="categorias-bar">
-            <button onclick="filtrarPorGenero('todos')">Todos</button>
-            <button onclick="filtrarPorGenero('Terror')">Terror</button>
-            <button onclick="filtrarPorGenero('Ação')">Ação</button>
-            <button onclick="filtrarPorGenero('Suspense')">Suspense</button>
-            <button onclick="filtrarPorGenero('Drama')">Drama</button>
+            <button onclick="filtrarPorGenero('todos')">TODOS</button>
+            <button onclick="filtrarPorGenero('Terror')">TERROR</button>
+            <button onclick="filtrarPorGenero('Ação')">AÇÃO</button>
+            <button onclick="filtrarPorGenero('Suspense')">SUSPENSE</button>
+            <button onclick="filtrarPorGenero('Drama')">DRAMA</button>
         </div>
     </header>
 
@@ -38,11 +38,11 @@
         <div class="modal-content-detalhes">
             <span class="close" onclick="fecharDetalhes()">×</span>
             <div class="detalhes-flex">
-                <img id="detalheCapa" src="" alt="">
+                <img id="detalheCapa" src="" alt="Capa">
                 <div class="detalhe-info">
                     <h2 id="detalheTitulo"></h2>
                     <p id="detalheSinopse"></p>
-                    <button id="btnPlay" class="play-btn">Assistir Agora</button>
+                    <button id="btnPlay" class="play-btn">ASSISTIR AGORA</button>
                 </div>
             </div>
         </div>
