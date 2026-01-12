@@ -5,7 +5,7 @@ const baseDeDados = [
         videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo",
         tipo: "filme",
         genero: "Terror",
-        sinopse: "Uma viagem tranquila se transforma em um pesadelo sangrento quando dois estudantes dão carona a um estranho perigoso."
+        sinopse: "Uma viagem tranquila se transforma em um pesadelo sangrento quando dois estudantes dão carona a um estranho perigoso em uma estrada deserta."
     },
     {
         titulo: "Cão de Briga (2005)",
@@ -13,7 +13,7 @@ const baseDeDados = [
         videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH",
         tipo: "filme",
         genero: "Ação",
-        sinopse: "Um homem criado como um escravo de luta descobre a humanidade através da música."
+        sinopse: "Criado como um escravo de luta, um homem descobre sua humanidade através do amor e da música."
     },
     {
         titulo: "O Massacre da Serra Elétrica (2006)",
@@ -21,7 +21,7 @@ const baseDeDados = [
         videoID: "1-gh6yP-OhYiCsCVa5V4-vUcxk2eXCu2J",
         tipo: "filme",
         genero: "Terror",
-        sinopse: "A história de origem do maníaco Leatherface e sua família canibal no Texas."
+        sinopse: "O prelúdio revela as origens do maníaco Leatherface e de sua família canibal no Texas."
     },
     {
         titulo: "Sem Saída",
@@ -29,7 +29,7 @@ const baseDeDados = [
         videoID: "1pH_Hj9TxMI4rz3fV5xyF22cLTNqsyW8T",
         tipo: "filme",
         genero: "Suspense",
-        sinopse: "Um casal em um lago isolado é aterrorizado por uma gangue de adolescentes sádicos."
+        sinopse: "Um final de semana romântico se torna uma luta pela sobrevivência contra adolescentes sádicos."
     },
     {
         titulo: "Efeito Colateral",
@@ -37,7 +37,7 @@ const baseDeDados = [
         videoID: "13n5AXI_kG6-QTOadQiz-zgCJaG8etqTp",
         tipo: "filme",
         genero: "Ação",
-        sinopse: "Um bombeiro busca vingança contra terroristas que destruíram sua vida."
+        sinopse: "Um bombeiro busca vingança contra o terrorista que matou sua família em um atentado."
     },
     {
         titulo: "Rambo 1",
@@ -45,7 +45,7 @@ const baseDeDados = [
         videoID: "1p1A82w1v_RB_XeNaf2MQGnns22Bdj4B_",
         tipo: "filme",
         genero: "Ação",
-        sinopse: "Um veterano do Vietnã usa suas táticas de guerra contra um xerife abusivo."
+        sinopse: "Um veterano do Vietnã usa suas habilidades de guerrilha contra um xerife autoritário."
     }
 ];
 
@@ -75,14 +75,14 @@ function filtrarPorGenero(genero) {
 function renderizarCard(item) {
     const card = document.createElement('div');
     card.classList.add('card');
-    const urlCapa = `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
+    const urlCapa = `https://lh3.googleusercontent.com/d/${item.capaID}`;
     card.innerHTML = `<img src="${urlCapa}"><h3>${item.titulo}</h3>`;
     card.onclick = () => abrirDetalhes(item);
     catalogo.appendChild(card);
 }
 
 function abrirDetalhes(item) {
-    document.getElementById('detalheCapa').src = `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
+    document.getElementById('detalheCapa').src = `https://lh3.googleusercontent.com/d/${item.capaID}`;
     document.getElementById('detalheTitulo').innerText = item.titulo;
     document.getElementById('detalheSinopse').innerText = item.sinopse;
     document.getElementById('btnPlay').onclick = () => abrirPlayer(item.videoID);
