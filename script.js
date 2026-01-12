@@ -1,42 +1,58 @@
-// Lista de Filmes, Séries e Canais
+// Aqui você vai adicionando mais filmes e canais seguindo o modelo
 const baseDeDados = [
     {
         titulo: "A Morte Pede Carona (2007)",
-        capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q",
+        capa: "https://lh3.googleusercontent.com/d/13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q",
         videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo",
-        categoria: "filme"
+        tipo: "filme"
+    },
+    {
+        titulo: "SBT (Ao Vivo)",
+        capa: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/SBT_logo.svg/1200px-SBT_logo.svg.png",
+        videoID: "https://www.sbt.com.br/ao-vivo", // Exemplo de TV
+        tipo: "tv"
     }
 ];
 
 const catalogo = document.getElementById('catalogo');
+const modal = document.getElementById('videoPlayer');
+const iframe = document.getElementById('videoFrame');
 
-function carregarConteudo() {
-    catalogo.innerHTML = ""; 
-
+function carregarConteudo(filtro = 'todos') {
+    catalogo.innerHTML = "";
+    
     baseDeDados.forEach(item => {
-        // Link direto para a imagem da capa
-        const urlCapa = `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
-        
-        // Link para o player do Google Drive
-        const urlVideo = `https://drive.google.com/file/d/${item.videoID}/preview`;
-
-        const card = document.createElement('div');
-        card.classList.add('card');
-        card.innerHTML = `
-            <img src="${urlCapa}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/300x450?text=Erro+na+Capa'">
-            <div class="filme-info">
+        if (filtro === 'todos' || item.tipo === filtro) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+                <img src="${item.capa}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/300x450?text=Sem+Capa'">
                 <h3>${item.titulo}</h3>
-            </div>
-        `;
-
-        // Ao clicar, abre o vídeo em uma nova aba (por enquanto)
-        card.onclick = () => {
-            window.open(urlVideo, '_blank');
-        };
-
-        catalogo.appendChild(card);
+            `;
+            
+            card.onclick = () => abrirPlayer(item.videoID, item.tipo);
+            catalogo.appendChild(card);
+        }
     });
 }
 
-// Inicia o site
+function abrirPlayer(id, tipo) {
+    let urlFinal = "";
+    
+    if (tipo === "filme") {
+        urlFinal = `https://drive.google.com/file/d/${id}/preview`;
+    } else {
+        urlFinal = id; // Para links de TV aberta
+    }
+
+    iframe.src = urlFinal;
+    modal.style.display = "block";
+}
+
+function fecharPlayer() {
+    modal.style.display = "none";
+    iframe.src = "";
+}
+
+// Inicia o site mostrando tudo
 carregarConteudo();
