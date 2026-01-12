@@ -15,14 +15,19 @@
                 <li><a href="#">Início</a></li>
                 <li><a href="#">Filmes</a></li>
                 <li><a href="#">Séries</a></li>
-                <li><a href="#">TV Aberta</a></li>
+                <li><a href="#">TV</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="catalogo">
-        <h2 style="text-align:center; width:100%;">Carregando catálogo...</h2>
-    </main>
+    <main id="catalogo"></main>
+
+    <div id="videoPlayer" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharPlayer()">&times;</span>
+            <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
