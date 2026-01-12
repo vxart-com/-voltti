@@ -1,4 +1,3 @@
-// BANCO DE DADOS DO VOLTTI
 const baseDeDados = [
     {
         titulo: "A Morte Pede Carona (2007)",
@@ -39,13 +38,13 @@ const baseDeDados = [
     {
         titulo: "SBT (Ao Vivo)",
         capaID: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/SBT_logo.svg/1200px-SBT_logo.svg.png",
-        videoID: "https://www.youtube.com/embed/live_stream?channel=UC5mS6S_H63XzV9z5F0uS7_A", 
+        videoID: "https://www.youtube.com/embed/5mS6S_H63XzV9z5F0uS7_A", 
         tipo: "tv"
     },
     {
         titulo: "CNN Brasil (Ao Vivo)",
         capaID: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/CNN_Brasil_logo.svg/1200px-CNN_Brasil_logo.svg.png",
-        videoID: "https://www.youtube.com/embed/live_stream?channel=UC7H_YlSAtGv33V3p68X-C-Q", 
+        videoID: "https://www.youtube.com/embed/7H_YlSAtGv33V3p68X-C-Q", 
         tipo: "tv"
     }
 ];
@@ -54,22 +53,19 @@ const catalogo = document.getElementById('catalogo');
 const modal = document.getElementById('videoPlayer');
 const iframe = document.getElementById('videoFrame');
 
-// Função para renderizar o conteúdo
 function carregarConteudo(filtro = 'todos') {
     catalogo.innerHTML = "";
-    
     baseDeDados.forEach(item => {
         if (filtro === 'todos' || item.tipo === filtro) {
             const card = document.createElement('div');
             card.classList.add('card');
             
-            // Lógica para carregar imagem do Drive ou link externo
-            const urlCapa = item.capaID.startsWith('http') 
+            let urlCapa = item.capaID.startsWith('http') 
                 ? item.capaID 
-                : `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
+                : `https://lh3.googleusercontent.com/d/${item.capaID}`;
             
             card.innerHTML = `
-                <img src="${urlCapa}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/300x450?text=VOLTTI'">
+                <img src="${urlCapa}" onerror="this.src='https://via.placeholder.com/300x450/141414/ffffff?text=VOLTTI'">
                 <h3>${item.titulo}</h3>
             `;
             
@@ -79,16 +75,9 @@ function carregarConteudo(filtro = 'todos') {
     });
 }
 
-// Player Modal
-function abrirPlayer(id, tipo) {
-    let urlFinal = "";
-    if (tipo === "filme") {
-        urlFinal = `https://drive.google.com/file/d/${id}/preview`;
-    } else {
-        urlFinal = id;
-    }
-
-    iframe.src = urlFinal;
+function abrirPlayer(link, tipo) {
+    // Se for filme, montamos o link do Drive. Se for TV, usamos o link direto.
+    iframe.src = tipo === "filme" ? `https://drive.google.com/file/d/${link}/preview` : link;
     modal.style.display = "block";
     document.body.style.overflow = "hidden";
 }
@@ -99,6 +88,5 @@ function fecharPlayer() {
     document.body.style.overflow = "auto";
 }
 
-window.onclick = (event) => { if (event.target == modal) fecharPlayer(); }
-
+window.onclick = (e) => { if (e.target == modal) fecharPlayer(); }
 carregarConteudo();
