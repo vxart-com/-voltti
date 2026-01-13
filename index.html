@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Seu Cinema por R$ 5</title>
+    <title>VOLTTI - Exclusive Streaming</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,21 +16,26 @@
             <li><a href="#" onclick="renderizarTudo()">Início</a></li>
             <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
             <li><a href="#" onclick="filtrar('dorama')">Séries & Doramas</a></li>
+            <li style="background: #e50914;"><a href="https://wa.me/SEUNUMERO" target="_blank" style="color: white;">ADQUIRIR ACESSO (R$ 5,00)</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="player-section">
-    <div class="video-container">
+    <div class="video-container" id="video-wrapper">
+        <div id="lock-screen" class="lock-screen">
+            <p>CONTEÚDO EXCLUSIVO</p>
+            <button onclick="verificarAcesso()">INSERIR CHAVE VOLTTI</button>
+        </div>
         <iframe id="main-player" src="" allowfullscreen></iframe>
     </div>
 </div>
+
 <div class="video-info">
-    <h1 id="video-title">Bem-vindo à VOLTTI - Escolha um filme</h1>
+    <h1 id="video-title">Selecione um título para liberar</h1>
 </div>
 
-<div id="conteudo-geral">
-    </div>
+<div id="conteudo-geral"></div>
 
 <script src="script.js"></script>
 </body>
