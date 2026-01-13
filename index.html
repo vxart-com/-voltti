@@ -5,59 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VOLTTI | Filmes e Séries</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header>
         <div class="logo">VOLTTI</div>
-        
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-
-        <nav class="navbar">
-            <ul class="nav-list">
-                <li><a href="#filmes">Filmes</a></li>
-                <li><a href="#series">Séries</a></li>
-                <li><a href="#doramas">Doramas</a></li>
-                <li><a href="#novelas">Novelas</a></li>
+        <nav>
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Filmes</a></li>
+                <li><a href="#">Séries</a></li>
+                <li><a href="#">Doramas</a></li>
+                <li><a href="#">Novelas</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="catalog">
-        <section id="filmes" class="category-section">
-            <h2 class="category-title"><i class="fas fa-film"></i> Filmes</h2>
-            <div class="movie-grid" id="grid-filme"></div>
+    <main>
+        <section class="video-container">
+            <div class="player-wrapper">
+                <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <h2 id="video-title">Selecione um título para assistir</h2>
         </section>
 
-        <section id="series" class="category-section">
-            <h2 class="category-title"><i class="fas fa-tv"></i> Séries</h2>
-            <div class="movie-grid" id="grid-serie"></div>
-        </section>
-
-        <section id="doramas" class="category-section">
-            <h2 class="category-title"><i class="fas fa-heart"></i> Doramas</h2>
-            <div class="movie-grid" id="grid-dorama"></div>
-        </section>
-
-        <section id="novelas" class="category-section">
-            <h2 class="category-title"><i class="fas fa-masks-theater"></i> Novelas</h2>
-            <div class="movie-grid" id="grid-novela"></div>
+        <section class="catalog">
+            <h3>Adicionados Recentemente</h3>
+            <div class="grid" id="movie-grid">
+                </div>
         </section>
     </main>
-
-    <div id="video-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div class="video-container">
-                <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
