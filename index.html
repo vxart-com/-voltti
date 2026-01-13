@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Filmes e Séries</title>
+    <title>VOLTTI | Filmes e Séries</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header>
         <div class="logo">VOLTTI</div>
-        <nav>
-            <ul>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <nav class="navbar">
+            <ul class="nav-list">
                 <li><a href="#filmes">Filmes</a></li>
                 <li><a href="#series">Séries</a></li>
                 <li><a href="#doramas">Doramas</a></li>
@@ -22,15 +30,32 @@
 
     <main id="catalog">
         <section id="filmes" class="category-section">
-            <h2>Filmes Populares</h2>
-            <div class="movie-grid" id="grid-filmes"></div>
+            <h2 class="category-title"><i class="fas fa-film"></i> Filmes</h2>
+            <div class="movie-grid" id="grid-filme"></div>
+        </section>
+
+        <section id="series" class="category-section">
+            <h2 class="category-title"><i class="fas fa-tv"></i> Séries</h2>
+            <div class="movie-grid" id="grid-serie"></div>
+        </section>
+
+        <section id="doramas" class="category-section">
+            <h2 class="category-title"><i class="fas fa-heart"></i> Doramas</h2>
+            <div class="movie-grid" id="grid-dorama"></div>
+        </section>
+
+        <section id="novelas" class="category-section">
+            <h2 class="category-title"><i class="fas fa-masks-theater"></i> Novelas</h2>
+            <div class="movie-grid" id="grid-novela"></div>
         </section>
     </main>
 
     <div id="video-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn">&times;</span>
-            <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
+            <div class="video-container">
+                <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
