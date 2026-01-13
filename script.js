@@ -1,5 +1,4 @@
 const conteudos = [
-    // --- FILMES (Seus 17 títulos anteriores) ---
     { titulo: "A Morte Pede Carona (2007)", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme" },
     { titulo: "Cão de Briga (2005)", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme" },
     { titulo: "O Massacre da Serra Elétrica", capaID: "1x3pTkU1IDAras3s9fez0zAamgS6VeaRN", videoID: "1-gh6yP-OhYiCsCVa5V4-vUcxk2eXCu2J", tipo: "filme" },
@@ -17,16 +16,14 @@ const conteudos = [
     { titulo: "After", capaID: "1SM2PN1hPWL0Z_mQRFTVvMoPBwtqD9rtB", videoID: "1RZE1S_UCi9DA-Q-9DZIKTyQmuBNSPHQ_", tipo: "filme" },
     { titulo: "After 2", capaID: "1CROr0ySxN7qjeMXr70nFEdqxG_XCelsz", videoID: "1WL6DAD7y0qJz7gU2Tri1DLgk7Dbhimus", tipo: "filme" },
     { titulo: "After 3", capaID: "1Z7TTYmECxz9QDotu3fRfOiQhsOO8MFjx", videoID: "1TNmCJVNQCEUChOtZ69Ono4hsD61PUGl4", tipo: "filme" },
-
-    // --- DORAMAS ---
     { 
         titulo: "A Má Mãe", 
         capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", 
         tipo: "dorama",
         episodios: [
             { nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" },
-            { nome: "Episódio 02 (Brevemente)", videoID: "" },
-            { nome: "Episódio 03 (Brevemente)", videoID: "" }
+            { nome: "Ep 02 (Breve)", videoID: "" },
+            { nome: "Ep 03 (Breve)", videoID: "" }
         ]
     }
 ];
@@ -36,8 +33,8 @@ const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
 const navMenu = document.getElementById('nav-menu');
 const mobileMenu = document.getElementById('mobile-menu');
+const listaEpsContainer = document.getElementById('lista-eps');
 
-// Função para validar a chave
 function validarChave() {
     const senha = prompt("🔒 ACESSO RESTRITO\nInsira a chave de acesso:");
     if (senha === "VOLTTI5") return true;
@@ -45,7 +42,6 @@ function validarChave() {
     return false;
 }
 
-// Função para dar o play
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
@@ -58,13 +54,12 @@ function renderizar(lista) {
         const card = document.createElement('div');
         card.className = 'card';
         const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}`;
-        
         card.innerHTML = `<img src="${linkImagem}"><p>${item.titulo}</p>`;
-        
         card.onclick = () => {
             if (item.tipo === "dorama") {
                 gerarListaEpisodios(item);
             } else {
+                listaEpsContainer.innerHTML = ""; // Limpa episódios se mudar para filme
                 if (validarChave()) darPlay(item.videoID, item.titulo);
             }
         };
@@ -72,15 +67,14 @@ function renderizar(lista) {
     });
 }
 
-// NOVA FUNÇÃO: Gera botões para os episódios
 function gerarListaEpisodios(serie) {
-    titleDisplay.innerHTML = `<strong>${serie.titulo}</strong> - Escolha o Episódio:<br><div id="lista-eps" style="margin-top:10px;"></div>`;
-    const containerEps = document.getElementById('lista-eps');
+    titleDisplay.innerText = `${serie.titulo} - Escolha o Episódio:`;
+    listaEpsContainer.innerHTML = ""; 
 
     serie.episodios.forEach(ep => {
         const btn = document.createElement('button');
         btn.innerText = ep.nome;
-        btn.style.cssText = "background:#e50914; color:#fff; border:none; padding:10px; margin:5px; border-radius:5px; cursor:pointer; font-weight:bold;";
+        btn.className = ep.videoID === "" ? "btn-episodio btn-indisponivel" : "btn-episodio";
         
         btn.onclick = () => {
             if (ep.videoID === "") {
@@ -89,7 +83,7 @@ function gerarListaEpisodios(serie) {
                 if (validarChave()) darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`);
             }
         };
-        containerEps.appendChild(btn);
+        listaEpsContainer.appendChild(btn);
     });
     document.getElementById('player-section').scrollIntoView({ behavior: 'smooth' });
 }
