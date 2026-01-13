@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VOLTTI Mobile</title>
+    <title>VOLTTI - Streaming</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,11 +17,11 @@
         </div>
         <nav id="nav-menu">
             <ul>
-                <li><a href="#" onclick="filtrar('todos')">Início</a></li>
-                <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
-                <li><a href="#" onclick="filtrar('serie')">Séries</a></li>
-                <li><a href="#" onclick="filtrar('dorama')">Doramas</a></li>
-                <li><a href="#" onclick="filtrar('novela')">Novelas</a></li>
+                <li><a href="#" onclick="filtrar('todos', 'Início')">Início</a></li>
+                <li><a href="#" onclick="filtrar('filme', 'Filmes')">Filmes</a></li>
+                <li><a href="#" onclick="filtrar('serie', 'Séries')">Séries</a></li>
+                <li><a href="#" onclick="filtrar('dorama', 'Doramas')">Doramas</a></li>
+                <li><a href="#" onclick="filtrar('novela', 'Novelas')">Novelas</a></li>
             </ul>
         </nav>
     </header>
@@ -31,11 +31,11 @@
             <div class="player-wrapper">
                 <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
-            <h2 id="video-title">Escolha algo para assistir</h2>
+            <h2 id="video-title">Selecione um título</h2>
         </section>
 
         <section class="catalog">
-            <p class="section-label">Lançamentos</p>
+            <p class="section-label" id="categoria-atual">Catálogo Geral</p>
             <div class="grid" id="movie-grid"></div>
         </section>
     </div>
