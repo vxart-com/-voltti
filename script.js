@@ -14,18 +14,19 @@ const conteudos = [
 const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
+const mobileMenu = document.getElementById('mobile-menu');
+const navMenu = document.getElementById('nav-menu');
 
+// Função para desenhar os filmes na tela
 function renderizar(lista) {
     grid.innerHTML = "";
     lista.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
-        
-        // Link específico para arquivos de imagem hospedados no Drive
-        const linkImagem = `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
+        const linkImagem = `https://drive.google.com/uc?export=view&id=${item.capaID}`;
         
         card.innerHTML = `
-            <img src="${linkImagem}" alt="${item.titulo}" loading="lazy">
+            <img src="${linkImagem}" alt="${item.titulo}">
             <p>${item.titulo}</p>
         `;
         
@@ -38,10 +39,18 @@ function renderizar(lista) {
     });
 }
 
+// Filtro do Menu
 function filtrar(tipo) {
+    navMenu.classList.remove('active'); // Fecha o menu mobile ao clicar
     if(tipo === 'todos') return renderizar(conteudos);
-    const f = conteudos.filter(i => i.tipo === tipo);
-    renderizar(f);
+    const filtrados = conteudos.filter(i => i.tipo === tipo);
+    renderizar(filtrados);
 }
 
+// Abrir/Fechar Menu Mobile
+mobileMenu.onclick = () => {
+    navMenu.classList.toggle('active');
+};
+
+// Iniciar site
 renderizar(conteudos);
