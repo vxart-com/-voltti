@@ -1,6 +1,5 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-
-body { background: #0f1014; color: #fff; } /* Fundo escuro estilo streaming */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background: #0f1014; color: #fff; }
 
 header {
     background: #1a1d23;
@@ -12,54 +11,40 @@ header {
     top: 0;
     z-index: 100;
 }
+.logo { font-size: 1.4rem; font-weight: 800; color: #e50914; }
 
-.logo { font-size: 1.4rem; font-weight: 800; color: #e50914; letter-spacing: 1px; }
-
-/* Menu Hambúrguer */
 .menu-toggle { display: flex; flex-direction: column; gap: 5px; }
 .menu-toggle span { width: 25px; height: 2px; background: #fff; }
 
-nav {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background: #1a1d23;
-    border-bottom: 2px solid #e50914;
-}
+nav { display: none; position: absolute; top: 60px; left: 0; width: 100%; background: #1a1d23; }
 nav.active { display: block; }
-nav ul { list-style: none; }
-nav a { display: block; padding: 15px; color: #fff; text-decoration: none; text-align: center; font-weight: bold; border-bottom: 1px solid #2a2e35; }
+nav a { display: block; padding: 15px; color: #fff; text-decoration: none; text-align: center; border-bottom: 1px solid #2a2e35; }
 
-/* Player Mobile */
-.video-container { width: 100%; background: #000; padding-bottom: 10px; }
+.video-container { width: 100%; background: #000; }
 .player-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
 .player-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-#video-title { padding: 12px; font-size: 1rem; font-weight: 500; color: #fff; text-align: left; }
+#video-title { padding: 15px; font-size: 1.1rem; }
 
-/* Grid de Capas Vertical */
-.catalog { padding: 10px; }
-.section-label { font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; color: #999; text-transform: uppercase; }
+.catalog { padding: 15px; }
+.section-label { font-size: 1rem; font-weight: bold; margin-bottom: 15px; color: #e50914; text-transform: uppercase; }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 capas por linha no celular */
-    gap: 12px;
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+.card { background: #1a1d23; border-radius: 8px; overflow: hidden; position: relative; }
+.card img { width: 100%; height: 230px; object-fit: cover; display: block; }
+
+/* Etiqueta de Categoria na Capa */
+.badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(229, 9, 20, 0.85);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
-.card { background: #1a1d23; border-radius: 6px; overflow: hidden; position: relative; }
-.card img { 
-    width: 100%; 
-    height: 240px; /* Altura ideal para posters verticais webp */
-    object-fit: cover; 
-    display: block;
-}
-.card p { 
-    padding: 8px; 
-    font-size: 0.8rem; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    text-align: center;
-}
+.card p { padding: 10px; font-size: 13px; text-align: center; }
