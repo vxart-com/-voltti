@@ -16,7 +16,8 @@ const detModal = document.getElementById('detalhesModal');
 const vidModal = document.getElementById('videoPlayer');
 const iframe = document.getElementById('videoFrame');
 
-const formatarCapa = (id) => `https://lh3.googleusercontent.com/d/$${id}`;
+// LINK DE CAPA QUE NÃO BUGUA
+const formatarCapa = (id) => `https://lh3.googleusercontent.com/d/${id}`;
 
 function carregarConteudo(filtro = 'todos') {
     catalogo.innerHTML = "";
