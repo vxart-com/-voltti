@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Filmes e Séries</title>
+    <title>VOLTTI - Streaming</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,18 +11,27 @@
 
     <header>
         <div class="header-container">
-            <div class="logo" onclick="carregarConteudo('todos')">VOLT<span>TI</span></div>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Pesquisar filme..." onkeyup="buscarFilme()">
+            <div class="header-left">
+                <div class="logo" onclick="carregarConteudo('todos')">VOLT<span>TI</span></div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="carregarConteudo('todos')">Início</a></li>
-                    <li><a href="#" onclick="carregarConteudo('filme')">Filmes</a></li>
-                    <li><a href="#" onclick="carregarConteudo('serie')">Séries</a></li>
-                </ul>
-            </nav>
+            
+            <div class="header-center">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Pesquisar filme..." onkeyup="buscarFilme()">
+                </div>
+            </div>
+
+            <div class="header-right">
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="carregarConteudo('todos')">Início</a></li>
+                        <li><a href="#" onclick="carregarConteudo('filme')">Filmes</a></li>
+                        <li><a href="#" onclick="carregarConteudo('serie')">Séries</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
+
         <div class="categorias-bar">
             <button onclick="filtrarPorGenero('todos')">TODOS</button>
             <button onclick="filtrarPorGenero('Ação')">AÇÃO</button>
