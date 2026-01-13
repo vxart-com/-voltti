@@ -2,21 +2,19 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI | Filmes e Séries</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOLTTI Mobile</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="logo">VOLTTI</div>
-        
         <div class="menu-toggle" id="mobile-menu">
             <span></span>
             <span></span>
             <span></span>
         </div>
-
         <nav id="nav-menu">
             <ul>
                 <li><a href="#" onclick="filtrar('todos')">Início</a></li>
@@ -28,20 +26,19 @@
         </nav>
     </header>
 
-    <main>
-        <section class="video-container">
+    <div class="main-content">
+        <section class="video-container" id="player-section">
             <div class="player-wrapper">
                 <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
-            <h2 id="video-title">Selecione um título para assistir</h2>
+            <h2 id="video-title">Escolha algo para assistir</h2>
         </section>
 
         <section class="catalog">
-            <h3>Adicionados Recentemente</h3>
-            <div class="grid" id="movie-grid">
-                </div>
+            <p class="section-label">Lançamentos</p>
+            <div class="grid" id="movie-grid"></div>
         </section>
-    </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
