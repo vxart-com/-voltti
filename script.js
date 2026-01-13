@@ -17,13 +17,14 @@ const titleDisplay = document.getElementById('video-title');
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.getElementById('nav-menu');
 
-// Função para desenhar os filmes na tela
 function renderizar(lista) {
     grid.innerHTML = "";
     lista.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
-        const linkImagem = `https://drive.google.com/uc?export=view&id=${item.capaID}`;
+        
+        // NOVO LINK: Este formato força o Drive a entregar a imagem
+        const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w320&id=${item.capaID}`;
         
         card.innerHTML = `
             <img src="${linkImagem}" alt="${item.titulo}">
@@ -39,18 +40,15 @@ function renderizar(lista) {
     });
 }
 
-// Filtro do Menu
 function filtrar(tipo) {
-    navMenu.classList.remove('active'); // Fecha o menu mobile ao clicar
+    navMenu.classList.remove('active');
     if(tipo === 'todos') return renderizar(conteudos);
     const filtrados = conteudos.filter(i => i.tipo === tipo);
     renderizar(filtrados);
 }
 
-// Abrir/Fechar Menu Mobile
 mobileMenu.onclick = () => {
     navMenu.classList.toggle('active');
 };
 
-// Iniciar site
 renderizar(conteudos);
