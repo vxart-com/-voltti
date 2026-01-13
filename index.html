@@ -3,61 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Streaming</title>
-    <style>
-        /* CSS CONSOLIDADO */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #f8f9fa; color: #333; }
-
-        /* Header e Logo */
-        header {
-            background: #ffffff;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .logo { font-size: 1.5rem; font-weight: 800; color: #e50914; letter-spacing: -1px; }
-        
-        /* Menu */
-        .menu-btn { font-size: 24px; cursor: pointer; color: #333; }
-        nav { display: none; position: absolute; top: 60px; left: 0; width: 100%; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        nav.active { display: block; }
-        nav ul { list-style: none; }
-        nav a { display: block; padding: 15px; text-decoration: none; color: #333; font-weight: 600; border-bottom: 1px solid #eee; }
-
-        /* Player */
-        .player-section { background: #000; width: 100%; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-        .video-info { padding: 15px; background: #fff; border-bottom: 2px solid #e50914; }
-        .video-info h1 { font-size: 1.2rem; color: #1a1d23; }
-
-        /* Divisórias de Seções */
-        .section-title { 
-            font-size: 1.1rem; 
-            color: #1a1d23; 
-            padding: 20px 15px 10px; 
-            font-weight: 800; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-            text-transform: uppercase;
-        }
-        .section-title::before { content: ""; width: 4px; height: 20px; background: #e50914; border-radius: 2px; }
-
-        /* Grid de Filmes */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0 15px 30px; }
-        .card { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: relative; border: 1px solid #eee; }
-        .card img { width: 100%; height: 230px; object-fit: cover; }
-        .card-info { padding: 8px; text-align: center; }
-        .card-info p { font-size: 0.85rem; font-weight: 600; color: #444; }
-        .badge { position: absolute; top: 8px; left: 8px; background: #e50914; color: #fff; padding: 3px 7px; border-radius: 4px; font-size: 10px; font-weight: bold; }
-    </style>
+    <title>VOLTTI - Premium</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -79,84 +26,11 @@
     </div>
 </div>
 <div class="video-info">
-    <h1 id="video-title">Selecione um filme abaixo</h1>
+    <h1 id="video-title">Selecione um título</h1>
 </div>
 
-<div id="conteudo-geral">
-    </div>
+<div id="conteudo-geral"></div>
 
-<script>
-    // DADOS: Aqui é onde você adiciona seus 10 filmes e 2 séries
-    // Regra: Ano >= 2020 vira "LANÇAMENTO". Tipo inclui "drama" vira "DORAMAS".
-    const conteudos = [
-        // LANÇAMENTOS (Exemplo dos 10 que você vai subir)
-        { titulo: "Love Between Lines", capaID: "1_29_kH8L86vVv9Fk5-j9_930p_eD7-6L", videoID: "ID_DO_VIDEO", tipo: "Cdrama", ano: 2023 },
-        
-        // NOSTALGIA / ANTIGOS
-        { titulo: "A Morte Pede Carona", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme", ano: 2007 },
-        { titulo: "Cão de Briga", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme", ano: 2005 },
-        { titulo: "Rambo 1", capaID: "1XJbDVYRvO0x77iY5HfdrRWCO54Ct4c9s", videoID: "1p1A82w1v_RB_XeNaf2MQGnns22Bdj4B_", tipo: "filme", ano: 1982 },
-        { titulo: "Vingadores: Ultimato", capaID: "1cmosS5uvNBgppGGkO4uLbytXyDu4WXmo", videoID: "1hpPF4WTbbjYNjLigkh0GTtLYviUR3s0s", tipo: "filme", ano: 2019 }
-    ];
-
-    const containerGeral = document.getElementById('conteudo-geral');
-    const player = document.getElementById('main-player');
-    const titleDisplay = document.getElementById('video-title');
-
-    function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }
-
-    function criarCard(item) {
-        const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}`;
-        return `
-            <div class="card" onclick="playVideo('${item.videoID}', '${item.titulo}')">
-                <div class="badge">${item.tipo.toUpperCase()}</div>
-                <img src="${linkImagem}" alt="${item.titulo}">
-                <div class="card-info"><p>${item.titulo}</p></div>
-            </div>
-        `;
-    }
-
-    function playVideo(id, titulo) {
-        player.src = `https://drive.google.com/file/d/${id}/preview`;
-        titleDisplay.innerText = titulo;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderizarTudo() {
-        const lancamentos = conteudos.filter(i => i.ano >= 2020);
-        const nostalgia = conteudos.filter(i => i.ano < 2020 && !i.tipo.toLowerCase().includes('drama'));
-        const doramas = conteudos.filter(i => i.tipo.toLowerCase().includes('drama'));
-
-        let htmlFinal = "";
-
-        if(lancamentos.length > 0) {
-            htmlFinal += `<div class="section-title">Lançamentos 2020+</div><div class="grid">${lancamentos.map(criarCard).join('')}</div>`;
-        }
-        if(doramas.length > 0) {
-            htmlFinal += `<div class="section-title">Séries e Doramas</div><div class="grid">${doramas.map(criarCard).join('')}</div>`;
-        }
-        if(nostalgia.length > 0) {
-            htmlFinal += `<div class="section-title">Filmes Nostálgicos</div><div class="grid">${nostalgia.map(criarCard).join('')}</div>`;
-        }
-
-        containerGeral.innerHTML = htmlFinal;
-        toggleMenu(); // Fecha menu se estiver aberto
-    }
-
-    function filtrar(tipo) {
-        let filtrados;
-        if(tipo === 'dorama') {
-            filtrados = conteudos.filter(i => i.tipo.toLowerCase().includes('drama'));
-        } else {
-            filtrados = conteudos.filter(i => i.tipo === tipo);
-        }
-        containerGeral.innerHTML = `<div class="section-title">${tipo}s</div><div class="grid">${filtrados.map(criarCard).join('')}</div>`;
-        toggleMenu();
-    }
-
-    // Inicializa o site
-    renderizarTudo();
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
