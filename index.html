@@ -3,57 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Streaming</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <title>VOLTTI - Filmes e Séries</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <div class="header-container">
-            <div class="logo" onclick="carregarConteudo('todos')">VOLT<span>TI</span></div>
-            
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="carregarConteudo('todos')">Início</a></li>
-                    <li><a href="#" onclick="carregarConteudo('filme')">Filmes</a></li>
-                    <li><a href="#" onclick="carregarConteudo('serie')">Séries</a></li>
-                </ul>
-            </nav>
-
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Pesquisar filme..." onkeyup="buscarFilme()">
-            </div>
-        </div>
-
-        <div class="categorias-bar">
-            <button onclick="filtrarPorGenero('todos')">TODOS</button>
-            <button onclick="filtrarPorGenero('Ação')">AÇÃO</button>
-            <button onclick="filtrarPorGenero('Terror')">TERROR</button>
-            <button onclick="filtrarPorGenero('Suspense')">SUSPENSE</button>
-        </div>
+        <div class="logo">VOLTTI</div>
+        <nav>
+            <ul>
+                <li><a href="#filmes">Filmes</a></li>
+                <li><a href="#series">Séries</a></li>
+                <li><a href="#doramas">Doramas</a></li>
+                <li><a href="#novelas">Novelas</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main id="catalogo"></main>
+    <main id="catalog">
+        <section id="filmes" class="category-section">
+            <h2>Filmes Populares</h2>
+            <div class="movie-grid" id="grid-filmes"></div>
+        </section>
+    </main>
 
-    <div id="detalhesModal" class="modal">
-        <div class="modal-content-detalhes">
-            <span class="close" onclick="fecharDetalhes()">×</span>
-            <div class="detalhes-flex">
-                <img id="detalheCapa" src="" alt="Capa">
-                <div class="detalhe-info">
-                    <h2 id="detalheTitulo"></h2>
-                    <p id="detalheSinopse"></p>
-                    <button id="btnPlay" class="play-btn">ASSISTIR AGORA</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="videoPlayer" class="modal">
+    <div id="video-modal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="fecharPlayer()">×</span>
-            <iframe id="videoFrame" src="" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+            <span class="close-btn">&times;</span>
+            <iframe id="video-player" src="" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
