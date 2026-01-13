@@ -1,68 +1,34 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background: #0f1014; color: #fff; }
 
-body { background: #0f1014; color: #fff; } /* Fundo escuro estilo streaming */
+header { background: #1a1d23; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+.logo { font-size: 1.4rem; font-weight: 800; color: #e50914; }
 
-header {
-    background: #1a1d23;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo { font-size: 1.4rem; font-weight: 800; color: #e50914; letter-spacing: 1px; }
-
-/* Menu Hambúrguer */
 .menu-toggle { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
 .menu-toggle span { width: 25px; height: 2px; background: #fff; }
 
-nav {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background: #1a1d23;
-    border-bottom: 2px solid #e50914;
-}
+nav { display: none; position: absolute; top: 60px; left: 0; width: 100%; background: #1a1d23; border-bottom: 2px solid #e50914; }
 nav.active { display: block; }
 nav ul { list-style: none; }
 nav a { display: block; padding: 15px; color: #fff; text-decoration: none; text-align: center; font-weight: bold; border-bottom: 1px solid #2a2e35; }
 
-/* --- DESTAQUE DO BOTÃO DE PAGAMENTO --- */
-.menu-destaque a {
-    color: #ff4d4d !important;
-    border: 2px solid #ff4d4d !important;
-    margin: 10px 20px !important;
-    border-radius: 10px !important;
-    background: rgba(255, 77, 77, 0.1);
-    text-transform: uppercase;
-}
-.menu-destaque a:hover {
-    background: #ff4d4d !important;
-    color: #fff !important;
-}
+/* Botão Pagar */
+.menu-destaque a { color: #ff4d4d !important; border: 2px solid #ff4d4d !important; margin: 10px 20px; border-radius: 10px; background: rgba(255, 77, 77, 0.1); }
 
-/* Player Mobile */
-.video-container { width: 100%; background: #000; padding-bottom: 10px; }
+/* Player */
+.video-container { width: 100%; background: #000; padding-bottom: 20px; }
 .player-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
 .player-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-#video-title { padding: 12px; font-size: 1rem; font-weight: 500; color: #fff; text-align: left; }
+#video-title { padding: 15px; font-size: 1.1rem; text-align: center; }
 
-/* Grid de Capas Vertical */
-.catalog { padding: 10px; }
-.section-label { font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; color: #999; text-transform: uppercase; }
+/* Botões Episódios */
+#lista-eps { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 0 10px; }
+.btn-episodio { background: #e50914; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+.btn-indisponivel { background: #333 !important; color: #777 !important; cursor: not-allowed; }
 
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas no mobile */
-    gap: 12px;
-}
-
-.card { background: #1a1d23; border-radius: 6px; overflow: hidden; cursor: pointer; transition: transform 0.2s; }
-.card:active { transform: scale(0.95); }
-.card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
-.card p { padding: 8px; font-size: 0.8rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee; }
+/* Grid */
+.catalog { padding: 15px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.card { background: #1a1d23; border-radius: 8px; overflow: hidden; cursor: pointer; }
+.card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+.card p { padding: 10px; font-size: 0.8rem; text-align: center; }
