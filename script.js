@@ -14,6 +14,7 @@ const conteudos = [
 const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
+const categoryLabel = document.getElementById('categoria-atual');
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.getElementById('nav-menu');
 
@@ -22,11 +23,10 @@ function renderizar(lista) {
     lista.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
-        
-        // Link thumbnail otimizado para celular
         const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}`;
         
         card.innerHTML = `
+            <div class="badge">${item.tipo}</div>
             <img src="${linkImagem}" alt="${item.titulo}">
             <p>${item.titulo}</p>
         `;
@@ -34,15 +34,15 @@ function renderizar(lista) {
         card.onclick = () => {
             player.src = `https://drive.google.com/file/d/${item.videoID}/preview`;
             titleDisplay.innerText = item.titulo;
-            // Rola suavemente até o player ao clicar
             document.getElementById('player-section').scrollIntoView({ behavior: 'smooth' });
         };
         grid.appendChild(card);
     });
 }
 
-function filtrar(tipo) {
+function filtrar(tipo, nomeCategoria) {
     navMenu.classList.remove('active');
+    categoryLabel.innerText = nomeCategoria; // Muda o título da seção
     if(tipo === 'todos') return renderizar(conteudos);
     const filtrados = conteudos.filter(i => i.tipo === tipo);
     renderizar(filtrados);
@@ -52,5 +52,5 @@ mobileMenu.onclick = () => {
     navMenu.classList.toggle('active');
 };
 
-// Iniciar
+// Começa mostrando tudo
 renderizar(conteudos);
