@@ -23,8 +23,8 @@ function renderizar(lista) {
         const card = document.createElement('div');
         card.className = 'card';
         
-        // NOVO LINK: Este formato força o Drive a entregar a imagem
-        const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w320&id=${item.capaID}`;
+        // Link thumbnail otimizado para celular
+        const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}`;
         
         card.innerHTML = `
             <img src="${linkImagem}" alt="${item.titulo}">
@@ -34,7 +34,8 @@ function renderizar(lista) {
         card.onclick = () => {
             player.src = `https://drive.google.com/file/d/${item.videoID}/preview`;
             titleDisplay.innerText = item.titulo;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Rola suavemente até o player ao clicar
+            document.getElementById('player-section').scrollIntoView({ behavior: 'smooth' });
         };
         grid.appendChild(card);
     });
@@ -51,4 +52,5 @@ mobileMenu.onclick = () => {
     navMenu.classList.toggle('active');
 };
 
+// Iniciar
 renderizar(conteudos);
