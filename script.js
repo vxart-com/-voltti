@@ -15,25 +15,25 @@ const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
 
-// Função para exibir os cards na tela
 function renderizarCatalogo(lista) {
-    grid.innerHTML = ""; // Limpa a grade antes de mostrar
+    grid.innerHTML = ""; 
     lista.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
-        // Link direto da imagem do Google Drive usando o capaID
-        const linkImagem = `https://lh3.googleusercontent.com/u/0/d/${item.capaID}`;
+        
+        // Link corrigido para miniaturas do Google Drive
+        const linkImagem = `https://drive.google.com/uc?export=view&id=${item.capaID}`;
         
         card.innerHTML = `
-            <img src="${linkImagem}" alt="${item.titulo}" onerror="this.src='https://via.placeholder.com/150x225?text=Sem+Capa'">
+            <img src="${linkImagem}" alt="${item.titulo}" loading="lazy">
             <p>${item.titulo}</p>
         `;
         
         card.onclick = () => {
-            // Player embutido sem abrir nova aba
             const embedUrl = `https://drive.google.com/file/d/${item.videoID}/preview`;
             player.src = embedUrl;
             titleDisplay.innerText = item.titulo;
+            // No celular, sobe a tela para o player automaticamente ao clicar
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
@@ -41,7 +41,6 @@ function renderizarCatalogo(lista) {
     });
 }
 
-// Função de Filtro para o Menu
 function filtrar(categoria) {
     if (categoria === 'todos') {
         renderizarCatalogo(conteudos);
@@ -51,5 +50,5 @@ function filtrar(categoria) {
     }
 }
 
-// Inicializa o site com tudo
+// Inicializa a página
 renderizarCatalogo(conteudos);
