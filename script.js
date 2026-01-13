@@ -1,8 +1,8 @@
 const conteudos = [
-    // === 1. ADICIONE OS 10 DE HOJE COMO "lancamento" ===
-    { titulo: "Love Between Lines", capaID: "1_29_kH8L86vVv9Fk5-j9_930p_eD7-6L", videoID: "ID_DO_VIDEO", tipo: "lancamento", ano: 2023 },
+    // === NOVOS DE HOJE (Aparecem no topo) ===
+    { titulo: "Love Between Lines", capaID: "1_29_kH8L86vVv9Fk5-j9_930p_eD7-6L", videoID: "ID_DO_VIDEO", tipo: "lancamento", ano: 2024 },
 
-    // === 2. SEUS FILMES JÁ ADICIONADOS (VÃO PARA O CATÁLOGO) ===
+    // === FILMES JÁ CADASTRADOS (Catálogo) ===
     { titulo: "A Morte Pede Carona", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme", ano: 2007 },
     { titulo: "Cão de Briga", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme", ano: 2005 },
     { titulo: "O Massacre da Serra Elétrica", capaID: "1x3pTkU1IDAras3s9fez0zAamgS6VeaRN", videoID: "1-gh6yP-OhYiCsCVa5V4-vUcxk2eXCu2J", tipo: "filme", ano: 2003 },
@@ -23,11 +23,11 @@ function toggleMenu() { document.getElementById('nav-menu').classList.toggle('ac
 
 function criarCard(item) {
     const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}`;
-    const tagTexto = item.tipo === 'lancamento' ? 'NOVO' : item.tipo.toUpperCase();
+    const tag = item.tipo === 'lancamento' ? 'NOVO' : item.tipo.toUpperCase();
     return `
         <div class="card" onclick="playVideo('${item.videoID}', '${item.titulo}')">
-            <div class="badge">${tagTexto}</div>
-            <img src="${linkImagem}" alt="${item.titulo}">
+            <div class="badge">${tag}</div>
+            <img src="${linkImagem}">
             <div class="card-info"><p>${item.titulo} (${item.ano})</p></div>
         </div>`;
 }
@@ -39,28 +39,21 @@ function playVideo(id, titulo) {
 }
 
 function renderizarTudo() {
-    const recemAdicionados = conteudos.filter(i => i.tipo === "lancamento");
-    const doramasESeries = conteudos.filter(i => i.tipo.toLowerCase().includes('drama') || i.tipo.toLowerCase().includes('série'));
-    const filmesCatalogo = conteudos.filter(i => i.tipo === "filme");
+    const recentes = conteudos.filter(i => i.tipo === "lancamento");
+    const series = conteudos.filter(i => i.tipo.toLowerCase().includes('série') || i.tipo.toLowerCase().includes('drama'));
+    const catalogo = conteudos.filter(i => i.tipo === "filme");
 
-    let htmlFinal = "";
-    if(recemAdicionados.length > 0) {
-        htmlFinal += `<div class="section-title">🔥 Recém Adicionados</div><div class="grid">${recemAdicionados.map(criarCard).join('')}</div>`;
-    }
-    if(doramasESeries.length > 0) {
-        htmlFinal += `<div class="section-title">📺 Séries e Doramas</div><div class="grid">${doramasESeries.map(criarCard).join('')}</div>`;
-    }
-    if(filmesCatalogo.length > 0) {
-        htmlFinal += `<div class="section-title">🎬 Filmes do Catálogo</div><div class="grid">${filmesCatalogo.map(criarCard).join('')}</div>`;
-    }
-    containerGeral.innerHTML = htmlFinal;
+    let html = "";
+    if(recentes.length > 0) html += `<div class="section-title">🔥 Adicionados Recentemente</div><div class="grid">${recentes.map(criarCard).join('')}</div>`;
+    if(series.length > 0) html += `<div class="section-title">📺 Séries e Doramas</div><div class="grid">${series.map(criarCard).join('')}</div>`;
+    if(catalogo.length > 0) html += `<div class="section-title">🎬 Filmes do Catálogo</div><div class="grid">${catalogo.map(criarCard).join('')}</div>`;
+    containerGeral.innerHTML = html;
 }
 
 function filtrar(tipo) {
     let filtrados = (tipo === 'dorama') 
         ? conteudos.filter(i => i.tipo.toLowerCase().includes('drama') || i.tipo.toLowerCase().includes('série'))
         : conteudos.filter(i => i.tipo === 'filme' || i.tipo === 'lancamento');
-    
     containerGeral.innerHTML = `<div class="section-title">${tipo}s</div><div class="grid">${filtrados.map(criarCard).join('')}</div>`;
     toggleMenu();
 }
