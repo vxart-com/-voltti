@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,7 +17,11 @@
             <li><a href="#" onclick="renderizarTudo()">Início</a></li>
             <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
             <li><a href="#" onclick="filtrar('dorama')">Séries & Doramas</a></li>
-            <li class="menu-destaque"><a href="https://wa.me/SEUNUMERO" target="_blank">ADQUIRIR ACESSO (R$ 5,00)</a></li>
+            <li class="menu-destaque">
+                <a href="https://wa.me/5598981296742?text=Olá!%20Quero%20adquirir%20minha%20Chave%20VOLTTI%20por%20R$%205,00" target="_blank">
+                    ADQUIRIR ACESSO (R$ 5,00)
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -35,11 +40,20 @@
 </div>
 
 <div class="video-info">
-    <h1 id="video-title">Escolha um título no catálogo abaixo</h1>
+    <h1 id="video-title">Selecione um título no catálogo abaixo</h1>
 </div>
 
 <div id="conteudo-geral"></div>
 
 <script src="script.js"></script>
+
+<script>
+    // Função para abrir/fechar o menu mobile
+    function toggleMenu() {
+        const nav = document.getElementById('nav-menu');
+        nav.classList.toggle('active');
+    }
+</script>
+
 </body>
 </html>
