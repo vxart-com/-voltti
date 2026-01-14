@@ -1,0 +1,16 @@
+{
+  "name": "VOLTTI Streaming",
+  "short_name": "VOLTTI",
+  "description": "Seu catálogo privado de filmes e séries",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f1014",
+  "theme_color": "#e50914",
+  "icons": [
+    {
+      "src": "logo-voltti.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
