@@ -1,5 +1,4 @@
 const conteudos = [
-    // --- FILMES ---
     { titulo: "A Morte Pede Carona (2007)", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme", genero: "Terror" },
     { titulo: "Cão de Briga (2005)", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme", genero: "Ação" },
     { titulo: "O Massacre da Serra Elétrica", capaID: "1x3pTkU1IDAras3s9fez0zAamgS6VeaRN", videoID: "1-gh6yP-OhYiCsCVa5V4-vUcxk2eXCu2J", tipo: "filme", genero: "Terror" },
@@ -17,16 +16,9 @@ const conteudos = [
     { titulo: "After", capaID: "1SM2PN1hPWL0Z_mQRFTVvMoPBwtqD9rtB", videoID: "1RZE1S_UCi9DA-Q-9DZIKTyQmuBNSPHQ_", tipo: "filme", genero: "Romance" },
     { titulo: "After 2", capaID: "1CROr0ySxN7qjeMXr70nFEdqxG_XCelsz", videoID: "1WL6DAD7y0qJz7gU2Tri1DLgk7Dbhimus", tipo: "filme", genero: "Romance" },
     { titulo: "After 3", capaID: "1Z7TTYmECxz9QDotu3fRfOiQhsOO8MFjx", videoID: "1TNmCJVNQCEUChOtZ69Ono4hsD61PUGl4", tipo: "filme", genero: "Romance" },
-
-    // --- DORAMAS ---
     { 
-        titulo: "A Má Mãe", 
-        capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", 
-        tipo: "dorama",
-        genero: "Dorama",
-        episodios: [
-            { nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }
-        ]
+        titulo: "A Má Mãe", capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", tipo: "dorama", genero: "Dorama",
+        episodios: [{ nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }]
     }
 ];
 
@@ -37,76 +29,49 @@ const navMenu = document.getElementById('nav-menu');
 const mobileMenu = document.getElementById('mobile-menu');
 const listaEpsContainer = document.getElementById('lista-eps');
 
-// MENU MOBILE
-if(mobileMenu) {
-    mobileMenu.onclick = () => { navMenu.classList.toggle('active'); };
-}
-
-// 1. ESCONDE O BOTÃO DE COMPRA SE JÁ TIVER ACESSO
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
     try {
-        const chaveSalva = localStorage.getItem("voltti_chave");
-        if (chaveSalva === chaveCorreta && botaoCompra) {
+        if (localStorage.getItem("voltti_chave") === chaveCorreta && botaoCompra) {
             botaoCompra.style.display = "none";
         }
     } catch (e) {}
 }
 
-// 2. VALIDA A CHAVE DE ACESSO
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
-    let chaveSalva = null;
-    try { chaveSalva = localStorage.getItem("voltti_chave"); } catch (e) {}
-    
-    if (chaveSalva === chaveCorreta) return true;
-
-    const senha = prompt("🔒 ACESSO RESTRITO\nInsira a chave de acesso:");
+    if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
+    const senha = prompt("Insira a chave de acesso:");
     if (senha === chaveCorreta) {
-        try { 
-            localStorage.setItem("voltti_chave", chaveCorreta); 
-            verificarAcessoBotao(); // Remove o botão na hora
-        } catch (e) {}
+        localStorage.setItem("voltti_chave", chaveCorreta);
+        verificarAcessoBotao();
         return true;
     }
-    alert("Chave incorreta ou expirada!");
+    alert("Chave incorreta!");
     return false;
 }
 
-// 3. CARREGA O VÍDEO NO PLAYER
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// 4. RENDERIZA O CATÁLOGO
 function renderizar(lista) {
     grid.innerHTML = "";
-    if (lista.length === 0) {
-        grid.innerHTML = "<p style='padding:40px; text-align:center; color:#777; width:100%;'>Em breve, novos conteúdos nesta categoria!</p>";
-        return;
-    }
-
     const generos = [...new Set(lista.map(item => item.genero))];
-
     generos.forEach(gen => {
         const secao = document.createElement('div');
         secao.className = 'genero-secao';
         secao.innerHTML = `<h3 class="genero-titulo">${gen}</h3><div class="genero-linha"></div>`;
         const linha = secao.querySelector('.genero-linha');
-        const itensDoGenero = lista.filter(i => i.genero === gen);
-
-        itensDoGenero.forEach(item => {
+        lista.filter(i => i.genero === gen).forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}`;
-            card.innerHTML = `<img src="${linkImagem}"><p>${item.titulo}</p>`;
-            
+            card.innerHTML = `<img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}"><p>${item.titulo}</p>`;
             card.onclick = () => {
-                const temEps = ["dorama", "serie", "anime", "novela"].includes(item.tipo);
-                if (temEps) {
+                if (item.episodios) {
                     gerarListaEpisodios(item);
                 } else {
                     listaEpsContainer.innerHTML = "";
@@ -119,30 +84,23 @@ function renderizar(lista) {
     });
 }
 
-// 5. GERA BOTÕES DE EPISÓDIOS
 function gerarListaEpisodios(serie) {
-    titleDisplay.innerText = `${serie.titulo} - Escolha o Episódio`;
+    titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
     serie.episodios.forEach(ep => {
         const btn = document.createElement('button');
         btn.innerText = ep.nome;
         btn.className = "btn-episodio";
-        btn.onclick = () => {
-            if (validarChave()) darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`);
-        };
+        btn.onclick = () => { if (validarChave()) darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
         listaEpsContainer.appendChild(btn);
     });
-    window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// 6. FILTRO DO MENU
 function filtrar(tipo) {
-    if(navMenu) navMenu.classList.remove('active');
-    if(tipo === 'todos') return renderizar(conteudos);
-    const filtrados = conteudos.filter(i => i.tipo === tipo);
-    renderizar(filtrados);
+    navMenu.classList.remove('active');
+    renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-// INICIALIZAÇÃO AO CARREGAR
+mobileMenu.onclick = () => navMenu.classList.toggle('active');
 renderizar(conteudos);
 verificarAcessoBotao();
