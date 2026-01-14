@@ -1,4 +1,5 @@
 const conteudos = [
+    // --- FILMES ---
     { titulo: "A Morte Pede Carona (2007)", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme" },
     { titulo: "Cão de Briga (2005)", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme" },
     { titulo: "O Massacre da Serra Elétrica", capaID: "1x3pTkU1IDAras3s9fez0zAamgS6VeaRN", videoID: "1-gh6yP-OhYiCsCVa5V4-vUcxk2eXCu2J", tipo: "filme" },
@@ -16,6 +17,8 @@ const conteudos = [
     { titulo: "After", capaID: "1SM2PN1hPWL0Z_mQRFTVvMoPBwtqD9rtB", videoID: "1RZE1S_UCi9DA-Q-9DZIKTyQmuBNSPHQ_", tipo: "filme" },
     { titulo: "After 2", capaID: "1CROr0ySxN7qjeMXr70nFEdqxG_XCelsz", videoID: "1WL6DAD7y0qJz7gU2Tri1DLgk7Dbhimus", tipo: "filme" },
     { titulo: "After 3", capaID: "1Z7TTYmECxz9QDotu3fRfOiQhsOO8MFjx", videoID: "1TNmCJVNQCEUChOtZ69Ono4hsD61PUGl4", tipo: "filme" },
+
+    // --- DORAMAS ---
     { 
         titulo: "A Má Mãe", 
         capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", 
@@ -35,11 +38,25 @@ const navMenu = document.getElementById('nav-menu');
 const mobileMenu = document.getElementById('mobile-menu');
 const listaEpsContainer = document.getElementById('lista-eps');
 
+// FUNÇÃO ATUALIZADA: Agora ela checa se o cliente já tem a chave salva no navegador
 function validarChave() {
+    // Tenta ler o "post-it" salvo no celular do cliente
+    const chaveSalva = localStorage.getItem("voltti_chave");
+
+    if (chaveSalva === "VOLTTI5") {
+        return true; // Se já tiver a chave certa, libera direto
+    }
+
+    // Se não tiver chave ou estiver errada, pede a senha
     const senha = prompt("🔒 ACESSO RESTRITO\nInsira a chave de acesso:");
-    if (senha === "VOLTTI5") return true;
-    alert("Chave incorreta! Adquira o seu acesso no menu.");
-    return false;
+    
+    if (senha === "VOLTTI5") {
+        localStorage.setItem("voltti_chave", "VOLTTI5"); // Salva o "post-it" para a próxima vez
+        return true;
+    } else {
+        alert("Chave incorreta! Adquira o seu acesso no menu.");
+        return false;
+    }
 }
 
 function darPlay(id, titulo) {
@@ -59,7 +76,7 @@ function renderizar(lista) {
             if (item.tipo === "dorama") {
                 gerarListaEpisodios(item);
             } else {
-                listaEpsContainer.innerHTML = ""; // Limpa episódios se mudar para filme
+                listaEpsContainer.innerHTML = "";
                 if (validarChave()) darPlay(item.videoID, item.titulo);
             }
         };
