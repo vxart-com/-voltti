@@ -38,9 +38,11 @@ const mobileMenu = document.getElementById('mobile-menu');
 const listaEpsContainer = document.getElementById('lista-eps');
 
 // MENU MOBILE
-mobileMenu.onclick = () => { navMenu.classList.toggle('active'); };
+if(mobileMenu) {
+    mobileMenu.onclick = () => { navMenu.classList.toggle('active'); };
+}
 
-// VERIFICA SE O BOTÃO DE COMPRA DEVE SUMIR
+// 1. ESCONDE O BOTÃO DE COMPRA SE JÁ TIVER ACESSO
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
@@ -52,6 +54,7 @@ function verificarAcessoBotao() {
     } catch (e) {}
 }
 
+// 2. VALIDA A CHAVE DE ACESSO
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     let chaveSalva = null;
@@ -59,28 +62,30 @@ function validarChave() {
     
     if (chaveSalva === chaveCorreta) return true;
 
-    const senha = prompt("🔒 ACESSO RESTRITO\nInsira a chave:");
+    const senha = prompt("🔒 ACESSO RESTRITO\nInsira a chave de acesso:");
     if (senha === chaveCorreta) {
         try { 
             localStorage.setItem("voltti_chave", chaveCorreta); 
-            verificarAcessoBotao(); 
+            verificarAcessoBotao(); // Remove o botão na hora
         } catch (e) {}
         return true;
     }
-    alert("Chave incorreta!");
+    alert("Chave incorreta ou expirada!");
     return false;
 }
 
+// 3. CARREGA O VÍDEO NO PLAYER
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+// 4. RENDERIZA O CATÁLOGO
 function renderizar(lista) {
     grid.innerHTML = "";
     if (lista.length === 0) {
-        grid.innerHTML = "<p style='padding:40px; text-align:center; color:#777; width:100%;'>Em breve, novos conteúdos aqui!</p>";
+        grid.innerHTML = "<p style='padding:40px; text-align:center; color:#777; width:100%;'>Em breve, novos conteúdos nesta categoria!</p>";
         return;
     }
 
@@ -114,8 +119,9 @@ function renderizar(lista) {
     });
 }
 
+// 5. GERA BOTÕES DE EPISÓDIOS
 function gerarListaEpisodios(serie) {
-    titleDisplay.innerText = `${serie.titulo} - Episódios`;
+    titleDisplay.innerText = `${serie.titulo} - Escolha o Episódio`;
     listaEpsContainer.innerHTML = ""; 
     serie.episodios.forEach(ep => {
         const btn = document.createElement('button');
@@ -129,13 +135,14 @@ function gerarListaEpisodios(serie) {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+// 6. FILTRO DO MENU
 function filtrar(tipo) {
-    navMenu.classList.remove('active');
+    if(navMenu) navMenu.classList.remove('active');
     if(tipo === 'todos') return renderizar(conteudos);
     const filtrados = conteudos.filter(i => i.tipo === tipo);
     renderizar(filtrados);
 }
 
-// Inicialização
+// INICIALIZAÇÃO AO CARREGAR
 renderizar(conteudos);
 verificarAcessoBotao();
