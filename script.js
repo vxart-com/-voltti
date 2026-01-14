@@ -41,7 +41,14 @@ const conteudos = [
 const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
+const navMenu = document.getElementById('nav-menu');
+const mobileMenu = document.getElementById('mobile-menu');
 const listaEpsContainer = document.getElementById('lista-eps');
+
+// ATIVAÇÃO DO MENU MOBILE
+mobileMenu.onclick = () => {
+    navMenu.classList.toggle('active');
+};
 
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
@@ -65,18 +72,14 @@ function darPlay(id, titulo) {
 
 function renderizar(lista) {
     grid.innerHTML = "";
-    
-    // Pega todos os gêneros únicos da lista
     const generos = [...new Set(lista.map(item => item.genero))];
 
     generos.forEach(gen => {
-        // Cria o título da seção (Ex: Ação)
         const secao = document.createElement('div');
         secao.className = 'genero-secao';
         secao.innerHTML = `<h3 class="genero-titulo">${gen}</h3><div class="genero-linha"></div>`;
         const linha = secao.querySelector('.genero-linha');
 
-        // Filtra os filmes desse gênero
         const filmesDoGenero = lista.filter(i => i.genero === gen);
 
         filmesDoGenero.forEach(item => {
@@ -113,6 +116,7 @@ function gerarListaEpisodios(serie) {
 }
 
 function filtrar(tipo) {
+    navMenu.classList.remove('active'); // Fecha o menu após clicar
     if(tipo === 'todos') return renderizar(conteudos);
     renderizar(conteudos.filter(i => i.tipo === tipo));
 }
