@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VOLTTI Streaming</title>
-    
+    <title>VOLTTI | Mobile</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="logo-voltti.png">
-    <link rel="apple-touch-icon" href="logo-voltti.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#e50914">
-
+    <link rel="icon" type="image/png" href="logo-voltti.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="logo">VOLTTI</div>
-        <div class="menu-toggle" id="mobile-menu">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="header-right">
+            <button id="btnInstalarMobile" class="btn-app-mobile" style="display:none;">BAIXAR APP</button>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
         </div>
         <nav id="nav-menu">
             <ul>
@@ -29,39 +25,41 @@
                 <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
                 <li><a href="#" onclick="filtrar('serie')">Séries</a></li>
                 <li><a href="#" onclick="filtrar('dorama')">Doramas</a></li>
-                <li><a href="#" onclick="filtrar('anime')">Animes</a></li>
-                <li><a href="#" onclick="filtrar('novela')">Novelas</a></li>
-                <li class="menu-destaque" id="botao-pagar"><a href="pagar.html">ADQUIRIR ACESSO (R$ 5,00)</a></li>
+                <li class="menu-destaque" id="botao-pagar"><a href="pagar.html">ASSINAR MENSAL</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="main-content">
-        <section class="video-container" id="player-section">
+        <section class="video-container">
             <div class="player-wrapper">
                 <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
             <h2 id="video-title">Seja bem-vindo à VOLTTI</h2>
             <div id="lista-eps"></div>
         </section>
-
-        <section class="catalog">
-            <div class="grid" id="movie-grid"></div>
-        </section>
+        <section class="catalog" id="movie-grid"></section>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-logo">VOLTTI</div>
-            <p>Seu streaming privado de alta qualidade.</p>
-            <div class="footer-links">
-                <a href="pagar.html">Assinar</a>
-                <a href="https://wa.me/5598981296742" target="_blank">Suporte</a>
-            </div>
-            <p class="copyright">© 2026 VOLTTI - Todos os direitos reservados</p>
+        <div class="footer-logo">VOLTTI</div>
+        <p style="color: #666; font-size: 0.8em;">Sua plataforma premium de entretenimento.</p>
+        <div class="footer-links">
+            <a href="https://wa.me/5598981296742" target="_blank">Suporte WhatsApp</a>
+            <a href="#" onclick="localStorage.clear(); location.reload();">Sair / Trocar Conta</a>
         </div>
+        <p class="copyright">© 2026 VOLTTI - Todos os direitos reservados</p>
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+        let promptMob;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault(); promptMob = e;
+            document.getElementById('btnInstalarMobile').style.display = 'block';
+        });
+        document.getElementById('btnInstalarMobile').onclick = () => { if(promptMob) promptMob.prompt(); };
+    </script>
 </body>
 </html>
