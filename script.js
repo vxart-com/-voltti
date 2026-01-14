@@ -22,27 +22,34 @@ const conteudos = [
     }
 ];
 
+// IDs DO HTML
 const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
-const navMenu = document.getElementById('nav-menu');
-const mobileMenu = document.getElementById('mobile-menu');
 const listaEpsContainer = document.getElementById('lista-eps');
+const mobileMenu = document.getElementById('mobile-menu');
+const navMenu = document.getElementById('nav-menu');
 
+// CONTROLE DO MENU HAMBÚRGUER
+mobileMenu.onclick = () => {
+    navMenu.classList.toggle('active');
+};
+
+// FECHAR BOTÃO DE COMPRA SE JÁ TIVER CHAVE
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
-    try {
-        if (localStorage.getItem("voltti_chave") === chaveCorreta && botaoCompra) {
-            botaoCompra.style.display = "none";
-        }
-    } catch (e) {}
+    if (localStorage.getItem("voltti_chave") === chaveCorreta && botaoCompra) {
+        botaoCompra.style.display = "none";
+    }
 }
 
+// TRAVA DE SEGURANÇA MENSAL
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
-    const senha = prompt("Insira a chave de acesso:");
+    
+    const senha = prompt("Insira a chave de acesso mensal:");
     if (senha === chaveCorreta) {
         localStorage.setItem("voltti_chave", chaveCorreta);
         verificarAcessoBotao();
@@ -52,30 +59,40 @@ function validarChave() {
     return false;
 }
 
+// FUNÇÃO DE DAR PLAY NO VÍDEO
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
+// GERAR O CATÁLOGO NA TELA
 function renderizar(lista) {
     grid.innerHTML = "";
     const generos = [...new Set(lista.map(item => item.genero))];
+    
     generos.forEach(gen => {
         const secao = document.createElement('div');
         secao.className = 'genero-secao';
         secao.innerHTML = `<h3 class="genero-titulo">${gen}</h3><div class="genero-linha"></div>`;
         const linha = secao.querySelector('.genero-linha');
+        
         lista.filter(i => i.genero === gen).forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `<img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}"><p>${item.titulo}</p>`;
+            card.innerHTML = `
+                <img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}">
+                <p>${item.titulo}</p>
+            `;
+            
             card.onclick = () => {
-                if (item.episodios) {
-                    gerarListaEpisodios(item);
-                } else {
-                    listaEpsContainer.innerHTML = "";
-                    if (validarChave()) darPlay(item.videoID, item.titulo);
+                if (validarChave()) {
+                    if (item.episodios) {
+                        gerarListaEpisodios(item);
+                    } else {
+                        listaEpsContainer.innerHTML = "";
+                        darPlay(item.videoID, item.titulo);
+                    }
                 }
             };
             linha.appendChild(card);
@@ -84,6 +101,7 @@ function renderizar(lista) {
     });
 }
 
+// GERAR LISTA DE EPISÓDIOS PARA DORAMAS/SÉRIES
 function gerarListaEpisodios(serie) {
     titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
@@ -91,16 +109,17 @@ function gerarListaEpisodios(serie) {
         const btn = document.createElement('button');
         btn.innerText = ep.nome;
         btn.className = "btn-episodio";
-        btn.onclick = () => { if (validarChave()) darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
+        btn.onclick = () => { darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
         listaEpsContainer.appendChild(btn);
     });
 }
 
+// FILTRO DO MENU
 function filtrar(tipo) {
-    navMenu.classList.remove('active');
+    navMenu.classList.remove('active'); // Fecha o menu ao clicar
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-mobileMenu.onclick = () => navMenu.classList.toggle('active');
+// INICIALIZAR
 renderizar(conteudos);
 verificarAcessoBotao();
