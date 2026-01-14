@@ -16,13 +16,15 @@
 </head>
 <body>
 
-    <header>
+    <header id="main-header">
         <div class="logo">VOLTTI</div>
+        
         <div class="menu-toggle" id="mobile-menu">
             <span></span>
             <span></span>
             <span></span>
         </div>
+
         <nav id="nav-menu">
             <ul>
                 <li><a href="#" onclick="filtrar('todos')">Início</a></li>
@@ -36,27 +38,56 @@
         </nav>
     </header>
 
-    <div class="main-content">
+    <main class="main-content">
+        
         <section class="video-container" id="player-section">
             <div class="player-wrapper">
                 <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
-            <h2 id="video-title">Seja bem-vindo à VOLTTI</h2>
+            <h2 id="video-title">Bem-vindo à VOLTTI - Selecione um conteúdo</h2>
+            
             <div id="lista-eps"></div>
         </section>
 
         <section class="catalog">
-            <div class="grid" id="movie-grid"></div>
+            <div class="grid" id="movie-grid">
+                </div>
         </section>
-    </div>
+
+        <section class="faq-section">
+            <h2 class="faq-titulo">Dúvidas Frequentes</h2>
+            
+            <div class="faq-item">
+                <h3>Como recebo o meu acesso?</h3>
+                <p>Após enviares o comprovante via WhatsApp no menu de pagamento, a nossa equipa envia-te a chave única de acesso em poucos minutos.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>O pagamento é mensal?</h3>
+                <p>Não! O valor de R$ 5,00 é um pagamento único que garante acesso vitalício a todo o catálogo atual e futuras atualizações.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Como instalo o aplicativo no telemóvel?</h3>
+                <p><b>Android:</b> No Chrome, clica nos 3 pontinhos e seleciona "Instalar aplicativo".<br>
+                <b>iPhone:</b> No Safari, clica no botão de partilhar (quadrado com seta) e seleciona "Adicionar ao Ecrã Principal".</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Posso assistir em mais de um dispositivo?</h3>
+                <p>Sim, podes usar a tua chave em todos os teus dispositivos (Telemóvel, Tablet, PC ou Smart TV com navegador).</p>
+            </div>
+        </section>
+
+    </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-logo">VOLTTI</div>
-            <p>Seu streaming privado de alta qualidade.</p>
+            <p>O teu streaming privado de alta performance.</p>
             <div class="footer-links">
-                <a href="pagar.html">Assinar</a>
-                <a href="#" onclick="alert('Suporte via WhatsApp: Seu Número Aqui')">Suporte</a>
+                <a href="pagar.html">Assinar Agora</a>
+                <a href="https://wa.me/5598981296742" target="_blank">Suporte Técnico</a>
             </div>
             <p class="copyright">© 2026 VOLTTI - Todos os direitos reservados</p>
         </div>
