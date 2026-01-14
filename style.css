@@ -1,34 +1,189 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-body { background: #0f1014; color: #fff; }
+/* Configurações Gerais */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
 
-header { background: #1a1d23; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-.logo { font-size: 1.4rem; font-weight: 800; color: #e50914; }
+body { 
+    background: #0f1014; 
+    color: #fff; 
+    overflow-x: hidden; 
+}
 
-.menu-toggle { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
-.menu-toggle span { width: 25px; height: 2px; background: #fff; }
+/* Header e Menu */
+header { 
+    background: #1a1d23; 
+    padding: 15px 20px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
 
-nav { display: none; position: absolute; top: 60px; left: 0; width: 100%; background: #1a1d23; border-bottom: 2px solid #e50914; }
+.logo { 
+    font-size: 1.6rem; 
+    font-weight: 800; 
+    color: #e50914; 
+    letter-spacing: 1px;
+}
+
+.menu-toggle { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 5px; 
+    cursor: pointer; 
+}
+
+.menu-toggle span { 
+    width: 25px; 
+    height: 3px; 
+    background: #fff; 
+    border-radius: 2px;
+}
+
+nav { 
+    display: none; 
+    position: absolute; 
+    top: 60px; 
+    left: 0; 
+    width: 100%; 
+    background: #1a1d23; 
+    border-bottom: 3px solid #e50914; 
+}
+
 nav.active { display: block; }
-nav ul { list-style: none; }
-nav a { display: block; padding: 15px; color: #fff; text-decoration: none; text-align: center; font-weight: bold; border-bottom: 1px solid #2a2e35; }
 
-/* Botão Pagar */
-.menu-destaque a { color: #ff4d4d !important; border: 2px solid #ff4d4d !important; margin: 10px 20px; border-radius: 10px; background: rgba(255, 77, 77, 0.1); }
+nav ul { list-style: none; padding: 10px 0; }
 
-/* Player */
-.video-container { width: 100%; background: #000; padding-bottom: 20px; }
-.player-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
-.player-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-#video-title { padding: 15px; font-size: 1.1rem; text-align: center; }
+nav a { 
+    display: block; 
+    padding: 15px; 
+    color: #fff; 
+    text-decoration: none; 
+    text-align: center; 
+    font-weight: bold; 
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
 
-/* Botões Episódios */
-#lista-eps { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; padding: 0 10px; }
-.btn-episodio { background: #e50914; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; }
-.btn-indisponivel { background: #333 !important; color: #777 !important; cursor: not-allowed; }
+/* Botão de Pagamento no Menu */
+.menu-destaque a { 
+    color: #00ff00 !important; 
+    border: 2px solid #00ff00 !important; 
+    margin: 10px 40px; 
+    border-radius: 50px; 
+    background: rgba(0, 255, 0, 0.1); 
+}
 
-/* Grid */
-.catalog { padding: 15px; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.card { background: #1a1d23; border-radius: 8px; overflow: hidden; cursor: pointer; }
-.card img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
-.card p { padding: 10px; font-size: 0.8rem; text-align: center; }
+/* Player de Vídeo */
+.video-container { 
+    width: 100%; 
+    background: #000; 
+    padding-bottom: 10px; 
+}
+
+.player-wrapper { 
+    position: relative; 
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    height: 0; 
+}
+
+.player-wrapper iframe { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+}
+
+#video-title { 
+    padding: 15px; 
+    font-size: 1.1rem; 
+    text-align: center; 
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Lista de Episódios (Para Doramas) */
+#lista-eps { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 8px; 
+    justify-content: center; 
+    padding: 10px; 
+}
+
+.btn-episodio { 
+    background: #e50914; 
+    color: #fff; 
+    border: none; 
+    padding: 8px 12px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.btn-indisponivel { 
+    background: #333 !important; 
+    color: #777 !important; 
+}
+
+/* Seções de Gêneros (O Coração da Organização) */
+.catalog { padding: 10px 0 20px 15px; }
+
+.genero-secao { margin-bottom: 25px; }
+
+.genero-titulo { 
+    font-size: 1.1rem; 
+    color: #fff; 
+    margin-bottom: 12px; 
+    font-weight: 700;
+    border-left: 4px solid #e50914;
+    padding-left: 10px;
+}
+
+.genero-linha { 
+    display: flex; 
+    overflow-x: auto; /* Habilita o arraste para o lado */
+    gap: 12px; 
+    padding-right: 15px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Rolagem suave no iPhone */
+}
+
+/* Esconder barra de rolagem para ficar limpo */
+.genero-linha::-webkit-scrollbar { display: none; }
+
+/* Cards dos Filmes */
+.card { 
+    min-width: 130px; 
+    max-width: 130px; 
+    background: #1a1d23; 
+    border-radius: 6px; 
+    overflow: hidden; 
+    transition: transform 0.2s;
+}
+
+.card:active { transform: scale(0.95); }
+
+.card img { 
+    width: 100%; 
+    aspect-ratio: 2/3; 
+    object-fit: cover; 
+    display: block;
+}
+
+.card p { 
+    padding: 8px; 
+    font-size: 0.75rem; 
+    text-align: center; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; /* Corta o texto se for muito grande */
+}
