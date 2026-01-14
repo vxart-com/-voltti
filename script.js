@@ -25,12 +25,9 @@ const conteudos = [
         tipo: "dorama",
         genero: "Dorama",
         episodios: [
-            { nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" },
-            { nome: "Ep 02 (Breve)", videoID: "" }
+            { nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }
         ]
     }
-
-    // AQUI VOCÊ ADICIONARÁ OS ANIMES, SÉRIES E NOVELAS DEPOIS
 ];
 
 const grid = document.getElementById('movie-grid');
@@ -43,15 +40,31 @@ const listaEpsContainer = document.getElementById('lista-eps');
 // MENU MOBILE
 mobileMenu.onclick = () => { navMenu.classList.toggle('active'); };
 
+// VERIFICA SE O BOTÃO DE COMPRA DEVE SUMIR
+function verificarAcessoBotao() {
+    const chaveCorreta = "VOLTTI5";
+    const botaoCompra = document.getElementById('botao-pagar');
+    try {
+        const chaveSalva = localStorage.getItem("voltti_chave");
+        if (chaveSalva === chaveCorreta && botaoCompra) {
+            botaoCompra.style.display = "none";
+        }
+    } catch (e) {}
+}
+
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     let chaveSalva = null;
     try { chaveSalva = localStorage.getItem("voltti_chave"); } catch (e) {}
+    
     if (chaveSalva === chaveCorreta) return true;
 
     const senha = prompt("🔒 ACESSO RESTRITO\nInsira a chave:");
     if (senha === chaveCorreta) {
-        try { localStorage.setItem("voltti_chave", chaveCorreta); } catch (e) {}
+        try { 
+            localStorage.setItem("voltti_chave", chaveCorreta); 
+            verificarAcessoBotao(); 
+        } catch (e) {}
         return true;
     }
     alert("Chave incorreta!");
@@ -67,7 +80,7 @@ function darPlay(id, titulo) {
 function renderizar(lista) {
     grid.innerHTML = "";
     if (lista.length === 0) {
-        grid.innerHTML = "<p style='padding:20px; text-align:center; color:#777;'>Em breve, novos conteúdos nesta categoria!</p>";
+        grid.innerHTML = "<p style='padding:40px; text-align:center; color:#777; width:100%;'>Em breve, novos conteúdos aqui!</p>";
         return;
     }
 
@@ -78,20 +91,17 @@ function renderizar(lista) {
         secao.className = 'genero-secao';
         secao.innerHTML = `<h3 class="genero-titulo">${gen}</h3><div class="genero-linha"></div>`;
         const linha = secao.querySelector('.genero-linha');
+        const itensDoGenero = lista.filter(i => i.genero === gen);
 
-        const filmesDoGenero = lista.filter(i => i.genero === gen);
-
-        filmesDoGenero.forEach(item => {
+        itensDoGenero.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
             const linkImagem = `https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}`;
             card.innerHTML = `<img src="${linkImagem}"><p>${item.titulo}</p>`;
             
             card.onclick = () => {
-                // Lógica para conteúdos com episódios
-                const temEpisodios = ["dorama", "serie", "anime", "novela"].includes(item.tipo);
-                
-                if (temEpisodios) {
+                const temEps = ["dorama", "serie", "anime", "novela"].includes(item.tipo);
+                if (temEps) {
                     gerarListaEpisodios(item);
                 } else {
                     listaEpsContainer.innerHTML = "";
@@ -105,18 +115,14 @@ function renderizar(lista) {
 }
 
 function gerarListaEpisodios(serie) {
-    titleDisplay.innerText = `${serie.titulo} - Escolha o Episódio:`;
+    titleDisplay.innerText = `${serie.titulo} - Episódios`;
     listaEpsContainer.innerHTML = ""; 
     serie.episodios.forEach(ep => {
         const btn = document.createElement('button');
         btn.innerText = ep.nome;
-        btn.className = ep.videoID === "" ? "btn-episodio btn-indisponivel" : "btn-episodio";
+        btn.className = "btn-episodio";
         btn.onclick = () => {
-            if (ep.videoID !== "" && validarChave()) {
-                darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`);
-            } else if (ep.videoID === "") {
-                alert("Este episódio ainda não está disponível.");
-            }
+            if (validarChave()) darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`);
         };
         listaEpsContainer.appendChild(btn);
     });
@@ -130,4 +136,6 @@ function filtrar(tipo) {
     renderizar(filtrados);
 }
 
+// Inicialização
 renderizar(conteudos);
+verificarAcessoBotao();
