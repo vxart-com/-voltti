@@ -38,20 +38,28 @@ const navMenu = document.getElementById('nav-menu');
 const mobileMenu = document.getElementById('mobile-menu');
 const listaEpsContainer = document.getElementById('lista-eps');
 
-// FUNÇÃO ATUALIZADA: Agora ela checa se o cliente já tem a chave salva no navegador
+// FUNÇÃO DE VALIDAÇÃO COM SUPORTE A BLOQUEIO DE NAVEGADOR (BRAVE)
 function validarChave() {
-    // Tenta ler o "post-it" salvo no celular do cliente
-    const chaveSalva = localStorage.getItem("voltti_chave");
+    const chaveCorreta = "VOLTTI5";
+    let chaveSalva = null;
 
-    if (chaveSalva === "VOLTTI5") {
-        return true; // Se já tiver a chave certa, libera direto
+    try {
+        chaveSalva = localStorage.getItem("voltti_chave");
+    } catch (e) {
+        console.warn("Storage bloqueado.");
     }
 
-    // Se não tiver chave ou estiver errada, pede a senha
+    if (chaveSalva === chaveCorreta) return true;
+
     const senha = prompt("🔒 ACESSO RESTRITO\nInsira a chave de acesso:");
     
-    if (senha === "VOLTTI5") {
-        localStorage.setItem("voltti_chave", "VOLTTI5"); // Salva o "post-it" para a próxima vez
+    if (senha === chaveCorreta) {
+        try {
+            localStorage.setItem("voltti_chave", chaveCorreta);
+        } catch (e) {
+            // Se o navegador barrar o salvamento, apenas avisa no log
+            console.log("Não foi possível salvar a chave automaticamente.");
+        }
         return true;
     } else {
         alert("Chave incorreta! Adquira o seu acesso no menu.");
