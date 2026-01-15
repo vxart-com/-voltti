@@ -1,71 +1,67 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background-color: #0f1014; color: white; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
 
-/* HEADER & LOGO */
+/* HEADER */
 header {
     display: flex; justify-content: space-between; align-items: center;
     padding: 15px 5%; background: rgba(0,0,0,0.95);
     position: fixed; width: 100%; top: 0; z-index: 1001;
-    border-bottom: 1px solid #222;
 }
-.logo { color: #e50914; font-size: 1.6em; font-weight: bold; letter-spacing: 1px; }
+.logo { color: #e50914; font-size: 1.8em; font-weight: bold; }
 
-/* PESQUISA FIXA */
+/* BUSCA FIXA */
 .search-container {
-    margin-top: 70px; padding: 12px 5%;
+    margin-top: 70px; padding: 10px 5%;
     background: #0f1014; position: sticky; top: 60px; z-index: 1000;
 }
 .search-box { position: relative; width: 100%; }
 #inputBusca {
-    width: 100%; padding: 12px 15px; border-radius: 25px;
-    border: 1px solid #333; background: #1a1a1a; color: white; outline: none; font-size: 15px;
+    width: 100%; padding: 12px 15px; border-radius: 8px;
+    border: 1px solid #333; background: #1a1a1a; color: white; outline: none;
 }
 #inputBusca:focus { border-color: #e50914; }
-.search-icon { position: absolute; right: 18px; top: 12px; color: #666; }
+.search-icon { position: absolute; right: 15px; top: 12px; color: #666; }
 
-/* MENU LATERAL CORRIGIDO */
+/* MENU MOBILE ORGANIZADO */
 #nav-menu { 
     position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; 
     background: #000; transition: 0.4s; z-index: 1002; padding-top: 80px;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
 }
 #nav-menu.active { right: 0; }
 nav ul { list-style: none; display: flex; flex-direction: column; padding: 0 10%; gap: 20px; }
-nav a { color: #fff; text-decoration: none; font-size: 1.2em; font-weight: 500; display: block; padding: 10px 0; }
+nav a { color: #fff; text-decoration: none; font-size: 1.2em; font-weight: 500; display: block; }
 
 /* BOTÃO ASSINAR NO MENU */
 .menu-destaque a { 
     background: #e50914 !important; color: white !important; 
-    text-align: center; border-radius: 8px; margin-top: 10px;
-    padding: 15px !important; font-weight: bold;
+    text-align: center; border-radius: 6px; padding: 15px !important; 
 }
 
-/* CATALOGO LATERAL (NETFLIX STYLE) */
+/* CATALOGO COM SCROLL LATERAL */
 .genero-secao { margin: 25px 0 10px 5%; }
-.genero-titulo { font-size: 1.1em; margin-bottom: 12px; color: #fff; font-weight: 600; }
+.genero-titulo { font-size: 1.1em; margin-bottom: 12px; color: #e5e5e5; }
 .genero-linha { 
     display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px;
     scrollbar-width: none;
 }
 .genero-linha::-webkit-scrollbar { display: none; }
-.card { min-width: 135px; max-width: 135px; }
-.card img { width: 100%; height: 190px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
-.card p { font-size: 0.85em; margin-top: 8px; color: #ccc; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card { min-width: 140px; max-width: 140px; transition: 0.3s; }
+.card img { width: 100%; height: 210px; object-fit: cover; border-radius: 6px; }
+.card p { font-size: 0.85em; margin-top: 5px; color: #ccc; text-align: center; }
 
 /* PLAYER */
 .main-content { margin-top: 10px; }
 .video-container { padding: 0 5%; margin-bottom: 20px; }
-.player-wrapper { position: relative; padding-bottom: 56.25%; background: #000; border-radius: 10px; overflow: hidden; }
-.player-wrapper iframe { position: absolute; top: 0; width: 100%; height: 100%; border: none; }
-#video-title { font-size: 1.1em; margin-top: 15px; color: #fff; text-align: center; }
+.player-wrapper { position: relative; padding-bottom: 56.25%; background: #000; border-radius: 8px; overflow: hidden; }
+.player-wrapper iframe { position: absolute; top: 0; width: 100%; height: 100%; }
 
-/* RODAPÉ LIMPO */
-footer { padding: 40px 5%; text-align: center; background: #000; border-top: 1px solid #1a1a1a; margin-top: 40px; }
-.footer-logo { color: #e50914; font-size: 1.4em; font-weight: bold; margin-bottom: 15px; }
-.footer-links { display: flex; flex-direction: column; gap: 12px; margin: 15px 0; }
+/* FOOTER ORGANIZADO */
+footer { padding: 40px 5%; text-align: center; background: #000; border-top: 1px solid #222; margin-top: 40px; }
+.footer-logo { color: #e50914; font-size: 1.5em; font-weight: bold; margin-bottom: 15px; }
+.footer-links { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; }
 .footer-links a { color: #888; text-decoration: none; font-size: 0.9em; }
-.copyright { color: #444; font-size: 0.7em; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
+.copyright { color: #444; font-size: 0.7em; margin-top: 20px; }
 
 /* BOTÃO HAMBURGUER */
-.menu-toggle { display: flex; flex-direction: column; gap: 6px; cursor: pointer; padding: 5px; }
-.menu-toggle span { width: 28px; height: 3px; background: #fff; border-radius: 2px; }
+.menu-toggle { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
+.menu-toggle span { width: 30px; height: 3px; background: #fff; }
