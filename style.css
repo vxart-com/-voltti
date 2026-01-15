@@ -1,67 +1,52 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: #0f1014; color: white; font-family: Arial, sans-serif; }
+body { background-color: #0f1014; color: white; font-family: Arial, sans-serif; overflow-x: hidden; }
 
 header {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 4%; background: rgba(0,0,0,0.9);
+    padding: 15px 4%; background: rgba(0,0,0,0.95);
     position: fixed; width: 100%; top: 0; z-index: 1000;
 }
 
 .logo { color: #e50914; font-size: 1.8em; font-weight: bold; }
 
-nav ul { display: flex; list-style: none; gap: 20px; align-items: center; }
-nav a { color: #e5e5e5; text-decoration: none; font-size: 0.9em; }
-.menu-destaque a { background: #e50914; padding: 8px 15px; border-radius: 4px; font-weight: bold; }
-
-.main-content { margin-top: 80px; }
-.video-container { padding: 0 4%; margin-bottom: 30px; }
-.player-wrapper { 
-    position: relative; padding-bottom: 56.25%; height: 0; 
-    background: #000; border-radius: 8px; overflow: hidden; 
+/* BARRA DE PESQUISA */
+.search-container {
+    margin-top: 75px;
+    padding: 10px 4%;
+    background: #0f1014;
 }
+.search-box { position: relative; width: 100%; }
+#inputBusca {
+    width: 100%; padding: 12px 15px; border-radius: 8px;
+    border: 1px solid #333; background: #1a1a1a; color: white; outline: none;
+}
+.search-icon { position: absolute; right: 15px; top: 12px; color: #666; }
+
+/* CATALOGO COM SCROLL LATERAL */
+.genero-secao { margin: 20px 0; padding-left: 4%; }
+.genero-titulo { font-size: 1.1em; margin-bottom: 10px; color: #e5e5e5; }
+.genero-linha { 
+    display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px;
+    scrollbar-width: none; /* Firefox */
+}
+.genero-linha::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+.card { min-width: 140px; transition: 0.3s; }
+.card img { width: 100%; height: 210px; object-fit: cover; border-radius: 6px; }
+.card p { font-size: 0.85em; margin-top: 5px; text-align: center; }
+
+/* PLAYER E RESTO */
+.main-content { margin-top: 10px; }
+.video-container { padding: 0 4%; margin-bottom: 20px; }
+.player-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; border-radius: 8px; overflow: hidden; }
 .player-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-#video-title { margin-top: 15px; font-size: 1.2em; }
-#lista-eps { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; }
-.btn-episodio { background: #333; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
-.btn-episodio:hover { background: #e50914; }
-
-.catalog { padding: 0 4%; }
-.genero-secao { margin-bottom: 25px; }
-.genero-titulo { font-size: 1.1em; margin-bottom: 10px; color: #999; }
-.genero-linha { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; }
-.card { min-width: 140px; cursor: pointer; transition: 0.3s; }
-.card:hover { transform: scale(1.05); }
-.card img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
-.card p { font-size: 0.8em; text-align: center; margin-top: 5px; }
-
-/* --- SEU FOOTER ATUALIZADO (ESTILO PC) --- */
-footer { padding: 40px; text-align: center; border-top: 1px solid #222; margin-top: 50px; background: #000; }
-.footer-logo { color: #e50914; font-weight: bold; font-size: 1.5em; margin-bottom: 10px; }
-.footer-links { margin-bottom: 15px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-.footer-links a { color: #888; text-decoration: none; font-size: 0.85em; transition: 0.3s; }
-.footer-links a:hover { color: #e50914; }
-.copyright { color: #444; font-size: 0.75em; margin-top: 10px; }
-
-/* --- NOVAS CLASSES ADICIONADAS (SEM QUEBRAR O RESTO) --- */
-.header-right { display: flex; align-items: center; gap: 12px; }
-
-.btn-app-mobile {
-    background: #333; color: white; border: 1px solid #555;
-    padding: 6px 12px; border-radius: 4px; font-size: 0.7em;
-    font-weight: bold; cursor: pointer;
-}
-
+/* MENU MOBILE */
+#nav-menu { position: fixed; top: 70px; right: -100%; width: 70%; height: 100%; background: rgba(0,0,0,0.95); transition: 0.4s; z-index: 999; }
+#nav-menu.active { right: 0; }
+nav ul { flex-direction: column; padding: 40px; gap: 25px; }
 .menu-toggle { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
-.menu-toggle span { width: 25px; height: 3px; background: white; }
+.menu-toggle span { width: 30px; height: 3px; background: white; }
 
-@media (max-width: 768px) {
-    .menu-toggle { display: flex; }
-    nav { 
-        display: none; position: absolute; top: 60px; right: 0; 
-        background: #000; width: 60%; height: 100vh; padding: 20px; 
-        border-left: 1px solid #222;
-    }
-    nav.active { display: block; }
-    nav ul { flex-direction: column; align-items: flex-start; }
-}
+footer { padding: 30px; text-align: center; background: #000; margin-top: 30px; }
+.menu-destaque a { background: #e50914; padding: 10px; border-radius: 4px; display: block; text-align: center; }
