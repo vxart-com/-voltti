@@ -28,7 +28,7 @@
 
     <div class="search-container">
         <div class="search-box">
-            <input type="text" id="inputBusca" placeholder="O que vamos assistir?" onkeyup="executarBusca()">
+            <input type="text" id="inputBusca" placeholder="Pesquisar filmes ou doramas..." onkeyup="executarBusca()">
             <span class="search-icon">🔍</span>
         </div>
     </div>
@@ -36,7 +36,7 @@
     <main class="main-content">
         <section class="video-container">
             <div class="player-wrapper">
-                <iframe id="main-player" src="" allowfullscreen></iframe>
+                <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
             </div>
             <h2 id="video-title">Escolha um título para começar</h2>
             <div id="lista-eps"></div>
@@ -47,10 +47,10 @@
     <footer>
         <div class="footer-logo">VOLTTI</div>
         <div class="footer-links">
-            <a href="https://wa.me/5598981296742">Suporte via WhatsApp</a>
-            <a href="#" onclick="localStorage.clear(); location.reload();">Sair da Conta</a>
+            <a href="https://wa.me/5598981296742" target="_blank">Suporte WhatsApp</a>
+            <a href="#" onclick="localStorage.clear(); location.reload();">Sair / Trocar Conta</a>
         </div>
-        <p class="copyright">© 2026 VOLTTI - ENTRETENIMENTO PREMIUM</p>
+        <p class="copyright">© 2026 VOLTTI - TODOS OS DIREITOS RESERVADOS</p>
     </footer>
 
     <script src="script.js"></script>
