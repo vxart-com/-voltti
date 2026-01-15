@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VOLTTI | Mobile</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#e50914">
-    <link rel="icon" type="image/png" href="logo-voltti.png">
+    <title>VOLTTI | Premium</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +11,6 @@
     <header>
         <div class="logo">VOLTTI</div>
         <div class="header-right">
-            <button id="btnInstalarMobile" class="btn-app-mobile" style="display:none;">BAIXAR APP</button>
             <div class="menu-toggle" id="mobile-menu">
                 <span></span><span></span><span></span>
             </div>
@@ -25,14 +21,14 @@
                 <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
                 <li><a href="#" onclick="filtrar('serie')">Séries</a></li>
                 <li><a href="#" onclick="filtrar('dorama')">Doramas</a></li>
-                <li class="menu-destaque" id="botao-pagar"><a href="pagar.html">ASSINAR MENSAL</a></li>
+                <li class="menu-destaque"><a href="pagar.html">ASSINAR MENSAL</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="search-container">
         <div class="search-box">
-            <input type="text" id="inputBusca" placeholder="Pesquisar filmes ou doramas..." onkeyup="executarBusca()">
+            <input type="text" id="inputBusca" placeholder="O que vamos assistir?" onkeyup="executarBusca()">
             <span class="search-icon">🔍</span>
         </div>
     </div>
@@ -40,9 +36,9 @@
     <main class="main-content">
         <section class="video-container">
             <div class="player-wrapper">
-                <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
+                <iframe id="main-player" src="" allowfullscreen></iframe>
             </div>
-            <h2 id="video-title">Seja bem-vindo à VOLTTI</h2>
+            <h2 id="video-title">Escolha um título para começar</h2>
             <div id="lista-eps"></div>
         </section>
         <section class="catalog" id="movie-grid"></section>
@@ -50,12 +46,11 @@
 
     <footer>
         <div class="footer-logo">VOLTTI</div>
-        <p style="color: #666; font-size: 0.8em;">Sua plataforma premium de entretenimento.</p>
         <div class="footer-links">
-            <a href="https://wa.me/5598981296742" target="_blank">Suporte WhatsApp</a>
-            <a href="#" onclick="localStorage.clear(); location.reload();">Sair / Trocar Conta</a>
+            <a href="https://wa.me/5598981296742">Suporte via WhatsApp</a>
+            <a href="#" onclick="localStorage.clear(); location.reload();">Sair da Conta</a>
         </div>
-        <p class="copyright">© 2026 VOLTTI - Todos os direitos reservados</p>
+        <p class="copyright">© 2026 VOLTTI - ENTRETENIMENTO PREMIUM</p>
     </footer>
 
     <script src="script.js"></script>
