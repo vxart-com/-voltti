@@ -1,4 +1,18 @@
+// LISTA DE CONTEÚDOS VOLTTI - ATUALIZADA (28/54)
 const conteudos = [
+    // --- SEUS NOVOS FILMES (ADICIONADOS) ---
+    { titulo: "Gente Grande", capaID: "1yy_A_OREbP01NwK_P9-3cpdJMnjslb_j", videoID: "19px6-CfTTjn7dPOINSgBcc0Y53MzmHO9", tipo: "filme", genero: "Comédia" },
+    { titulo: "Gente Grande 2", capaID: "1mXb9TqIXJ6NmTMPXpYsqIGjbfMXcl2DD", videoID: "15ZaZatHBEkvuAjKYSoTLJRsbX3HPBKx5", tipo: "filme", genero: "Comédia" },
+    { titulo: "Maze Runner: Correr ou Morrer", capaID: "1QVTx5Oq-Jq9xQbJv-eIHVvNDzhFDS_HP", videoID: "10JiLPtB8sCbqmRYAtfM6Vo1FaER20Nie", tipo: "filme", genero: "Ação" },
+    { titulo: "Maze Runner: Prova de Fogo", capaID: "1Tw-uyztkyNG7o8BxTP8zh8WqkCCBHaYp", videoID: "1K_wAhYMGm6-BSpQL0CSX3-hmXkrPCQeW", tipo: "filme", genero: "Ação" },
+    { titulo: "Maze Runner: A Cura Mortal", capaID: "1DHD2SLdwB7GwpkPDKRZm29kYflvsi-KJ", videoID: "1lX4uC9A5zRhIyMcmMK6HLdUNnJTv2gJL", tipo: "filme", genero: "Ação" },
+    { titulo: "A Saga Crepúsculo: Amanhecer P1", capaID: "1Dh-Rr4GX0SF775MM1nwXjY8HP7fmoWeK", videoID: "1ja1P_ckNanuacbCZEb3AdtKygfB_mKA9", tipo: "filme", genero: "Romance" },
+    { titulo: "As Branquelas", capaID: "1IeImEkGmnVVKsVQMH9ZaEu3SfGPR1Hhm", videoID: "1PBlfX6f8trvtxgLqo4G4kN8LiOZ0lob1", tipo: "filme", genero: "Comédia" },
+    { titulo: "De Volta Para O Futuro 1", capaID: "1ywJfcead5moOJcZwvZnpIydolmoja0dg", videoID: "1zlj4HUOI9VlUJXAvycIop4NEMyIVswwn", tipo: "filme", genero: "Ficção" },
+    { titulo: "De Volta Para O Futuro 2", capaID: "1eZzvuIK_JoyEXd0U7OZ1pfDfgYO5KMcW", videoID: "1lorWd0OtE1VLttH1xTS7-vtq9R3QZl2u", tipo: "filme", genero: "Ficção" },
+    { titulo: "Vovó... Zona", capaID: "1e3pW_ZUznvwZFhS_K1ciTm-8jcUmf8oB", videoID: "1E-SZy85PhQVJNyHvaEXIle7EU4ZbF0Is", tipo: "filme", genero: "Comédia" },
+
+    // --- FILMES ANTERIORES ---
     { titulo: "A Morte Pede Carona (2007)", capaID: "13hcPWKedhsuyKJjDnkA1OKsDBsqNQt9Q", videoID: "1Dv2kWhQBm1pp2QEWDmzgqQfK0Cs8bYlo", tipo: "filme", genero: "Terror" },
     { titulo: "Cão de Briga (2005)", capaID: "1eQqmBbC-ynXoywSlftsWEn-AkTbDo6q0", videoID: "1S2ACOJIWCTT3iXqQZ91pl1-RLWxxZOuH", tipo: "filme", genero: "Ação" },
     { titulo: "O Massacre da Serra Elétrica", capaID: "1x3pTkU1IDAras3s9fez0zAamgS6VeaRN", videoID: "1-gh6yP-OhYiCsCVa5V4-vUcxk2eXCu2J", tipo: "filme", genero: "Terror" },
@@ -18,7 +32,9 @@ const conteudos = [
     { titulo: "After 3", capaID: "1Z7TTYmECxz9QDotu3fRfOiQhsOO8MFjx", videoID: "1TNmCJVNQCEUChOtZ69Ono4hsD61PUGl4", tipo: "filme", genero: "Romance" },
     { 
         titulo: "A Má Mãe", capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", tipo: "dorama", genero: "Dorama",
-        episodios: [{ nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }]
+        episodios: [
+            { nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }
+        ]
     }
 ];
 
@@ -30,12 +46,10 @@ const listaEpsContainer = document.getElementById('lista-eps');
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.getElementById('nav-menu');
 
-// CONTROLE DO MENU HAMBÚRGUER
-mobileMenu.onclick = () => {
-    navMenu.classList.toggle('active');
-};
+// CONTROLE DO MENU
+mobileMenu.onclick = () => navMenu.classList.toggle('active');
 
-// FECHAR BOTÃO DE COMPRA SE JÁ TIVER CHAVE
+// VERIFICAR BOTÃO DE PAGAMENTO
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
@@ -44,7 +58,7 @@ function verificarAcessoBotao() {
     }
 }
 
-// TRAVA DE SEGURANÇA MENSAL
+// VALIDAÇÃO DE ACESSO
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
@@ -59,14 +73,14 @@ function validarChave() {
     return false;
 }
 
-// FUNÇÃO DE DAR PLAY NO VÍDEO
+// DAR PLAY
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// GERAR O CATÁLOGO NA TELA
+// RENDERIZAR SITE
 function renderizar(lista) {
     grid.innerHTML = "";
     const generos = [...new Set(lista.map(item => item.genero))];
@@ -101,7 +115,6 @@ function renderizar(lista) {
     });
 }
 
-// GERAR LISTA DE EPISÓDIOS PARA DORAMAS/SÉRIES
 function gerarListaEpisodios(serie) {
     titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
@@ -109,17 +122,16 @@ function gerarListaEpisodios(serie) {
         const btn = document.createElement('button');
         btn.innerText = ep.nome;
         btn.className = "btn-episodio";
-        btn.onclick = () => { darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
+        btn.onclick = () => darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`);
         listaEpsContainer.appendChild(btn);
     });
 }
 
-// FILTRO DO MENU
 function filtrar(tipo) {
-    navMenu.classList.remove('active'); // Fecha o menu ao clicar
+    navMenu.classList.remove('active');
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-// INICIALIZAR
+// INICIAR
 renderizar(conteudos);
 verificarAcessoBotao();
