@@ -1,7 +1,6 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { background-color: #0f1014; color: white; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
 
-/* HEADER */
 header {
     display: flex; justify-content: space-between; align-items: center;
     padding: 15px 5%; background: rgba(0,0,0,0.95);
@@ -9,7 +8,6 @@ header {
 }
 .logo { color: #e50914; font-size: 1.8em; font-weight: bold; }
 
-/* BUSCA FIXA */
 .search-container {
     margin-top: 70px; padding: 10px 5%;
     background: #0f1014; position: sticky; top: 60px; z-index: 1000;
@@ -19,25 +17,21 @@ header {
     width: 100%; padding: 12px 15px; border-radius: 8px;
     border: 1px solid #333; background: #1a1a1a; color: white; outline: none;
 }
-#inputBusca:focus { border-color: #e50914; }
 .search-icon { position: absolute; right: 15px; top: 12px; color: #666; }
 
-/* MENU MOBILE ORGANIZADO */
 #nav-menu { 
     position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; 
     background: #000; transition: 0.4s; z-index: 1002; padding-top: 80px;
 }
 #nav-menu.active { right: 0; }
 nav ul { list-style: none; display: flex; flex-direction: column; padding: 0 10%; gap: 20px; }
-nav a { color: #fff; text-decoration: none; font-size: 1.2em; font-weight: 500; display: block; }
+nav a { color: #fff !important; text-decoration: none !important; font-size: 1.2em; font-weight: 500; display: block; }
 
-/* BOTÃO ASSINAR NO MENU */
 .menu-destaque a { 
     background: #e50914 !important; color: white !important; 
     text-align: center; border-radius: 6px; padding: 15px !important; 
 }
 
-/* CATALOGO COM SCROLL LATERAL */
 .genero-secao { margin: 25px 0 10px 5%; }
 .genero-titulo { font-size: 1.1em; margin-bottom: 12px; color: #e5e5e5; }
 .genero-linha { 
@@ -45,23 +39,28 @@ nav a { color: #fff; text-decoration: none; font-size: 1.2em; font-weight: 500; 
     scrollbar-width: none;
 }
 .genero-linha::-webkit-scrollbar { display: none; }
-.card { min-width: 140px; max-width: 140px; transition: 0.3s; }
+.card { min-width: 140px; max-width: 140px; }
 .card img { width: 100%; height: 210px; object-fit: cover; border-radius: 6px; }
 .card p { font-size: 0.85em; margin-top: 5px; color: #ccc; text-align: center; }
 
-/* PLAYER */
 .main-content { margin-top: 10px; }
 .video-container { padding: 0 5%; margin-bottom: 20px; }
 .player-wrapper { position: relative; padding-bottom: 56.25%; background: #000; border-radius: 8px; overflow: hidden; }
-.player-wrapper iframe { position: absolute; top: 0; width: 100%; height: 100%; }
+.player-wrapper iframe { position: absolute; top: 0; width: 100%; height: 100%; border: none; }
 
-/* FOOTER ORGANIZADO */
+/* Estilo dos Botões de Episódios */
+#lista-eps { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+.btn-episodio { 
+    background: #e50914; color: white; border: none; 
+    padding: 10px 20px; border-radius: 5px; cursor: pointer; 
+    font-weight: bold; font-size: 0.9em;
+}
+
 footer { padding: 40px 5%; text-align: center; background: #000; border-top: 1px solid #222; margin-top: 40px; }
 .footer-logo { color: #e50914; font-size: 1.5em; font-weight: bold; margin-bottom: 15px; }
-.footer-links { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; }
-.footer-links a { color: #888; text-decoration: none; font-size: 0.9em; }
+.footer-links { display: flex; flex-direction: column; gap: 15px; }
+.footer-links a { color: #888 !important; text-decoration: none !important; font-size: 0.9em; }
 .copyright { color: #444; font-size: 0.7em; margin-top: 20px; }
 
-/* BOTÃO HAMBURGUER */
 .menu-toggle { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
 .menu-toggle span { width: 30px; height: 3px; background: #fff; }
