@@ -46,12 +46,21 @@ function executarBusca() {
     renderizar(filtrados);
 }
 
+function verificarAcessoBotao() {
+    const chaveCorreta = "VOLTTI5";
+    const botaoPagar = document.getElementById('botao-pagar');
+    if (localStorage.getItem("voltti_chave") === chaveCorreta && botaoPagar) {
+        botaoPagar.style.display = "none";
+    }
+}
+
 function validarChave() {
     const chave = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chave) return true;
     const senha = prompt("Insira a chave de acesso mensal:");
     if (senha === chave) {
         localStorage.setItem("voltti_chave", chave);
+        verificarAcessoBotao();
         return true;
     }
     alert("Chave incorreta!");
@@ -78,12 +87,29 @@ function renderizar(lista) {
             card.innerHTML = `<img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}"><p>${item.titulo}</p>`;
             card.onclick = () => {
                 if (validarChave()) {
-                    item.episodios ? gerarListaEpisodios(item) : (listaEpsContainer.innerHTML = "", darPlay(item.videoID, item.titulo));
+                    if (item.episodios) {
+                        gerarListaEpisodios(item);
+                    } else {
+                        listaEpsContainer.innerHTML = "";
+                        darPlay(item.videoID, item.titulo);
+                    }
                 }
             };
             linha.appendChild(card);
         });
         grid.appendChild(secao);
+    });
+}
+
+function gerarListaEpisodios(serie) {
+    titleDisplay.innerText = serie.titulo;
+    listaEpsContainer.innerHTML = ""; 
+    serie.episodios.forEach(ep => {
+        const btn = document.createElement('button');
+        btn.innerText = ep.nome;
+        btn.className = "btn-episodio";
+        btn.onclick = () => { darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
+        listaEpsContainer.appendChild(btn);
     });
 }
 
@@ -93,3 +119,4 @@ function filtrar(tipo) {
 }
 
 renderizar(conteudos);
+verificarAcessoBotao();
