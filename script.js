@@ -33,7 +33,7 @@ const conteudos = [
     { 
         titulo: "Homem-Aranha (2002)", 
         capaID: "1AGL2UODMNhyDgcTLfUlrnIhSVtk5lj9g", 
-        videoID: "1Ph9Rx3fX1FxRuS_dywcpp5n9KQu2Hpk2", 
+        videoID: "https://voe.sx/e/ybm1nstmwrk0", 
         tipo: "filme", 
         genero: "Marvel" 
     }
@@ -46,12 +46,6 @@ const listaEpsContainer = document.getElementById('lista-eps');
 const navMenu = document.getElementById('nav-menu');
 
 document.getElementById('mobile-menu').onclick = () => navMenu.classList.toggle('active');
-
-function executarBusca() {
-    const termo = document.getElementById('inputBusca').value.toLowerCase();
-    const filtrados = conteudos.filter(i => i.titulo.toLowerCase().includes(termo) || i.genero.toLowerCase().includes(termo));
-    renderizar(filtrados);
-}
 
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
@@ -75,7 +69,12 @@ function validarChave() {
 }
 
 function darPlay(id, titulo) {
-    player.src = `https://drive.google.com/file/d/${id}/preview`;
+    // Lógica para diferenciar Google Drive de outros links (como Voe)
+    if (id.startsWith('http')) {
+        player.src = id;
+    } else {
+        player.src = `https://drive.google.com/file/d/${id}/preview`;
+    }
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
