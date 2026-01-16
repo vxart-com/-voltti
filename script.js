@@ -33,7 +33,7 @@ const conteudos = [
     { 
         titulo: "Homem-Aranha (2002)", 
         capaID: "1AGL2UODMNhyDgcTLfUlrnIhSVtk5lj9g", 
-        videoID: "https://voe.sx/e/ybm1nstmwrk0", 
+        videoID: "1Ph9Rx3fX1FxRuS_dywcpp5n9KQu2Hpk2", 
         tipo: "filme", 
         genero: "Marvel" 
     }
@@ -69,7 +69,6 @@ function validarChave() {
 }
 
 function darPlay(id, titulo) {
-    // Lógica para diferenciar Google Drive de outros links (como Voe)
     if (id.startsWith('http')) {
         player.src = id;
     } else {
