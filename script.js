@@ -29,6 +29,13 @@ const conteudos = [
     { 
         titulo: "A Má Mãe", capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", tipo: "dorama", genero: "Dorama",
         episodios: [{ nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }]
+    },
+    { 
+        titulo: "Homem-Aranha (2002)", 
+        capaID: "1AGL2UODMNhyDgcTLfUlrnIhSVtk5lj9g", 
+        videoID: "1Ph9Rx3fX1FxRuS_dywcpp5n9KQu2Hpk2", 
+        tipo: "filme", 
+        genero: "Marvel" 
     }
 ];
 
@@ -57,7 +64,7 @@ function verificarAcessoBotao() {
 function validarChave() {
     const chave = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chave) return true;
-    const senha = prompt("Insira a chave de acesso mensal:");
+    const senha = prompt("Insira a chave de acesso:");
     if (senha === chave) {
         localStorage.setItem("voltti_chave", chave);
         verificarAcessoBotao();
