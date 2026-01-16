@@ -33,13 +33,12 @@ const conteudos = [
     { 
         titulo: "Homem-Aranha (2002)", 
         capaID: "1AGL2UODMNhyDgcTLfUlrnIhSVtk5lj9g", 
-        videoID: "1Ph9Rx3fX1FxRuS_dywcpp5n9KQu2Hpk2", 
+        videoID: "14_rg35NNhW2-j1Dd-wvsIEAw7Xne4qgW", 
         tipo: "filme", 
         genero: "Marvel" 
     }
 ];
 
-// IDs DO HTML
 const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
@@ -47,14 +46,12 @@ const listaEpsContainer = document.getElementById('lista-eps');
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.getElementById('nav-menu');
 
-// CONTROLE DO MENU HAMBÚRGUER
 if (mobileMenu) {
     mobileMenu.onclick = () => {
         navMenu.classList.toggle('active');
     };
 }
 
-// FECHAR BOTÃO DE COMPRA SE JÁ TIVER CHAVE
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
@@ -63,7 +60,6 @@ function verificarAcessoBotao() {
     }
 }
 
-// TRAVA DE SEGURANÇA MENSAL
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
@@ -78,14 +74,12 @@ function validarChave() {
     return false;
 }
 
-// FUNÇÃO DE DAR PLAY NO VÍDEO
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// GERAR O CATÁLOGO NA TELA
 function renderizar(lista) {
     if (!grid) return;
     grid.innerHTML = "";
@@ -121,7 +115,6 @@ function renderizar(lista) {
     });
 }
 
-// GERAR LISTA DE EPISÓDIOS PARA DORAMAS/SÉRIES
 function gerarListaEpisodios(serie) {
     if (!titleDisplay || !listaEpsContainer) return;
     titleDisplay.innerText = serie.titulo;
@@ -135,13 +128,11 @@ function gerarListaEpisodios(serie) {
     });
 }
 
-// FILTRO DO MENU
 function filtrar(tipo) {
     if (navMenu) navMenu.classList.remove('active'); 
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-// FUNÇÃO DE BUSCA (Para a barra de pesquisa funcionar)
 function executarBusca() {
     const input = document.getElementById('inputBusca');
     if (!input) return;
@@ -153,6 +144,5 @@ function executarBusca() {
     renderizar(filtrados);
 }
 
-// INICIALIZAR
 renderizar(conteudos);
 verificarAcessoBotao();
