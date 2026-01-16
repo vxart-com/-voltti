@@ -2,9 +2,9 @@ const conteudos = [
     // COMÉDIA
     { titulo: "Gente Grande", capaID: "1yy_A_OREbP01NwK_P9-3cpdJMnjslb_j", videoID: "19px6-CfTTjn7dPOINSgBcc0Y53MzmHO9", tipo: "filme", genero: "Comédia" },
     { titulo: "Gente Grande 2", capaID: "1mXb9TqIXJ6NmTMPXpYsqIGjbfMXcl2DD", videoID: "15ZaZatHBEkvuAjKYSoTLJRsbX3HPBKx5", tipo: "filme", genero: "Comédia" },
-    { titulo: "Uma Noite no Museu", capaID: "12DPh9Ck0vDK0y-wsghKgO0V5ALOjPERz", videoID: "1aY-OoFAuTL9Juj2bm4LuBOnjfmWZV3L_", tipo: "filme", genero: "Comédia" },
-    { titulo: "Uma Noite no Museu 2", capaID: "1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX", videoID: "1fHAi7cpYwsUJn8_JpAQmdmGUiJpf44cm", tipo: "filme", genero: "Comédia" },
-    { titulo: "Uma Noite no Museu 3", capaID: "1tYDi0LU-9-YwAklLGvZ9iDqgFwrIQhKc", videoID: "1RfiGFGH-RISFOXgufP2zxtOUdYCeLoSo", tipo: "filme", genero: "Comédia" },
+    { titulo: "Uma Noite no Museu", capaID: "12DPh9Ck0vDK0y-wsghKgO0V5ALOjPERz", videoID: "1CwPlyAQhamfkEp-JN3yeQIgPcPvnszRg", tipo: "filme", genero: "Comédia" },
+    { titulo: "Uma Noite no Museu 2", capaID: "1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX", videoID: "1Yx_A9Nqh4oqWyYKrOYLD4QVGDe8HuY5w", tipo: "filme", genero: "Comédia" },
+    { titulo: "Uma Noite no Museu 3", capaID: "1tYDi0LU-9-YwAklLGvZ9iDqgFwrIQhKc", videoID: "1jJhpl29jNIQaZQ0w9h9jNFJIiR1dOMsc", tipo: "filme", genero: "Comédia" },
     { titulo: "As Branquelas", capaID: "1IeImEkGmnVVKsVQMH9ZaEu3SfGPR1Hhm", videoID: "1PBlfX6f8trvtxgLqo4G4kN8LiOZ0lob1", tipo: "filme", genero: "Comédia" },
     { titulo: "Vovó... Zona", capaID: "1e3pW_ZUznvwZFhS_K1ciTm-8jcUmf8oB", videoID: "1E-SZy85PhQVJNyHvaEXIle7EU4ZbF0Is", tipo: "filme", genero: "Comédia" },
 
@@ -40,7 +40,7 @@ const conteudos = [
     // DRAMA
     { titulo: "A Culpa é das Estrelas", capaID: "1xkA2xCy76G8P0O7vEt4lBkeU9DklDak1", videoID: "1dwni5OTZmAo_HtdbT3iJBiYt3ka3xL95", tipo: "filme", genero: "Drama" },
     { titulo: "O Menino do Pijama Listrado", capaID: "1RSoG6tRL3cegXOz7-o2-GUSstpZjDiP0", videoID: "1hgv7uIupbJIcsiQoTq0_De_05Erd8Ple", tipo: "filme", genero: "Drama" },
-    { titulo: "A 5 Passos de Você", capaID: "1Yvh4YJ5MgXqOQkT2dA4QpZ7-9G8ZSDTX", videoID: "1h60Db30uHO8d8B_surtOGBhKKl0SHocm", tipo: "filme", genero: "Drama" },
+    { titulo: "A 5 Passos de Você", capaID: "1Yvh4YJ5MgXqOQkT2dA4QpZ7-9G8ZSDTX", videoID: "1zbGDdhY83bEcAn7bdYmt4WlQgKFgQbfj", tipo: "filme", genero: "Drama" },
     { titulo: "A Vida Depois", capaID: "1td-M-4A2NwidJcYnrOXrpMrU4UF0WCzE", videoID: "1jY807j1irBq8nBr4cJCi_hWWadhIPtXU", tipo: "filme", genero: "Drama" },
 
     // TERROR & SUSPENSE
@@ -65,7 +65,7 @@ const conteudos = [
     }
 ];
 
-// IDs DO HTML
+// O RESTANTE DO CÓDIGO (GRID, PLAYER, BUSCA) PERMANECE IGUAL
 const grid = document.getElementById('movie-grid');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
@@ -73,14 +73,12 @@ const listaEpsContainer = document.getElementById('lista-eps');
 const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.getElementById('nav-menu');
 
-// CONTROLE DO MENU HAMBÚRGUER
 if (mobileMenu) {
     mobileMenu.onclick = () => {
         navMenu.classList.toggle('active');
     };
 }
 
-// FECHAR BOTÃO DE COMPRA SE JÁ TIVER CHAVE
 function verificarAcessoBotao() {
     const chaveCorreta = "VOLTTI5";
     const botaoCompra = document.getElementById('botao-pagar');
@@ -89,7 +87,6 @@ function verificarAcessoBotao() {
     }
 }
 
-// TRAVA DE SEGURANÇA MENSAL
 function validarChave() {
     const chaveCorreta = "VOLTTI5";
     if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
@@ -104,14 +101,12 @@ function validarChave() {
     return false;
 }
 
-// FUNÇÃO DE DAR PLAY NO VÍDEO
 function darPlay(id, titulo) {
     player.src = `https://drive.google.com/file/d/${id}/preview`;
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// GERAR O CATÁLOGO NA TELA
 function renderizar(lista) {
     if (!grid) return;
     grid.innerHTML = "";
@@ -147,7 +142,6 @@ function renderizar(lista) {
     });
 }
 
-// GERAR LISTA DE EPISÓDIOS PARA DORAMAS/SÉRIES
 function gerarListaEpisodios(serie) {
     if (!titleDisplay || !listaEpsContainer) return;
     titleDisplay.innerText = serie.titulo;
@@ -161,13 +155,11 @@ function gerarListaEpisodios(serie) {
     });
 }
 
-// FILTRO DO MENU
 function filtrar(tipo) {
     if (navMenu) navMenu.classList.remove('active'); 
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-// FUNÇÃO DE BUSCA
 function executarBusca() {
     const input = document.getElementById('inputBusca');
     if (!input) return;
@@ -179,6 +171,5 @@ function executarBusca() {
     renderizar(filtrados);
 }
 
-// INICIALIZAR
 renderizar(conteudos);
 verificarAcessoBotao();
