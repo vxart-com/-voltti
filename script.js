@@ -72,14 +72,14 @@ function darPlay(id, titulo) {
     if (id.startsWith('http')) {
         player.src = id;
     } else {
-        // Adicionando autoplay e forçando o carregamento para evitar o "rodando infinito"
-        player.src = `https://drive.google.com/file/d/${id}/preview?autoplay=1`;
+        player.src = `https://drive.google.com/file/d/${id}/preview`;
     }
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 function renderizar(lista) {
+    if (!grid) return;
     grid.innerHTML = "";
     const generos = [...new Set(lista.map(item => item.genero))];
     generos.forEach(gen => {
@@ -96,7 +96,7 @@ function renderizar(lista) {
                     if (item.episodios) {
                         gerarListaEpisodios(item);
                     } else {
-                        listaEpsContainer.innerHTML = "";
+                        if(listaEpsContainer) listaEpsContainer.innerHTML = "";
                         darPlay(item.videoID, item.titulo);
                     }
                 }
@@ -108,6 +108,7 @@ function renderizar(lista) {
 }
 
 function gerarListaEpisodios(serie) {
+    if(!titleDisplay || !listaEpsContainer) return;
     titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
     serie.episodios.forEach(ep => {
@@ -120,15 +121,18 @@ function gerarListaEpisodios(serie) {
 }
 
 function filtrar(tipo) {
-    navMenu.classList.remove('active');
+    if(navMenu) navMenu.classList.remove('active');
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
 function executarBusca() {
-    const termo = document.getElementById('inputBusca').value.toLowerCase();
+    const input = document.getElementById('inputBusca');
+    if(!input) return;
+    const termo = input.value.toLowerCase();
     const filtrados = conteudos.filter(i => i.titulo.toLowerCase().includes(termo) || i.genero.toLowerCase().includes(termo));
     renderizar(filtrados);
 }
 
+// Inicia o app
 renderizar(conteudos);
 verificarAcessoBotao();
