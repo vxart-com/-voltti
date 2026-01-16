@@ -15,7 +15,7 @@ const conteudos = [
     { titulo: "Sem Saída", capaID: "1rZhZrrh5d8LXqBtcI5MCBMJ5gHYbyFPH", videoID: "1pH_Hj9TxMI4rz3fV5xyF22cLTNqsyW8T", tipo: "filme", genero: "Suspense" },
     { titulo: "Efeito Colateral", capaID: "1scsoyrl6aIYaRX2gXV9RBMgZc53UL08B", videoID: "13n5AXI_kG6-QTOadQiz-zgCJaG8etqTp", tipo: "filme", genero: "Ação" },
     { titulo: "Rambo 1", capaID: "1XJbDVYRvO0x77iY5HfdrRWCO54Ct4c9s", videoID: "1p1A82w1v_RB_XeNaf2MQGnns22Bdj4B_", tipo: "filme", genero: "Ação" },
-    { titulo: "Os Vingadores (2012)", capaID: "17wlZ3X3JNtwvve-iUhDErUcS4hxlfozU", videoID: "1lfiSg14g7uFfMFGPGjlFJA3tAVrKqMiY", tipo: "filme", genero: "Marvel" },
+    { titulo: "Os Vingadores (2012)", capaID: "17wlZ3X3JNtwve-iUhDErUcS4hxlfozU", videoID: "1lfiSg14g7uFfMFGPGjlFJA3tAVrKqMiY", tipo: "filme", genero: "Marvel" },
     { titulo: "Vingadores: Era de Ultron", capaID: "1NR94XINMjQI5RAq6GAB5rrMog-3Uojzc", videoID: "1-C0vOq5Xp4gDmlCpmitbGNNLf_D4y-ne", tipo: "filme", genero: "Marvel" },
     { titulo: "Vingadores: Guerra Infinita", capaID: "1aEaxbcYemiRC25xrXMgGD5-6vfSKCHJK", videoID: "1sQ3RZ4-mJ3n5pt8TW16R0E1FO5NuDfzs", tipo: "filme", genero: "Marvel" },
     { titulo: "Vingadores: Ultimato", capaID: "1cmosS5uvNBgppGGkO4uLbytXyDu4WXmo", videoID: "1hpPF4WTbbjYNjLigkh0GTtLYviUR3s0s", tipo: "filme", genero: "Marvel" },
@@ -72,7 +72,8 @@ function darPlay(id, titulo) {
     if (id.startsWith('http')) {
         player.src = id;
     } else {
-        player.src = `https://drive.google.com/file/d/${id}/preview`;
+        // Adicionando autoplay e forçando o carregamento para evitar o "rodando infinito"
+        player.src = `https://drive.google.com/file/d/${id}/preview?autoplay=1`;
     }
     titleDisplay.innerText = titulo;
     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -121,6 +122,12 @@ function gerarListaEpisodios(serie) {
 function filtrar(tipo) {
     navMenu.classList.remove('active');
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
+}
+
+function executarBusca() {
+    const termo = document.getElementById('inputBusca').value.toLowerCase();
+    const filtrados = conteudos.filter(i => i.titulo.toLowerCase().includes(termo) || i.genero.toLowerCase().includes(termo));
+    renderizar(filtrados);
 }
 
 renderizar(conteudos);
