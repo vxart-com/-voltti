@@ -48,7 +48,7 @@ const mobileMenu = document.getElementById('mobile-menu');
 const navMenu = document.getElementById('nav-menu');
 
 // CONTROLE DO MENU HAMBÚRGUER
-if(mobileMenu) {
+if (mobileMenu) {
     mobileMenu.onclick = () => {
         navMenu.classList.toggle('active');
     };
@@ -87,7 +87,7 @@ function darPlay(id, titulo) {
 
 // GERAR O CATÁLOGO NA TELA
 function renderizar(lista) {
-    if(!grid) return;
+    if (!grid) return;
     grid.innerHTML = "";
     const generos = [...new Set(lista.map(item => item.genero))];
     
@@ -110,7 +110,7 @@ function renderizar(lista) {
                     if (item.episodios) {
                         gerarListaEpisodios(item);
                     } else {
-                        if(listaEpsContainer) listaEpsContainer.innerHTML = "";
+                        if (listaEpsContainer) listaEpsContainer.innerHTML = "";
                         darPlay(item.videoID, item.titulo);
                     }
                 }
@@ -123,7 +123,7 @@ function renderizar(lista) {
 
 // GERAR LISTA DE EPISÓDIOS PARA DORAMAS/SÉRIES
 function gerarListaEpisodios(serie) {
-    if(!titleDisplay || !listaEpsContainer) return;
+    if (!titleDisplay || !listaEpsContainer) return;
     titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
     serie.episodios.forEach(ep => {
@@ -137,16 +137,19 @@ function gerarListaEpisodios(serie) {
 
 // FILTRO DO MENU
 function filtrar(tipo) {
-    if(navMenu) navMenu.classList.remove('active');
+    if (navMenu) navMenu.classList.remove('active'); 
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
-// BUSCA
+// FUNÇÃO DE BUSCA (Para a barra de pesquisa funcionar)
 function executarBusca() {
     const input = document.getElementById('inputBusca');
-    if(!input) return;
+    if (!input) return;
     const termo = input.value.toLowerCase();
-    const filtrados = conteudos.filter(i => i.titulo.toLowerCase().includes(termo) || i.genero.toLowerCase().includes(termo));
+    const filtrados = conteudos.filter(i => 
+        i.titulo.toLowerCase().includes(termo) || 
+        i.genero.toLowerCase().includes(termo)
+    );
     renderizar(filtrados);
 }
 
