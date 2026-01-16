@@ -156,3 +156,7 @@ function executarBusca() {
 // INICIALIZAR
 renderizar(conteudos);
 verificarAcessoBotao();
+
+// INICIALIZAR
+renderizar(conteudos);
+verificarAcessoBotao();
