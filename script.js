@@ -15,7 +15,7 @@ const conteudos = [
     { titulo: "Sem Saída", capaID: "1rZhZrrh5d8LXqBtcI5MCBMJ5gHYbyFPH", videoID: "1pH_Hj9TxMI4rz3fV5xyF22cLTNqsyW8T", tipo: "filme", genero: "Suspense" },
     { titulo: "Efeito Colateral", capaID: "1scsoyrl6aIYaRX2gXV9RBMgZc53UL08B", videoID: "13n5AXI_kG6-QTOadQiz-zgCJaG8etqTp", tipo: "filme", genero: "Ação" },
     { titulo: "Rambo 1", capaID: "1XJbDVYRvO0x77iY5HfdrRWCO54Ct4c9s", videoID: "1p1A82w1v_RB_XeNaf2MQGnns22Bdj4B_", tipo: "filme", genero: "Ação" },
-    { titulo: "Os Vingadores (2012)", capaID: "17wlZ3X3JNtwvve-iUhDErUcS4hxlfozU", videoID: "1lfiSg14g7uFfMFGPGjlFJA3tAVrKqMiY", tipo: "filme", genero: "Marvel" },
+    { titulo: "Os Vingadores (2012)", capaID: "17wlZ3X3JNtwve-iUhDErUcS4hxlfozU", videoID: "1lfiSg14g7uFfMFGPGjlFJA3tAVrKqMiY", tipo: "filme", genero: "Marvel" },
     { titulo: "Vingadores: Era de Ultron", capaID: "1NR94XINMjQI5RAq6GAB5rrMog-3Uojzc", videoID: "1-C0vOq5Xp4gDmlCpmitbGNNLf_D4y-ne", tipo: "filme", genero: "Marvel" },
     { titulo: "Vingadores: Guerra Infinita", capaID: "1aEaxbcYemiRC25xrXMgGD5-6vfSKCHJK", videoID: "1sQ3RZ4-mJ3n5pt8TW16R0E1FO5NuDfzs", tipo: "filme", genero: "Marvel" },
     { titulo: "Vingadores: Ultimato", capaID: "1cmosS5uvNBgppGGkO4uLbytXyDu4WXmo", videoID: "1hpPF4WTbbjYNjLigkh0GTtLYviUR3s0s", tipo: "filme", genero: "Marvel" },
@@ -26,6 +26,10 @@ const conteudos = [
     { titulo: "After", capaID: "1SM2PN1hPWL0Z_mQRFTVvMoPBwtqD9rtB", videoID: "1RZE1S_UCi9DA-Q-9DZIKTyQmuBNSPHQ_", tipo: "filme", genero: "Romance" },
     { titulo: "After 2", capaID: "1CROr0ySxN7qjeMXr70nFEdqxG_XCelsz", videoID: "1WL6DAD7y0qJz7gU2Tri1DLgk7Dbhimus", tipo: "filme", genero: "Romance" },
     { titulo: "After 3", capaID: "1Z7TTYmECxz9QDotu3fRfOiQhsOO8MFjx", videoID: "1TNmCJVNQCEUChOtZ69Ono4hsD61PUGl4", tipo: "filme", genero: "Romance" },
+    { titulo: "A 5 Passos de Você", capaID: "1Yvh4YJ5MgXqOQkT2dA4QpZ7-9G8ZSDTX", videoID: "1h60Db30uHO8d8B_surtOGBhKKl0SHocm", tipo: "filme", genero: "Drama" },
+    { titulo: "Divergente", capaID: "1HgbFXLvcaueu3CYg5QoKJ4snUJrteqWm", videoID: "1R4870Drhcd_RMLtpeiOcXE3NkvKN21Sb", tipo: "filme", genero: "Ficção" },
+    { titulo: "Insurgente", capaID: "1cASAmTsjz6DFy7oPhWnwubPceJX7Fj8c", videoID: "1O12xtSQ8co35B8d-FFL6aqlMeNzBwP_L", tipo: "filme", genero: "Ficção" },
+    { titulo: "A Vida Depois", capaID: "1td-M-4A2NwidJcYnrOXrpMrU4UF0WCzE", videoID: "1jY807j1irBq8nBr4cJCi_hWWadhIPtXU", tipo: "filme", genero: "Drama" },
     { 
         titulo: "A Má Mãe", capaID: "1_NY-gbUM21gbOdsBf56zVjNtm8KUDYoi", tipo: "dorama", genero: "Dorama",
         episodios: [{ nome: "Episódio 01", videoID: "1_tOC-zRf2hIDxrmZiHd3gpImrj0yIWzV" }]
@@ -156,7 +160,6 @@ function executarBusca() {
 // INICIALIZAR
 renderizar(conteudos);
 verificarAcessoBotao();
-
 // INICIALIZAR
 renderizar(conteudos);
 verificarAcessoBotao();
