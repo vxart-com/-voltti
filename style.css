@@ -1,147 +1,74 @@
-:root {
-    --primary: #8B5CF6; 
-    --accent: #06B6D4;
-    --bg: #0D0D12;
-    --glass: rgba(255, 255, 255, 0.03);
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background-color: var(--bg);
-    color: #F8FAFC;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0; padding: 0;
-    overflow-x: hidden;
-}
-
-/* HEADER COMPACTO VOLTTI */
-header {
-    background: #000;
-    padding: 8px 15px;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0; z-index: 1000;
-    height: 55px;
-    gap: 12px;
-}
-
-.logo {
-    font-size: 20px;
-    font-weight: 900;
-    background: linear-gradient(45deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: 1px;
-}
-
-.search-box { flex: 1; }
-.search-box input {
-    width: 100%;
-    background: #1a1a1a;
-    border: 1px solid #333;
-    padding: 8px 15px;
-    border-radius: 8px;
+    background: #050505;
     color: #fff;
-    outline: none;
-    font-size: 14px;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden; /* Site fixo, sem rolagem de página, estilo App */
 }
 
-/* GRID ESTILO VOLTTI */
-.genero-secao { padding: 20px 0 0 15px; }
-.genero-titulo {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--accent);
-    margin-bottom: 12px;
-    font-weight: 700;
-}
-
-.genero-linha {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding-bottom: 20px;
-}
-.genero-linha::-webkit-scrollbar { display: none; }
-
-.card {
-    min-width: 120px;
-    max-width: 120px;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.card img {
-    width: 120px;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-.card p {
-    font-size: 11px;
-    margin-top: 8px;
-    text-align: center;
-    color: #cbd5e1;
-}
-
-/* PLAYER NEBULA GLASS */
-#player-modal {
-    display: none;
+/* Efeito de vidro e luz ao fundo */
+.bg-overlay {
     position: fixed;
-    inset: 0;
-    background: rgba(13, 13, 18, 0.98);
-    backdrop-filter: blur(15px);
-    z-index: 5000;
-    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.9), transparent), 
+                url('sua-imagem-de-fundo.jpg');
+    background-size: cover;
+    z-index: -1;
+    filter: brightness(0.5);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 80px;
+}
+
+.logo { font-size: 2rem; font-weight: 800; letter-spacing: -1px; }
+.logo span { color: #ff004c; }
+
+nav a { color: #aaa; text-decoration: none; margin-left: 30px; font-weight: 500; }
+nav a:hover { color: #fff; }
+
+.featured {
+    padding: 100px 80px;
+    max-width: 600px;
+}
+
+.tag { color: #ff004c; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
+
+h1 { font-size: 4rem; margin: 20px 0; line-height: 1; }
+
+p { color: #ccc; line-height: 1.6; margin-bottom: 30px; }
+
+.play-now {
+    background: #fff;
+    color: #000;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.scroll-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px 80px;
+}
+
+.mini-card {
+    width: 150px;
+    height: 80px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
 }
 
-.player-container { width: 95%; max-width: 800px; }
-
-.player-glass {
-    background: var(--glass);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 25px;
-    padding: 15px;
-    position: relative;
-}
-
-.modal-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-.status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
-#video-title { flex: 1; font-size: 13px; font-weight: bold; color: #fff; }
-
-.btn-fechar-voltti {
-    background: rgba(255, 255, 255, 0.1);
-    border: none; color: #fff; padding: 6px 12px;
-    border-radius: 8px; font-size: 11px; font-weight: bold;
-}
-
-.video-wrapper {
-    position: relative; width: 100%; padding-top: 56.25%;
-    border-radius: 15px; overflow: hidden; background: #000;
-}
-
-.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-.glow-effect {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 80%);
-    pointer-events: none;
-}
-
-/* BOTÕES DE EPISÓDIOS */
-.voltti-playlist {
-    margin-top: 15px; display: flex; flex-direction: column; gap: 8px;
-    max-height: 150px; overflow-y: auto;
-}
-
-.btn-episodio {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #ccc; padding: 12px; border-radius: 12px;
-    text-align: left; font-size: 13px; transition: 0.3s;
-}
-
-.btn-episodio:active { background: var(--primary); color: #fff; }
+.mini-card.active { border-color: #ff004c; background: rgba(255, 0, 76, 0.2); }
