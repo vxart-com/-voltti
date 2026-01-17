@@ -5,7 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>VOLTTI Premium</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { 
+            --main: #ff004c; 
+            --bg: #000; 
+            --card: #111; 
+            --glow: 0 0 15px rgba(255, 0, 76, 0.6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; overflow-x: hidden; }
+
+        /* HEADER E LOGO NEON */
+        .bg-gradient { position: fixed; top: 0; width: 100%; height: 50vh; background: linear-gradient(to bottom, rgba(255,0,76,0.15), transparent); z-index: -1; }
+        .mobile-header { display: flex; justify-content: space-between; padding: 25px 20px; align-items: center; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; }
+        .logo span { color: var(--main); text-shadow: var(--glow); }
+        .price-tag { background: var(--main); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; box-shadow: var(--glow); }
+
+        /* HERO - MOBILE FIRST */
+        .hero-mobile { padding: 0 20px; margin-top: 10px; }
+        .main-poster { width: 100%; height: 420px; border-radius: 25px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .main-poster img { width: 100%; height: 100%; object-fit: cover; }
+        .hero-content h1 { font-size: 2.2rem; margin: 20px 0 8px; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero-content p { color: #aaa; font-size: 14px; margin-bottom: 20px; line-height: 1.4; }
+
+        /* BOTÕES DE AÇÃO */
+        .mobile-actions { display: flex; gap: 12px; }
+        .btn-play { flex: 1; background: #fff; color: #000; border: none; padding: 18px; border-radius: 15px; font-weight: 900; font-size: 16px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+        .btn-list { width: 65px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 15px; font-size: 28px; display: flex; align-items: center; justify-content: center; }
+
+        /* LISTAS HORIZONTAIS */
+        .horizontal-list { padding: 30px 20px 120px; }
+        .horizontal-list h3 { margin-bottom: 15px; font-size: 18px; font-weight: bold; }
+        .cards-container { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+        .m-card { min-width: 140px; height: 210px; background-size: cover; background-position: center; border-radius: 15px; position: relative; border: 1px solid #222; flex-shrink: 0; }
+        .card-overlay { position: absolute; bottom: 0; width: 100%; background: linear-gradient(transparent, #000); padding: 10px; border-radius: 0 0 15px 15px; font-size: 11px; font-weight: bold; text-align: center; }
+
+        /* BUSCA PREMIUM */
+        .search-section { padding: 30px 20px; }
+        .search-section h2 { margin-bottom: 20px; font-size: 24px; }
+        #searchInput { width: 100%; padding: 18px; background: var(--card); border: 1px solid #333; border-radius: 15px; color: #fff; font-size: 16px; margin-bottom: 25px; transition: 0.3s; }
+        #searchInput:focus { border-color: var(--main); box-shadow: var(--glow); }
+        .search-item { background: var(--card); padding: 12px; border-radius: 18px; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; border: 1px solid #222; }
+        .search-item img { width: 55px; height: 75px; object-fit: cover; border-radius: 10px; }
+        .search-info { flex: 1; }
+        .search-info span { display: block; font-weight: bold; margin-bottom: 4px; }
+        .search-info small { color: var(--main); font-weight: bold; text-transform: uppercase; font-size: 10px; }
+
+        /* PERFIL E FAVORITOS */
+        .profile-section { padding: 30px 20px 120px; }
+        .avatar { width: 90px; height: 90px; background: var(--main); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: bold; box-shadow: var(--glow); }
+        .profile-header { text-align: center; margin-bottom: 30px; }
+        .status-card { background: var(--card); padding: 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid #222; }
+        .status-card h3 { font-size: 13px; color: var(--main); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .info-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 8px; }
+
+        .favoritos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .fav-item { text-align: center; }
+        .fav-item img { width: 100%; height: 130px; object-fit: cover; border-radius: 12px; border: 1px solid #333; }
+        .fav-item span { display: block; font-size: 10px; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .btn-whatsapp { width: 100%; background: #25d366; color: #fff; border: none; padding: 18px; border-radius: 15px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 16px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+
+        /* NAV BAR (Ícones Grandes) */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 85px; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #222; z-index: 1000; }
+        .nav-item { color: #555; font-size: 11px; text-align: center; transition: 0.3s; }
+        .nav-item.active { color: var(--main); text-shadow: var(--glow); }
+        .nav-item .icon { display: block; font-size: 28px; margin-bottom: 4px; }
+
+        /* PLAYER MODAL */
+        .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 2000; align-items: center; justify-content: center; }
+        .modal-content { width: 100%; }
+        .close-modal { position: absolute; top: 30px; right: 25px; font-size: 40px; color: #fff; cursor: pointer; z-index: 2001; }
+    </style>
 </head>
 <body>
 
@@ -26,8 +99,7 @@
         </header>
 
         <section class="hero-mobile">
-            <div id="hero-display">
-                </div>
+            <div id="hero-render"></div>
         </section>
 
         <section class="horizontal-list">
@@ -38,8 +110,9 @@
 
     <div id="busca" class="tab-content" style="display: none;">
         <section class="search-section">
-            <input type="text" id="searchInput" placeholder="O que vamos assistir hoje?">
-            <div id="searchResult" class="results-grid"></div>
+            <h2>Descobrir</h2>
+            <input type="text" id="searchInput" placeholder="Filmes, séries ou doramas...">
+            <div id="searchResult"></div>
         </section>
     </div>
 
@@ -47,94 +120,94 @@
         <section class="profile-section">
             <div class="profile-header">
                 <div class="avatar">V</div>
-                <h2>Assinante VOLTTI</h2>
+                <h2>Assinante Premium</h2>
             </div>
 
             <div class="status-card">
                 <h3>Minha Lista</h3>
-                <div id="lista-favoritos" class="favoritos-grid">
-                    </div>
+                <div id="lista-favoritos" class="favoritos-grid"></div>
             </div>
 
             <div class="status-card">
-                <h3>Assinatura Premium</h3>
+                <h3>Assinatura</h3>
+                <div class="info-row"><span>Plano:</span><span>Premium Mensal</span></div>
                 <div class="info-row"><span>Status:</span><span style="color: #00ff88;">Ativo</span></div>
                 <div class="info-row"><span>Valor:</span><span>R$ 9,00</span></div>
             </div>
 
-            <div class="profile-menu">
-                <button class="menu-item" onclick="abrirSuporte()">
-                    <span>💬 Suporte WhatsApp</span><span>❯</span>
-                </button>
-            </div>
+            <button class="btn-whatsapp" onclick="abrirSuporte()">
+                <span>💬 Suporte WhatsApp</span>
+                <span>❯</span>
+            </button>
         </section>
     </div>
 
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="trocarAba('inicio', this)">🏠<span class="label">Início</span></div>
-        <div class="nav-item" onclick="trocarAba('busca', this)">🔍<span class="label">Busca</span></div>
-        <div class="nav-item" onclick="trocarAba('perfil', this)">👤<span class="label">Perfil</span></div>
+        <div class="nav-item active" onclick="trocarAba('inicio', this)">
+            <span class="icon">🏠</span><span>Início</span>
+        </div>
+        <div class="nav-item" onclick="trocarAba('busca', this)">
+            <span class="icon">🔍</span><span>Busca</span>
+        </div>
+        <div class="nav-item" onclick="trocarAba('perfil', this)">
+            <span class="icon">👤</span><span>Perfil</span>
+        </div>
     </nav>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
-        // BANCO DE DADOS
         const db_voltti = [
             {
                 id: 1,
                 titulo: "Uma Noite no Museu 2",
                 capa: "https://drive.google.com/thumbnail?id=1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX&sz=w500",
                 link: "http://localhost:8080/stream/2?hash=a2583a",
-                desc: "O Smithsonian ganha vida nesta aventura épica."
+                desc: "Larry Daley encara sua maior aventura quando o museu Smithsonian ganha vida."
             }
         ];
 
-        let meusFavoritos = JSON.parse(localStorage.getItem('voltti_favs')) || [];
+        let favoritos = JSON.parse(localStorage.getItem('voltti_favs')) || [];
         const player = new Plyr('#player');
 
-        // FUNÇÕES DO PLAYER
         function abrirPlayer(link) {
             document.getElementById('videoPlayerModal').style.display = 'flex';
             player.source = { type: 'video', sources: [{ src: link, type: 'video/mp4' }] };
             player.play();
         }
+
         function fecharPlayer() {
             document.getElementById('videoPlayerModal').style.display = 'none';
             player.pause();
         }
 
-        // NAVEGAÇÃO
         function trocarAba(id, el) {
             document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
             document.getElementById(id).style.display = 'block';
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             el.classList.add('active');
-            if(id === 'perfil') renderizarFavoritos();
+            if(id === 'perfil') renderFavoritos();
         }
 
-        // FAVORITOS
-        function toggleFavorito(id) {
+        function toggleFav(id) {
             const item = db_voltti.find(f => f.id === id);
-            const index = meusFavoritos.findIndex(f => f.id === id);
-
-            if (index > -1) {
-                meusFavoritos.splice(index, 1);
-                alert("Removido da lista");
+            const idx = favoritos.findIndex(f => f.id === id);
+            if(idx > -1) {
+                favoritos.splice(idx, 1);
             } else {
-                meusFavoritos.push(item);
-                alert("Adicionado à sua lista!");
+                favoritos.push(item);
             }
-            localStorage.setItem('voltti_favs', JSON.stringify(meusFavoritos));
-            renderizarFavoritos();
+            localStorage.setItem('voltti_favs', JSON.stringify(favoritos));
+            renderFavoritos();
+            alert("Lista atualizada!");
         }
 
-        function renderizarFavoritos() {
+        function renderFavoritos() {
             const container = document.getElementById('lista-favoritos');
-            if (meusFavoritos.length === 0) {
-                container.innerHTML = '<p style="color:#666; font-size:12px">Sua lista está vazia.</p>';
+            if(favoritos.length === 0) {
+                container.innerHTML = '<p style="color:#555; font-size:12px">Nenhum item salvo.</p>';
                 return;
             }
-            container.innerHTML = meusFavoritos.map(f => `
+            container.innerHTML = favoritos.map(f => `
                 <div class="fav-item" onclick="abrirPlayer('${f.link}')">
                     <img src="${f.capa}">
                     <span>${f.titulo}</span>
@@ -143,31 +216,46 @@
         }
 
         function abrirSuporte() {
-            window.open(`https://wa.me/5598981296742?text=Suporte%20VOLTTI%20Premium`, '_blank');
+            window.open('https://wa.me/5598981296742?text=Preciso%20de%20ajuda%20com%20meu%20Premium%20VOLTTI', '_blank');
         }
 
-        // CARREGAMENTO INICIAL
+        // BUSCA
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const t = e.target.value.toLowerCase();
+            const r = document.getElementById('searchResult');
+            if(t.length > 2) {
+                const f = db_voltti.filter(i => i.titulo.toLowerCase().includes(t));
+                r.innerHTML = f.map(i => `
+                    <div class="search-item" onclick="abrirPlayer('${i.link}')">
+                        <img src="${i.capa}">
+                        <div class="search-info">
+                            <span>${i.titulo}</span>
+                            <small>Assistir agora</small>
+                        </div>
+                    </div>
+                `).join('');
+            } else { r.innerHTML = ''; }
+        });
+
         window.onload = () => {
-            // Hero
             const h = db_voltti[0];
-            document.getElementById('hero-display').innerHTML = `
+            document.getElementById('hero-render').innerHTML = `
                 <div class="main-poster"><img src="${h.capa}"></div>
                 <div class="hero-content">
                     <h1>${h.titulo}</h1>
                     <p>${h.desc}</p>
                     <div class="mobile-actions">
-                        <button onclick="abrirPlayer('${h.link}')" class="btn-play">ASSISTIR</button>
-                        <button onclick="toggleFavorito(${h.id})" class="btn-list">+</button>
+                        <button onclick="abrirPlayer('${h.link}')" class="btn-play">ASSISTIR AGORA</button>
+                        <button onclick="toggleFav(${h.id})" class="btn-list">+</button>
                     </div>
                 </div>
             `;
-            // Catálogo
             document.getElementById('catalogo-container').innerHTML = db_voltti.map(f => `
                 <div class="m-card" onclick="abrirPlayer('${f.link}')" style="background-image: url('${f.capa}')">
                     <div class="card-overlay"><span>${f.titulo}</span></div>
                 </div>
             `).join('');
-            renderizarFavoritos();
+            renderFavoritos();
         };
     </script>
 </body>
