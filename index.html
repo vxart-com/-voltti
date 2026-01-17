@@ -3,55 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI Mobile</title>
+    <title>VOLTTI - Premium Streaming</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
-
-    <main class="app-container">
+    <div id="inicio" class="tab-content active">
+        <div class="bg-gradient"></div>
+        
         <header class="mobile-header">
             <div class="logo">VOLTTI<span>.</span></div>
             <div class="price-tag">R$ 4,50</div>
         </header>
 
         <section class="hero-mobile">
+            <div class="main-poster">
+                <img src="https://images.tcdn.com.br/img/img_prod/1046424/poster_cartaz_uma_noite_no_museu_2_1143_1_d7be9b784a37b3f465d2f66e6c466487.jpg" alt="Capa Filme">
+            </div>
+
             <div class="hero-content">
                 <span class="status">DESTAQUE</span>
                 <h1>Uma Noite no Museu 2</h1>
-                <p>O guarda Larry Daley mergulha na maior aventura de sua vida.</p>
+                <p>O guarda Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
                 
                 <div class="mobile-actions">
-                    <a href="http://localhost:8080/watch/2?hash=a2583a" class="btn-play">ASSISTIR</a>
+                    <a href="http://localhost:8080/watch/2?hash=a2583a" target="_blank" class="btn-play">ASSISTIR AGORA</a>
                     <button class="btn-list">+</button>
                 </div>
             </div>
         </section>
 
-        <section class="categories-scroll">
-            <div class="cat-chip active">Tudo</div>
-            <div class="cat-chip">Doramas</div>
-            <div class="cat-chip">Séries</div>
-            <div class="cat-chip">Filmes</div>
-        </section>
-
         <section class="horizontal-list">
-            <h3>Próximos na sua lista</h3>
+            <h3>Novidades</h3>
             <div class="cards-container">
-                <div class="m-card">01</div>
-                <div class="m-card">02</div>
-                <div class="m-card">03</div>
-                <div class="m-card">04</div>
+                <div class="m-card">Dorama 1</div>
+                <div class="m-card">Dorama 2</div>
+                <div class="m-card">Série 1</div>
             </div>
         </section>
-    </main>
+    </div>
+
+    <div id="busca" class="tab-content" style="display: none;">
+        <section class="search-section">
+            <h2>Buscar</h2>
+            <input type="text" id="searchInput" placeholder="Filmes, Séries ou Doramas...">
+            <div id="searchResult" class="results-grid">
+                <p class="search-placeholder">Digite algo para começar...</p>
+            </div>
+        </section>
+    </div>
+
+    <div id="perfil" class="tab-content" style="display: none;">
+        <section class="profile-section">
+            <div class="avatar">V</div>
+            <h2>Usuário VOLTTI</h2>
+            <div class="status-card">
+                <p>Plano: <strong>Mensal</strong></p>
+                <p>Status: <span style="color: #00ff88;">Ativo</span></p>
+                <p>Valor: R$ 4,50</p>
+            </div>
+            <button class="btn-logout">Sair da Conta</button>
+        </section>
+    </div>
 
     <nav class="bottom-nav">
-        <div class="nav-item active">Início</div>
-        <div class="nav-item">Busca</div>
-        <div class="nav-item">Perfil</div>
+        <div class="nav-item active" onclick="trocarAba('inicio', this)">
+            <span class="icon">🏠</span>
+            <span class="label">Início</span>
+        </div>
+        <div class="nav-item" onclick="trocarAba('busca', this)">
+            <span class="icon">🔍</span>
+            <span class="label">Busca</span>
+        </div>
+        <div class="nav-item" onclick="trocarAba('perfil', this)">
+            <span class="icon">👤</span>
+            <span class="label">Perfil</span>
+        </div>
     </nav>
 
+    <script>
+        // LÓGICA DE TROCA DE ABAS
+        function trocarAba(idAba, elemento) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.getElementById(idAba).style.display = 'block';
+            
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            elemento.classList.add('active');
+            
+            // Scroll para o topo ao trocar
+            window.scrollTo(0, 0);
+        }
+
+        // LÓGICA DE BUSCA SIMULADA
+        const filmes = [
+            { titulo: "Uma Noite no Museu 2", link: "http://localhost:8080/watch/2?hash=a2583a" }
+        ];
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            let termo = e.target.value.toLowerCase();
+            let resultados = document.getElementById('searchResult');
+            
+            if (termo.length > 2) {
+                let filtrados = filmes.filter(f => f.titulo.toLowerCase().includes(termo));
+                if (filtrados.length > 0) {
+                    resultados.innerHTML = filtrados.map(f => `
+                        <div class="search-item">
+                            <span>${f.titulo}</span>
+                            <a href="${f.link}" target="_blank">Ver</a>
+                        </div>
+                    `).join('');
+                } else {
+                    resultados.innerHTML = '<p>Nenhum resultado encontrado.</p>';
+                }
+            } else {
+                resultados.innerHTML = '<p class="search-placeholder">Digite ao menos 3 letras...</p>';
+            }
+        });
+    </script>
 </body>
 </html>
