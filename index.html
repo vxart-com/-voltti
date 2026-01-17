@@ -2,8 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Premium Streaming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOLTTI Premium</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,34 +26,20 @@
         </header>
 
         <section class="hero-mobile">
-            <div class="main-poster">
-                <img src="https://drive.google.com/thumbnail?id=1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX&sz=w1000" alt="Capa Destaque">
-            </div>
-            <div class="hero-content">
-                <span class="status">DESTAQUE</span>
-                <h1>Uma Noite no Museu 2</h1>
-                <p>O guarda Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
-                <div class="mobile-actions">
-                    <button onclick="abrirPlayer('http://localhost:8080/stream/2?hash=a2583a')" class="btn-play">ASSISTIR AGORA</button>
-                    <button class="btn-list">+</button>
+            <div id="hero-display">
                 </div>
-            </div>
         </section>
 
         <section class="horizontal-list">
-            <h3>Novidades no Catálogo</h3>
-            <div id="container-geral" class="cards-container">
-                </div>
+            <h3>Novidades</h3>
+            <div id="catalogo-container" class="cards-container"></div>
         </section>
     </div>
 
     <div id="busca" class="tab-content" style="display: none;">
         <section class="search-section">
-            <h2>Descobrir</h2>
-            <input type="text" id="searchInput" placeholder="Filmes, séries ou doramas...">
-            <div id="searchResult" class="results-grid">
-                <p class="search-placeholder">Busque por títulos...</p>
-            </div>
+            <input type="text" id="searchInput" placeholder="O que vamos assistir hoje?">
+            <div id="searchResult" class="results-grid"></div>
         </section>
     </div>
 
@@ -61,99 +47,127 @@
         <section class="profile-section">
             <div class="profile-header">
                 <div class="avatar">V</div>
-                <h2>Usuário VOLTTI</h2>
+                <h2>Assinante VOLTTI</h2>
             </div>
+
+            <div class="status-card">
+                <h3>Minha Lista</h3>
+                <div id="lista-favoritos" class="favoritos-grid">
+                    </div>
+            </div>
+
             <div class="status-card">
                 <h3>Assinatura Premium</h3>
                 <div class="info-row"><span>Status:</span><span style="color: #00ff88;">Ativo</span></div>
-                <div class="info-row"><span>Valor Mensal:</span><span>R$ 9,00</span></div>
+                <div class="info-row"><span>Valor:</span><span>R$ 9,00</span></div>
             </div>
+
             <div class="profile-menu">
                 <button class="menu-item" onclick="abrirSuporte()">
-                    <span>💬 Suporte via WhatsApp</span><span>❯</span>
+                    <span>💬 Suporte WhatsApp</span><span>❯</span>
                 </button>
             </div>
-            <button class="btn-logout" onclick="window.location.reload()">Sair da Conta</button>
         </section>
     </div>
 
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="trocarAba('inicio', this)">
-            <span class="icon">🏠</span><span class="label">Início</span>
-        </div>
-        <div class="nav-item" onclick="trocarAba('busca', this)">
-            <span class="icon">🔍</span><span class="label">Busca</span>
-        </div>
-        <div class="nav-item" onclick="trocarAba('perfil', this)">
-            <span class="icon">👤</span><span class="label">Perfil</span>
-        </div>
+        <div class="nav-item active" onclick="trocarAba('inicio', this)">🏠<span class="label">Início</span></div>
+        <div class="nav-item" onclick="trocarAba('busca', this)">🔍<span class="label">Busca</span></div>
+        <div class="nav-item" onclick="trocarAba('perfil', this)">👤<span class="label">Perfil</span></div>
     </nav>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
-        // BANCO DE DADOS INTEGRADO (Para facilitar antes das pastas)
-        const catalogo = [
+        // BANCO DE DADOS
+        const db_voltti = [
             {
                 id: 1,
                 titulo: "Uma Noite no Museu 2",
                 capa: "https://drive.google.com/thumbnail?id=1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX&sz=w500",
-                link: "http://localhost:8080/stream/2?hash=a2583a"
+                link: "http://localhost:8080/stream/2?hash=a2583a",
+                desc: "O Smithsonian ganha vida nesta aventura épica."
             }
-            // Adicione novos itens aqui seguindo o mesmo padrão
         ];
 
-        // Inicializa Player
+        let meusFavoritos = JSON.parse(localStorage.getItem('voltti_favs')) || [];
         const player = new Plyr('#player');
 
+        // FUNÇÕES DO PLAYER
         function abrirPlayer(link) {
-            const modal = document.getElementById('videoPlayerModal');
+            document.getElementById('videoPlayerModal').style.display = 'flex';
             player.source = { type: 'video', sources: [{ src: link, type: 'video/mp4' }] };
-            modal.style.display = 'flex';
             player.play();
         }
-
         function fecharPlayer() {
             document.getElementById('videoPlayerModal').style.display = 'none';
             player.pause();
         }
 
-        function trocarAba(idAba, elemento) {
+        // NAVEGAÇÃO
+        function trocarAba(id, el) {
             document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-            document.getElementById(idAba).style.display = 'block';
+            document.getElementById(id).style.display = 'block';
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            elemento.classList.add('active');
-            window.scrollTo(0, 0);
+            el.classList.add('active');
+            if(id === 'perfil') renderizarFavoritos();
+        }
+
+        // FAVORITOS
+        function toggleFavorito(id) {
+            const item = db_voltti.find(f => f.id === id);
+            const index = meusFavoritos.findIndex(f => f.id === id);
+
+            if (index > -1) {
+                meusFavoritos.splice(index, 1);
+                alert("Removido da lista");
+            } else {
+                meusFavoritos.push(item);
+                alert("Adicionado à sua lista!");
+            }
+            localStorage.setItem('voltti_favs', JSON.stringify(meusFavoritos));
+            renderizarFavoritos();
+        }
+
+        function renderizarFavoritos() {
+            const container = document.getElementById('lista-favoritos');
+            if (meusFavoritos.length === 0) {
+                container.innerHTML = '<p style="color:#666; font-size:12px">Sua lista está vazia.</p>';
+                return;
+            }
+            container.innerHTML = meusFavoritos.map(f => `
+                <div class="fav-item" onclick="abrirPlayer('${f.link}')">
+                    <img src="${f.capa}">
+                    <span>${f.titulo}</span>
+                </div>
+            `).join('');
         }
 
         function abrirSuporte() {
-            const msg = encodeURIComponent("Olá VOLTTI! Preciso de ajuda com minha assinatura de R$ 9,00.");
-            window.open(`https://wa.me/5598981296742?text=${msg}`, '_blank');
+            window.open(`https://wa.me/5598981296742?text=Suporte%20VOLTTI%20Premium`, '_blank');
         }
 
-        // Lógica de Busca
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const termo = e.target.value.toLowerCase();
-            const resultados = document.getElementById('searchResult');
-            if(termo.length > 2) {
-                const filtrados = catalogo.filter(i => i.titulo.toLowerCase().includes(termo));
-                resultados.innerHTML = filtrados.map(i => `
-                    <div class="search-item" onclick="abrirPlayer('${i.link}')">
-                        <img src="${i.capa}" width="40" style="border-radius:5px">
-                        <span>${i.titulo}</span>
-                        <small>Assistir</small>
-                    </div>
-                `).join('');
-            }
-        });
-
-        // Carrega os cards ao iniciar
+        // CARREGAMENTO INICIAL
         window.onload = () => {
-            const container = document.getElementById('container-geral');
-            container.innerHTML = catalogo.map(item => `
-                <div class="m-card" onclick="abrirPlayer('${item.link}')" style="background-image: url('${item.capa}')">
-                    <div class="card-overlay"><span>${item.titulo}</span></div>
+            // Hero
+            const h = db_voltti[0];
+            document.getElementById('hero-display').innerHTML = `
+                <div class="main-poster"><img src="${h.capa}"></div>
+                <div class="hero-content">
+                    <h1>${h.titulo}</h1>
+                    <p>${h.desc}</p>
+                    <div class="mobile-actions">
+                        <button onclick="abrirPlayer('${h.link}')" class="btn-play">ASSISTIR</button>
+                        <button onclick="toggleFavorito(${h.id})" class="btn-list">+</button>
+                    </div>
+                </div>
+            `;
+            // Catálogo
+            document.getElementById('catalogo-container').innerHTML = db_voltti.map(f => `
+                <div class="m-card" onclick="abrirPlayer('${f.link}')" style="background-image: url('${f.capa}')">
+                    <div class="card-overlay"><span>${f.titulo}</span></div>
                 </div>
             `).join('');
+            renderizarFavoritos();
         };
     </script>
 </body>
