@@ -1,74 +1,98 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    background: #050505;
+    background: #000;
     color: #fff;
     font-family: 'Segoe UI', sans-serif;
-    overflow: hidden; /* Site fixo, sem rolagem de página, estilo App */
+    overflow-x: hidden;
 }
 
-/* Efeito de vidro e luz ao fundo */
-.bg-overlay {
+.bg-gradient {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.9), transparent), 
-                url('sua-imagem-de-fundo.jpg');
-    background-size: cover;
+    top: 0; width: 100%; height: 60vh;
+    background: linear-gradient(to bottom, rgba(255, 0, 76, 0.2), transparent);
     z-index: -1;
-    filter: brightness(0.5);
 }
 
-header {
+.mobile-header {
     display: flex;
     justify-content: space-between;
-    padding: 40px 80px;
+    align-items: center;
+    padding: 20px;
 }
 
-.logo { font-size: 2rem; font-weight: 800; letter-spacing: -1px; }
+.logo { font-size: 1.5rem; font-weight: 800; }
 .logo span { color: #ff004c; }
 
-nav a { color: #aaa; text-decoration: none; margin-left: 30px; font-weight: 500; }
-nav a:hover { color: #fff; }
-
-.featured {
-    padding: 100px 80px;
-    max-width: 600px;
-}
-
-.tag { color: #ff004c; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
-
-h1 { font-size: 4rem; margin: 20px 0; line-height: 1; }
-
-p { color: #ccc; line-height: 1.6; margin-bottom: 30px; }
-
-.play-now {
-    background: #fff;
-    color: #000;
-    padding: 15px 40px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 4px;
-    margin-right: 15px;
-}
-
-.scroll-container {
-    display: flex;
-    gap: 20px;
-    padding: 20px 80px;
-}
-
-.mini-card {
-    width: 150px;
-    height: 80px;
+.price-tag {
     background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,255,255,0.1);
-    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: 1px solid #ff004c;
 }
 
-.mini-card.active { border-color: #ff004c; background: rgba(255, 0, 76, 0.2); }
+.hero-mobile {
+    padding: 40px 20px;
+    text-align: left;
+}
+
+.status { color: #ff004c; font-size: 0.7rem; font-weight: bold; }
+h1 { font-size: 2.5rem; margin: 10px 0; }
+p { color: #aaa; font-size: 0.9rem; margin-bottom: 20px; }
+
+.mobile-actions { display: flex; gap: 10px; }
+
+.btn-play {
+    flex: 1;
+    background: #fff; color: #000;
+    text-align: center; padding: 15px;
+    border-radius: 8px; font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-list {
+    width: 55px; background: rgba(255,255,255,0.1);
+    border: none; color: #fff; font-size: 1.5rem;
+    border-radius: 8px;
+}
+
+.categories-scroll {
+    display: flex; gap: 10px;
+    padding: 10px 20px;
+    overflow-x: auto;
+}
+
+.cat-chip {
+    white-space: nowrap;
+    padding: 8px 20px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.cat-chip.active { background: #ff004c; }
+
+.horizontal-list { padding: 20px; margin-bottom: 80px; }
+
+.cards-container {
+    display: flex; gap: 15px;
+    overflow-x: auto; padding: 15px 0;
+}
+
+.m-card {
+    min-width: 140px; height: 180px;
+    background: #111; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.bottom-nav {
+    position: fixed; bottom: 0;
+    width: 100%; height: 70px;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    display: flex; justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
