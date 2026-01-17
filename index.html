@@ -4,9 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VOLTTI - Streaming Experience</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div id="videoPlayerModal" class="video-modal">
+        <span class="close-modal" onclick="fecharPlayer()">×</span>
+        <div class="modal-content">
+            <div class="video-container">
+                <video id="player" playsinline controls>
+                    <source src="" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+    </div>
 
     <div id="inicio" class="tab-content active">
         <div class="bg-gradient"></div>
@@ -18,37 +30,37 @@
 
         <section class="hero-mobile">
             <div class="main-poster">
-                <img src="https://lh3.googleusercontent.com/u/0/d/1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX=w1000-h1000" alt="Uma Noite no Museu 2">
+                <img src="https://drive.google.com/thumbnail?id=1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX&sz=w1000" alt="Capa Filme">
             </div>
 
             <div class="hero-content">
                 <span class="status">DESTAQUE</span>
                 <h1>Uma Noite no Museu 2</h1>
-                <p>O guarda Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
+                <p>Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
                 
                 <div class="mobile-actions">
-                    <a href="http://localhost:8080/watch/2?hash=a2583a" target="_blank" class="btn-play">ASSISTIR AGORA</a>
+                    <button onclick="abrirPlayer('http://localhost:8080/stream/2?hash=a2583a')" class="btn-play">ASSISTIR AGORA</button>
                     <button class="btn-list">+</button>
                 </div>
             </div>
         </section>
 
         <section class="horizontal-list">
-            <h3>Novidades no Catálogo</h3>
+            <h3>Novidades</h3>
             <div class="cards-container">
                 <div class="m-card">Dorama 1</div>
                 <div class="m-card">Dorama 2</div>
-                <div class="m-card">Série Original</div>
+                <div class="m-card">Série</div>
             </div>
         </section>
     </div>
 
     <div id="busca" class="tab-content" style="display: none;">
         <section class="search-section">
-            <h2>Buscar</h2>
-            <input type="text" id="searchInput" placeholder="Filmes, Séries ou Doramas...">
+            <h2>Descobrir</h2>
+            <input type="text" id="searchInput" placeholder="O que vamos assistir hoje?">
             <div id="searchResult" class="results-grid">
-                <p class="search-placeholder">Digite o nome para começar...</p>
+                <p class="search-placeholder">Digite o nome de um filme...</p>
             </div>
         </section>
     </div>
@@ -58,7 +70,7 @@
             <div class="avatar">V</div>
             <h2>Usuário VOLTTI</h2>
             <div class="status-card">
-                <p>Assinatura: <strong>Plano VIP</strong></p>
+                <p>Plano: <strong>Premium Mensal</strong></p>
                 <p>Status: <span style="color: #00ff88;">Ativo</span></p>
                 <p>Valor: R$ 4,50</p>
             </div>
@@ -81,8 +93,30 @@
         </div>
     </nav>
 
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
-        // Lógica de troca de abas (Sistema de Telas)
+        // Inicializa o Player Profissional
+        const player = new Plyr('#player', {
+            controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+            tooltips: { controls: true, seek: true }
+        });
+
+        function abrirPlayer(link) {
+            const modal = document.getElementById('videoPlayerModal');
+            player.source = {
+                type: 'video',
+                sources: [{ src: link, type: 'video/mp4' }]
+            };
+            modal.style.display = 'flex';
+            player.play();
+        }
+
+        function fecharPlayer() {
+            const modal = document.getElementById('videoPlayerModal');
+            player.pause();
+            modal.style.display = 'none';
+        }
+
         function trocarAba(idAba, elemento) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
             document.getElementById(idAba).style.display = 'block';
@@ -91,29 +125,19 @@
             window.scrollTo(0, 0);
         }
 
-        // Banco de dados simples para a Busca
-        const filmes = [
-            { titulo: "Uma Noite no Museu 2", link: "http://localhost:8080/watch/2?hash=a2583a" }
+        // Simulação de Busca
+        const filmesDB = [
+            { titulo: "Uma Noite no Museu 2", link: "http://localhost:8080/stream/2?hash=a2583a" }
         ];
 
         document.getElementById('searchInput').addEventListener('input', function(e) {
             let termo = e.target.value.toLowerCase();
             let resultados = document.getElementById('searchResult');
-            
             if (termo.length > 2) {
-                let filtrados = filmes.filter(f => f.titulo.toLowerCase().includes(termo));
-                if (filtrados.length > 0) {
-                    resultados.innerHTML = filtrados.map(f => `
-                        <div class="search-item">
-                            <span>${f.titulo}</span>
-                            <a href="${f.link}" target="_blank">Ver</a>
-                        </div>
-                    `).join('');
-                } else {
-                    resultados.innerHTML = '<p>Nada encontrado.</p>';
-                }
-            } else {
-                resultados.innerHTML = '<p class="search-placeholder">Digite ao menos 3 letras...</p>';
+                let filtrados = filmesDB.filter(f => f.titulo.toLowerCase().includes(termo));
+                resultados.innerHTML = filtrados.length > 0 ? 
+                    filtrados.map(f => `<div class="search-item"><span>${f.titulo}</span><button onclick="abrirPlayer('${f.link}')">Ver</button></div>`).join('') :
+                    '<p>Nada encontrado.</p>';
             }
         });
     </script>
