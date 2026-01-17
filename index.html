@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Streaming Experience</title>
+    <title>VOLTTI - Premium Streaming</title>
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,32 +12,27 @@
     <div id="videoPlayerModal" class="video-modal">
         <span class="close-modal" onclick="fecharPlayer()">×</span>
         <div class="modal-content">
-            <div class="video-container">
-                <video id="player" playsinline controls>
-                    <source src="" type="video/mp4" />
-                </video>
-            </div>
+            <video id="player" playsinline controls>
+                <source src="" type="video/mp4" />
+            </video>
         </div>
     </div>
 
     <div id="inicio" class="tab-content active">
         <div class="bg-gradient"></div>
-        
         <header class="mobile-header">
             <div class="logo">VOLTTI<span>.</span></div>
-            <div class="price-tag">R$ 4,50</div>
+            <div class="price-tag">R$ 9,00</div>
         </header>
 
         <section class="hero-mobile">
             <div class="main-poster">
-                <img src="https://drive.google.com/thumbnail?id=1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX&sz=w1000" alt="Capa Filme">
+                <img src="https://drive.google.com/thumbnail?id=1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX&sz=w1000" alt="Capa Destaque">
             </div>
-
             <div class="hero-content">
                 <span class="status">DESTAQUE</span>
                 <h1>Uma Noite no Museu 2</h1>
-                <p>Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
-                
+                <p>O guarda Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
                 <div class="mobile-actions">
                     <button onclick="abrirPlayer('http://localhost:8080/stream/2?hash=a2583a')" class="btn-play">ASSISTIR AGORA</button>
                     <button class="btn-list">+</button>
@@ -46,100 +41,120 @@
         </section>
 
         <section class="horizontal-list">
-            <h3>Novidades</h3>
-            <div class="cards-container">
-                <div class="m-card">Dorama 1</div>
-                <div class="m-card">Dorama 2</div>
-                <div class="m-card">Série</div>
-            </div>
+            <h3>Novidades no Catálogo</h3>
+            <div id="container-geral" class="cards-container">
+                </div>
         </section>
     </div>
 
     <div id="busca" class="tab-content" style="display: none;">
         <section class="search-section">
             <h2>Descobrir</h2>
-            <input type="text" id="searchInput" placeholder="O que vamos assistir hoje?">
+            <input type="text" id="searchInput" placeholder="Filmes, séries ou doramas...">
             <div id="searchResult" class="results-grid">
-                <p class="search-placeholder">Digite o nome de um filme...</p>
+                <p class="search-placeholder">Busque por títulos...</p>
             </div>
         </section>
     </div>
 
     <div id="perfil" class="tab-content" style="display: none;">
         <section class="profile-section">
-            <div class="avatar">V</div>
-            <h2>Usuário VOLTTI</h2>
-            <div class="status-card">
-                <p>Plano: <strong>Premium Mensal</strong></p>
-                <p>Status: <span style="color: #00ff88;">Ativo</span></p>
-                <p>Valor: R$ 4,50</p>
+            <div class="profile-header">
+                <div class="avatar">V</div>
+                <h2>Usuário VOLTTI</h2>
             </div>
-            <button class="btn-logout">Sair da Conta</button>
+            <div class="status-card">
+                <h3>Assinatura Premium</h3>
+                <div class="info-row"><span>Status:</span><span style="color: #00ff88;">Ativo</span></div>
+                <div class="info-row"><span>Valor Mensal:</span><span>R$ 9,00</span></div>
+            </div>
+            <div class="profile-menu">
+                <button class="menu-item" onclick="abrirSuporte()">
+                    <span>💬 Suporte via WhatsApp</span><span>❯</span>
+                </button>
+            </div>
+            <button class="btn-logout" onclick="window.location.reload()">Sair da Conta</button>
         </section>
     </div>
 
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="trocarAba('inicio', this)">
-            <span class="icon">🏠</span>
-            <span class="label">Início</span>
+            <span class="icon">🏠</span><span class="label">Início</span>
         </div>
         <div class="nav-item" onclick="trocarAba('busca', this)">
-            <span class="icon">🔍</span>
-            <span class="label">Busca</span>
+            <span class="icon">🔍</span><span class="label">Busca</span>
         </div>
         <div class="nav-item" onclick="trocarAba('perfil', this)">
-            <span class="icon">👤</span>
-            <span class="label">Perfil</span>
+            <span class="icon">👤</span><span class="label">Perfil</span>
         </div>
     </nav>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
-        // Inicializa o Player Profissional
-        const player = new Plyr('#player', {
-            controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-            tooltips: { controls: true, seek: true }
-        });
+        // BANCO DE DADOS INTEGRADO (Para facilitar antes das pastas)
+        const catalogo = [
+            {
+                id: 1,
+                titulo: "Uma Noite no Museu 2",
+                capa: "https://drive.google.com/thumbnail?id=1ta4H5bAOZ1932KTsbwqxDNRIDdhahAOX&sz=w500",
+                link: "http://localhost:8080/stream/2?hash=a2583a"
+            }
+            // Adicione novos itens aqui seguindo o mesmo padrão
+        ];
+
+        // Inicializa Player
+        const player = new Plyr('#player');
 
         function abrirPlayer(link) {
             const modal = document.getElementById('videoPlayerModal');
-            player.source = {
-                type: 'video',
-                sources: [{ src: link, type: 'video/mp4' }]
-            };
+            player.source = { type: 'video', sources: [{ src: link, type: 'video/mp4' }] };
             modal.style.display = 'flex';
             player.play();
         }
 
         function fecharPlayer() {
-            const modal = document.getElementById('videoPlayerModal');
+            document.getElementById('videoPlayerModal').style.display = 'none';
             player.pause();
-            modal.style.display = 'none';
         }
 
         function trocarAba(idAba, elemento) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
+            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
             document.getElementById(idAba).style.display = 'block';
-            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             elemento.classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        // Simulação de Busca
-        const filmesDB = [
-            { titulo: "Uma Noite no Museu 2", link: "http://localhost:8080/stream/2?hash=a2583a" }
-        ];
+        function abrirSuporte() {
+            const msg = encodeURIComponent("Olá VOLTTI! Preciso de ajuda com minha assinatura de R$ 9,00.");
+            window.open(`https://wa.me/5598981296742?text=${msg}`, '_blank');
+        }
 
+        // Lógica de Busca
         document.getElementById('searchInput').addEventListener('input', function(e) {
-            let termo = e.target.value.toLowerCase();
-            let resultados = document.getElementById('searchResult');
-            if (termo.length > 2) {
-                let filtrados = filmesDB.filter(f => f.titulo.toLowerCase().includes(termo));
-                resultados.innerHTML = filtrados.length > 0 ? 
-                    filtrados.map(f => `<div class="search-item"><span>${f.titulo}</span><button onclick="abrirPlayer('${f.link}')">Ver</button></div>`).join('') :
-                    '<p>Nada encontrado.</p>';
+            const termo = e.target.value.toLowerCase();
+            const resultados = document.getElementById('searchResult');
+            if(termo.length > 2) {
+                const filtrados = catalogo.filter(i => i.titulo.toLowerCase().includes(termo));
+                resultados.innerHTML = filtrados.map(i => `
+                    <div class="search-item" onclick="abrirPlayer('${i.link}')">
+                        <img src="${i.capa}" width="40" style="border-radius:5px">
+                        <span>${i.titulo}</span>
+                        <small>Assistir</small>
+                    </div>
+                `).join('');
             }
         });
+
+        // Carrega os cards ao iniciar
+        window.onload = () => {
+            const container = document.getElementById('container-geral');
+            container.innerHTML = catalogo.map(item => `
+                <div class="m-card" onclick="abrirPlayer('${item.link}')" style="background-image: url('${item.capa}')">
+                    <div class="card-overlay"><span>${item.titulo}</span></div>
+                </div>
+            `).join('');
+        };
     </script>
 </body>
 </html>
