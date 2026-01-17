@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Premium Streaming</title>
+    <title>VOLTTI - Streaming Experience</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 
         <section class="hero-mobile">
             <div class="main-poster">
-                <img src="https://images.tcdn.com.br/img/img_prod/1046424/poster_cartaz_uma_noite_no_museu_2_1143_1_d7be9b784a37b3f465d2f66e6c466487.jpg" alt="Capa Filme">
+                <img src="https://m.media-amazon.com/images/M/MV5BMTQyOTM1NjE2N15BMl5BanBnXkFtZTcwODExMTkyMg@@._V1_.jpg" alt="Noite no Museu 2">
             </div>
 
             <div class="hero-content">
@@ -34,21 +34,21 @@
         </section>
 
         <section class="horizontal-list">
-            <h3>Novidades</h3>
+            <h3>Em Alta</h3>
             <div class="cards-container">
                 <div class="m-card">Dorama 1</div>
                 <div class="m-card">Dorama 2</div>
-                <div class="m-card">Série 1</div>
+                <div class="m-card">Novela</div>
             </div>
         </section>
     </div>
 
     <div id="busca" class="tab-content" style="display: none;">
         <section class="search-section">
-            <h2>Buscar</h2>
-            <input type="text" id="searchInput" placeholder="Filmes, Séries ou Doramas...">
+            <h2>Descobrir</h2>
+            <input type="text" id="searchInput" placeholder="O que vamos assistir hoje?">
             <div id="searchResult" class="results-grid">
-                <p class="search-placeholder">Digite algo para começar...</p>
+                <p class="search-placeholder">Digite o nome de um filme ou dorama...</p>
             </div>
         </section>
     </div>
@@ -58,11 +58,11 @@
             <div class="avatar">V</div>
             <h2>Usuário VOLTTI</h2>
             <div class="status-card">
-                <p>Plano: <strong>Mensal</strong></p>
+                <p>Assinatura: <strong>Plano VIP</strong></p>
                 <p>Status: <span style="color: #00ff88;">Ativo</span></p>
-                <p>Valor: R$ 4,50</p>
+                <p>Próximo Pagamento: R$ 4,50</p>
             </div>
-            <button class="btn-logout">Sair da Conta</button>
+            <button class="btn-logout">Finalizar Sessão</button>
         </section>
     </div>
 
@@ -82,20 +82,17 @@
     </nav>
 
     <script>
-        // LÓGICA DE TROCA DE ABAS
+        // Lógica de troca de abas (Telas)
         function trocarAba(idAba, elemento) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
             document.getElementById(idAba).style.display = 'block';
-            
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             elemento.classList.add('active');
-            
-            // Scroll para o topo ao trocar
             window.scrollTo(0, 0);
         }
 
-        // LÓGICA DE BUSCA SIMULADA
-        const filmes = [
+        // Lógica da Busca
+        const db_filmes = [
             { titulo: "Uma Noite no Museu 2", link: "http://localhost:8080/watch/2?hash=a2583a" }
         ];
 
@@ -104,19 +101,19 @@
             let resultados = document.getElementById('searchResult');
             
             if (termo.length > 2) {
-                let filtrados = filmes.filter(f => f.titulo.toLowerCase().includes(termo));
+                let filtrados = db_filmes.filter(f => f.titulo.toLowerCase().includes(termo));
                 if (filtrados.length > 0) {
                     resultados.innerHTML = filtrados.map(f => `
                         <div class="search-item">
                             <span>${f.titulo}</span>
-                            <a href="${f.link}" target="_blank">Ver</a>
+                            <a href="${f.link}" target="_blank">Assistir</a>
                         </div>
                     `).join('');
                 } else {
-                    resultados.innerHTML = '<p>Nenhum resultado encontrado.</p>';
+                    resultados.innerHTML = '<p>Nada encontrado :(</p>';
                 }
             } else {
-                resultados.innerHTML = '<p class="search-placeholder">Digite ao menos 3 letras...</p>';
+                resultados.innerHTML = '<p class="search-placeholder">Digite para buscar...</p>';
             }
         });
     </script>
