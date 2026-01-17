@@ -1,26 +1,34 @@
-body {
-    background-color: #050505;
-    color: #fff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+/* Reset Básico para Mobile */
+* {
+    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
 }
 
+body {
+    background-color: #050505;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Cabeçalho com Pesquisa */
 header {
-    background-color: #000;
+    background-color: #000000;
     padding: 10px 15px;
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    gap: 15px;
+    height: 60px;
+    gap: 12px;
 }
 
 .logo {
     color: #e50914;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 900;
     letter-spacing: -1px;
 }
@@ -31,67 +39,77 @@ header {
 
 .search-container input {
     width: 100%;
-    background: #222;
+    background: #222222;
     border: none;
-    padding: 8px 12px;
-    border-radius: 6px;
-    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: #ffffff;
     font-size: 14px;
     outline: none;
 }
 
-/* Catálogo Mobile */
+/* Seções de Gênero */
 .genero-secao {
-    padding: 15px 0 0 15px;
+    padding: 20px 0 5px 15px;
 }
 
 .genero-titulo {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
-    margin-bottom: 10px;
-    color: #999;
+    margin-bottom: 12px;
+    color: #b3b3b3;
 }
 
+/* Linha de filmes com Scroll Lateral */
 .genero-linha {
     display: flex;
     overflow-x: auto;
-    gap: 10px;
-    padding-bottom: 15px;
+    gap: 12px;
+    padding-bottom: 20px;
     scroll-snap-type: x mandatory;
 }
 
-.genero-linha::-webkit-scrollbar { display: none; }
+/* Esconde a barra de rolagem feia */
+.genero-linha::-webkit-scrollbar {
+    display: none;
+}
 
+/* Card do Filme - TAMANHO PADRONIZADO */
 .card {
     min-width: 110px;
     max-width: 110px;
     scroll-snap-align: start;
+    cursor: pointer;
 }
 
 .card img {
     width: 110px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 4px;
+    height: 165px; /* Proporção 2:3 fixa */
+    object-fit: cover; /* Faz a imagem caber sem esticar */
+    border-radius: 6px;
     background: #1a1a1a;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
 .card p {
-    font-size: 11px;
-    margin-top: 5px;
+    font-size: 12px;
+    margin-top: 8px;
     text-align: left;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    color: #eee;
+    text-overflow: ellipsis; /* Coloca ... se o nome for grande */
+    color: #e5e5e5;
 }
 
-/* Player Modal Mobile */
+/* Player Modal (Estilo Nativo Mobile) */
 #player-modal {
     display: none;
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #000;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: #000000;
     z-index: 1000;
     flex-direction: column;
 }
@@ -101,37 +119,58 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #111;
+    background: #111111;
+    border-bottom: 1px solid #222;
 }
 
 #video-title {
     font-size: 14px;
     font-weight: bold;
-    color: #fff;
+    max-width: 65%;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 60%;
 }
 
 .btn-fechar {
     background: #e50914;
-    color: #fff;
+    color: #ffffff;
     border: none;
-    padding: 6px 12px;
+    padding: 8px 16px;
     border-radius: 4px;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
 }
 
+/* Ajuste do Iframe para não sobrar espaço */
 .video-box {
     width: 100%;
-    position: relative;
-    padding-top: 56.25%; /* 16:9 proporção mobile */
     background: #000;
+    display: flex;
+    align-items: center;
+    flex: 1; /* Ocupa o centro da tela no mobile */
 }
 
 .video-box iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    width: 100%;
+    height: 100%; /* Ajuste para o player do Drive no mobile */
+    max-height: 300px; /* Limite para não esticar demais na vertical */
+}
+
+/* Botões de Episódios (Para Doramas) */
+#lista-eps {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.btn-episodio {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 14px;
 }
