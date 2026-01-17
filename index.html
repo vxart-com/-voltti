@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VOLTTI - Mobile</title>
+    <title>VOLTTI | Future Streaming</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="logo">VOLTTI</div>
-        <div class="search-container">
+        <div class="search-box">
             <input type="text" id="inputBusca" placeholder="Pesquisar..." onkeyup="executarBusca()">
         </div>
     </header>
 
     <div id="player-modal">
-        <div class="modal-header">
-            <span id="video-title">Carregando...</span>
-            <button class="btn-fechar" onclick="fecharPlayer()">FECHAR ×</button>
+        <div class="player-container">
+            <div class="player-glass">
+                <div class="modal-header">
+                    <div class="status-dot"></div>
+                    <span id="video-title">VOLTTI ORIGINAL</span>
+                    <button class="btn-fechar-voltti" onclick="fecharPlayer()">FECHAR</button>
+                </div>
+                
+                <div class="video-wrapper">
+                    <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
+                    <div class="glow-effect"></div>
+                </div>
+
+                <div id="lista-eps" class="voltti-playlist"></div>
+            </div>
         </div>
-        <div class="video-box">
-            <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div id="lista-eps"></div>
     </div>
 
     <main id="movie-grid"></main>
