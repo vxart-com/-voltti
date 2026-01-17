@@ -66,71 +66,57 @@ const conteudos = [
 ];
 
 const grid = document.getElementById('movie-grid');
+const playerContainer = document.getElementById('player-container');
 const player = document.getElementById('main-player');
 const titleDisplay = document.getElementById('video-title');
 const listaEpsContainer = document.getElementById('lista-eps');
-const mobileMenu = document.getElementById('mobile-menu');
-const navMenu = document.getElementById('nav-menu');
 
-if (mobileMenu) {
-    mobileMenu.onclick = () => {
-        navMenu.classList.toggle('active');
-    };
+// Abrir Vídeo
+function darPlay(id, titulo) {
+    player.src = `https://drive.google.com/file/d/${id}/preview?autoplay=1`;
+    titleDisplay.innerText = titulo;
+    playerContainer.style.display = "flex";
 }
 
-function verificarAcessoBotao() {
-    const chaveCorreta = "VOLTTI5";
-    const botaoCompra = document.getElementById('botao-pagar');
-    if (localStorage.getItem("voltti_chave") === chaveCorreta && botaoCompra) {
-        botaoCompra.style.display = "none";
-    }
+// Fechar Vídeo
+function fecharPlayer() {
+    player.src = "";
+    playerContainer.style.display = "none";
 }
 
+// Chave Mensal
 function validarChave() {
-    const chaveCorreta = "VOLTTI5";
-    if (localStorage.getItem("voltti_chave") === chaveCorreta) return true;
-    
+    const chave = "VOLTTI5";
+    if (localStorage.getItem("voltti_chave") === chave) return true;
     const senha = prompt("Insira a chave de acesso mensal:");
-    if (senha === chaveCorreta) {
-        localStorage.setItem("voltti_chave", chaveCorreta);
-        verificarAcessoBotao();
+    if (senha === chave) {
+        localStorage.setItem("voltti_chave", chave);
         return true;
     }
     alert("Chave incorreta!");
     return false;
 }
 
-function darPlay(id, titulo) {
-    player.src = `https://drive.google.com/file/d/${id}/preview`;
-    titleDisplay.innerText = titulo;
-    window.scrollTo({top: 0, behavior: 'smooth'});
-}
-
+// Renderizar Catálogo
 function renderizar(lista) {
-    if (!grid) return;
     grid.innerHTML = "";
     const generos = [...new Set(lista.map(item => item.genero))];
-    
     generos.forEach(gen => {
         const secao = document.createElement('div');
         secao.className = 'genero-secao';
         secao.innerHTML = `<h3 class="genero-titulo">${gen}</h3><div class="genero-linha"></div>`;
         const linha = secao.querySelector('.genero-linha');
-        
         lista.filter(i => i.genero === gen).forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.innerHTML = `
-                <img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}">
-                <p>${item.titulo}</p>
-            `;
-            
+            card.innerHTML = `<img src="https://drive.google.com/thumbnail?authuser=0&sz=w400&id=${item.capaID}"><p>${item.titulo}</p>`;
             card.onclick = () => {
                 if (validarChave()) {
                     if (item.episodios) {
                         gerarListaEpisodios(item);
+                        playerContainer.style.display = "flex";
                     } else {
-                        if (listaEpsContainer) listaEpsContainer.innerHTML = "";
+                        listaEpsContainer.innerHTML = "";
                         darPlay(item.videoID, item.titulo);
                     }
                 }
@@ -142,33 +128,24 @@ function renderizar(lista) {
 }
 
 function gerarListaEpisodios(serie) {
-    if (!titleDisplay || !listaEpsContainer) return;
     titleDisplay.innerText = serie.titulo;
     listaEpsContainer.innerHTML = ""; 
     serie.episodios.forEach(ep => {
         const btn = document.createElement('button');
         btn.innerText = ep.nome;
-        btn.className = "btn-episodio";
-        btn.onclick = () => { darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`); };
+        btn.onclick = () => darPlay(ep.videoID, `${serie.titulo} - ${ep.nome}`);
         listaEpsContainer.appendChild(btn);
     });
 }
 
 function filtrar(tipo) {
-    if (navMenu) navMenu.classList.remove('active'); 
     renderizar(tipo === 'todos' ? conteudos : conteudos.filter(i => i.tipo === tipo));
 }
 
 function executarBusca() {
-    const input = document.getElementById('inputBusca');
-    if (!input) return;
-    const termo = input.value.toLowerCase();
-    const filtrados = conteudos.filter(i => 
-        i.titulo.toLowerCase().includes(termo) || 
-        i.genero.toLowerCase().includes(termo)
-    );
+    const termo = document.getElementById('inputBusca').value.toLowerCase();
+    const filtrados = conteudos.filter(i => i.titulo.toLowerCase().includes(termo) || i.genero.toLowerCase().includes(termo));
     renderizar(filtrados);
 }
 
 renderizar(conteudos);
-verificarAcessoBotao();
