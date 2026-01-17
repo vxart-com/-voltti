@@ -1,4 +1,3 @@
-/* Reset Básico para Mobile */
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -7,30 +6,29 @@
 body {
     background-color: #050505;
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
 
-/* Cabeçalho com Pesquisa */
+/* HEADER COMPACTO */
 header {
-    background-color: #000000;
-    padding: 10px 15px;
+    background-color: #000;
+    padding: 5px 15px; /* Reduzi o padding vertical */
     display: flex;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    height: 60px;
-    gap: 12px;
+    height: 50px; /* Altura fixa e baixa */
+    gap: 10px;
 }
 
 .logo {
     color: #e50914;
-    font-size: 22px;
+    font-size: 18px; /* Logo levemente menor */
     font-weight: 900;
-    letter-spacing: -1px;
 }
 
 .search-container {
@@ -39,138 +37,95 @@ header {
 
 .search-container input {
     width: 100%;
-    background: #222222;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    color: #ffffff;
-    font-size: 14px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 6px 12px; /* Input mais fino */
+    border-radius: 4px;
+    color: #fff;
+    font-size: 13px;
     outline: none;
+    height: 32px; /* Altura compacta */
 }
 
-/* Seções de Gênero */
+/* GRID MOBILE */
 .genero-secao {
-    padding: 20px 0 5px 15px;
+    padding: 15px 0 5px 15px;
 }
 
 .genero-titulo {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: bold;
-    margin-bottom: 12px;
-    color: #b3b3b3;
+    margin-bottom: 8px;
+    color: #999;
 }
 
-/* Linha de filmes com Scroll Lateral */
 .genero-linha {
     display: flex;
     overflow-x: auto;
-    gap: 12px;
-    padding-bottom: 20px;
-    scroll-snap-type: x mandatory;
+    gap: 10px;
+    padding-bottom: 15px;
 }
 
-/* Esconde a barra de rolagem feia */
 .genero-linha::-webkit-scrollbar {
     display: none;
 }
 
-/* Card do Filme - TAMANHO PADRONIZADO */
 .card {
-    min-width: 110px;
-    max-width: 110px;
-    scroll-snap-align: start;
-    cursor: pointer;
+    min-width: 105px;
+    max-width: 105px;
 }
 
 .card img {
-    width: 110px;
-    height: 165px; /* Proporção 2:3 fixa */
-    object-fit: cover; /* Faz a imagem caber sem esticar */
-    border-radius: 6px;
-    background: #1a1a1a;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    width: 105px;
+    height: 155px;
+    object-fit: cover;
+    border-radius: 4px;
 }
 
 .card p {
-    font-size: 12px;
-    margin-top: 8px;
-    text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Coloca ... se o nome for grande */
-    color: #e5e5e5;
-}
-
-/* Player Modal (Estilo Nativo Mobile) */
-#player-modal {
-    display: none;
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background: #000000;
-    z-index: 1000;
-    flex-direction: column;
-}
-
-.modal-header {
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #111111;
-    border-bottom: 1px solid #222;
-}
-
-#video-title {
-    font-size: 14px;
-    font-weight: bold;
-    max-width: 65%;
+    font-size: 11px;
+    margin-top: 5px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.btn-fechar {
-    background: #e50914;
-    color: #ffffff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 13px;
+/* PLAYER MODAL */
+#player-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000;
+    z-index: 1000;
+    flex-direction: column;
 }
 
-/* Ajuste do Iframe para não sobrar espaço */
+.modal-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+}
+
+.btn-fechar {
+    background: #e50914;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
 .video-box {
     width: 100%;
-    background: #000;
+    flex: 1;
     display: flex;
     align-items: center;
-    flex: 1; /* Ocupa o centro da tela no mobile */
 }
 
 .video-box iframe {
     width: 100%;
-    height: 100%; /* Ajuste para o player do Drive no mobile */
-    max-height: 300px; /* Limite para não esticar demais na vertical */
-}
-
-/* Botões de Episódios (Para Doramas) */
-#lista-eps {
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    overflow-y: auto;
-}
-
-.btn-episodio {
-    background: #333;
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    font-size: 14px;
+    height: 100%;
+    max-height: 280px;
 }
