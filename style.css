@@ -1,66 +1,88 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { background-color: #0f1014; color: white; font-family: 'Segoe UI', Arial, sans-serif; overflow-x: hidden; }
+body {
+    background-color: #0f1014;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
 header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 5%; background: rgba(0,0,0,0.95);
-    position: fixed; width: 100%; top: 0; z-index: 1001;
-}
-.logo { color: #e50914; font-size: 1.8em; font-weight: bold; }
-
-.search-container {
-    margin-top: 70px; padding: 10px 5%;
-    background: #0f1014; position: sticky; top: 60px; z-index: 1000;
-}
-.search-box { position: relative; width: 100%; }
-#inputBusca {
-    width: 100%; padding: 12px 15px; border-radius: 8px;
-    border: 1px solid #333; background: #1a1a1a; color: white; outline: none;
-}
-.search-icon { position: absolute; right: 15px; top: 12px; color: #666; }
-
-#nav-menu { 
-    position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; 
-    background: #000; transition: 0.4s; z-index: 1002; padding-top: 80px;
-}
-#nav-menu.active { right: 0; }
-nav ul { list-style: none; display: flex; flex-direction: column; padding: 0 10%; gap: 20px; }
-nav a { color: #fff !important; text-decoration: none !important; font-size: 1.2em; font-weight: 500; display: block; }
-
-.menu-destaque a { 
-    background: #e50914 !important; color: white !important; 
-    text-align: center; border-radius: 6px; padding: 15px !important; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 5%;
+    background: #000;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.genero-secao { margin: 25px 0 10px 5%; }
-.genero-titulo { font-size: 1.1em; margin-bottom: 12px; color: #e5e5e5; }
-.genero-linha { 
-    display: flex; gap: 15px; overflow-x: auto; padding-bottom: 15px;
-    scrollbar-width: none;
-}
-.genero-linha::-webkit-scrollbar { display: none; }
-.card { min-width: 140px; max-width: 140px; }
-.card img { width: 100%; height: 210px; object-fit: cover; border-radius: 6px; }
-.card p { font-size: 0.85em; margin-top: 5px; color: #ccc; text-align: center; }
+.logo { font-size: 24px; font-weight: bold; color: #e50914; }
 
-.main-content { margin-top: 10px; }
-.video-container { padding: 0 5%; margin-bottom: 20px; }
-.player-wrapper { position: relative; padding-bottom: 56.25%; background: #000; border-radius: 8px; overflow: hidden; }
-.player-wrapper iframe { position: absolute; top: 0; width: 100%; height: 100%; border: none; }
-
-/* Estilo dos Botões de Episódios */
-#lista-eps { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-.btn-episodio { 
-    background: #e50914; color: white; border: none; 
-    padding: 10px 20px; border-radius: 5px; cursor: pointer; 
-    font-weight: bold; font-size: 0.9em;
+.search-box input {
+    padding: 8px;
+    width: 250px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
 }
 
-footer { padding: 40px 5%; text-align: center; background: #000; border-top: 1px solid #222; margin-top: 40px; }
-.footer-logo { color: #e50914; font-size: 1.5em; font-weight: bold; margin-bottom: 15px; }
-.footer-links { display: flex; flex-direction: column; gap: 15px; }
-.footer-links a { color: #888 !important; text-decoration: none !important; font-size: 0.9em; }
-.copyright { color: #444; font-size: 0.7em; margin-top: 20px; }
+/* Modal do Player */
+#player-container {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
 
-.menu-toggle { display: flex; flex-direction: column; gap: 5px; cursor: pointer; }
-.menu-toggle span { width: 30px; height: 3px; background: #fff; }
+.player-content { width: 90%; max-width: 800px; text-align: center; }
+
+.iframe-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Proporção 16:9 */
+    height: 0;
+}
+
+.iframe-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border-radius: 10px;
+}
+
+.close-btn {
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    float: right;
+    margin-bottom: 10px;
+}
+
+/* Grid de Filmes */
+.genero-secao { padding: 20px 5%; }
+.genero-linha {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.card {
+    min-width: 160px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: scale(1.05); }
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.card p { font-size: 14px; margin-top: 8px; text-align: center; }
+
+#nav-menu { display: none; } /* Adicione a lógica de menu que você já usa */
