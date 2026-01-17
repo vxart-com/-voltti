@@ -2,40 +2,47 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VOLTTI | Future Streaming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOLTTI | Experience</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">VOLTTI</div>
-        <div class="search-box">
-            <input type="text" id="inputBusca" placeholder="Pesquisar..." onkeyup="executarBusca()">
-        </div>
-    </header>
+    <div class="bg-overlay"></div>
 
-    <div id="player-modal">
-        <div class="player-container">
-            <div class="player-glass">
-                <div class="modal-header">
-                    <div class="status-dot"></div>
-                    <span id="video-title">VOLTTI ORIGINAL</span>
-                    <button class="btn-fechar-voltti" onclick="fecharPlayer()">FECHAR</button>
-                </div>
-                
-                <div class="video-wrapper">
-                    <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
-                    <div class="glow-effect"></div>
-                </div>
+    <main class="main-content">
+        <header>
+            <div class="logo">VOLTTI<span>.</span></div>
+            <nav>
+                <a href="#">Doramas</a>
+                <a href="#">Filmes</a>
+                <a href="#">Novelas</a>
+                <button class="btn-premium">R$ 4,50</button>
+            </nav>
+        </header>
 
-                <div id="lista-eps" class="voltti-playlist"></div>
+        <section class="featured">
+            <div class="info">
+                <span class="tag">Destaque da Semana</span>
+                <h1>Uma Noite no Museu 2</h1>
+                <p>O guarda Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
+                <div class="actions">
+                    <a href="http://localhost:8080/watch/2?hash=a2583a" target="_blank" class="play-now">ASSISTIR AGORA</a>
+                    <button class="add-list">+ Minha Lista</button>
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <main id="movie-grid"></main>
+        <section class="next-up">
+            <h3>Próximos na sua lista</h3>
+            <div class="scroll-container">
+                <div class="mini-card active">01</div>
+                <div class="mini-card">02</div>
+                <div class="mini-card">03</div>
+                <div class="mini-card">04</div>
+            </div>
+        </section>
+    </main>
 
-    <script src="script.js"></script>
 </body>
 </html>
