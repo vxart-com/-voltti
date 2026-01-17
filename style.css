@@ -1,131 +1,147 @@
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+:root {
+    --primary: #8B5CF6; 
+    --accent: #06B6D4;
+    --bg: #0D0D12;
+    --glass: rgba(255, 255, 255, 0.03);
 }
 
 body {
-    background-color: #050505;
-    color: #ffffff;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+    background-color: var(--bg);
+    color: #F8FAFC;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0; padding: 0;
     overflow-x: hidden;
 }
 
-/* HEADER COMPACTO */
+/* HEADER COMPACTO VOLTTI */
 header {
-    background-color: #000;
-    padding: 5px 15px; /* Reduzi o padding vertical */
+    background: #000;
+    padding: 8px 15px;
     display: flex;
     align-items: center;
     position: sticky;
-    top: 0;
-    z-index: 100;
-    height: 50px; /* Altura fixa e baixa */
-    gap: 10px;
+    top: 0; z-index: 1000;
+    height: 55px;
+    gap: 12px;
 }
 
 .logo {
-    color: #e50914;
-    font-size: 18px; /* Logo levemente menor */
+    font-size: 20px;
     font-weight: 900;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
 }
 
-.search-container {
-    flex: 1;
-}
-
-.search-container input {
+.search-box { flex: 1; }
+.search-box input {
     width: 100%;
     background: #1a1a1a;
     border: 1px solid #333;
-    padding: 6px 12px; /* Input mais fino */
-    border-radius: 4px;
+    padding: 8px 15px;
+    border-radius: 8px;
     color: #fff;
-    font-size: 13px;
     outline: none;
-    height: 32px; /* Altura compacta */
+    font-size: 14px;
 }
 
-/* GRID MOBILE */
-.genero-secao {
-    padding: 15px 0 5px 15px;
-}
-
+/* GRID ESTILO VOLTTI */
+.genero-secao { padding: 20px 0 0 15px; }
 .genero-titulo {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #999;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 .genero-linha {
     display: flex;
     overflow-x: auto;
-    gap: 10px;
-    padding-bottom: 15px;
+    gap: 15px;
+    padding-bottom: 20px;
 }
-
-.genero-linha::-webkit-scrollbar {
-    display: none;
-}
+.genero-linha::-webkit-scrollbar { display: none; }
 
 .card {
-    min-width: 105px;
-    max-width: 105px;
+    min-width: 120px;
+    max-width: 120px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card img {
-    width: 105px;
-    height: 155px;
+    width: 120px;
+    height: 180px;
     object-fit: cover;
-    border-radius: 4px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 .card p {
     font-size: 11px;
-    margin-top: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin-top: 8px;
+    text-align: center;
+    color: #cbd5e1;
 }
 
-/* PLAYER MODAL */
+/* PLAYER NEBULA GLASS */
 #player-modal {
     display: none;
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #000;
-    z-index: 1000;
-    flex-direction: column;
-}
-
-.modal-header {
-    padding: 10px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #111;
-}
-
-.btn-fechar {
-    background: #e50914;
-    color: #fff;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-weight: bold;
-}
-
-.video-box {
-    width: 100%;
-    flex: 1;
-    display: flex;
+    inset: 0;
+    background: rgba(13, 13, 18, 0.98);
+    backdrop-filter: blur(15px);
+    z-index: 5000;
+    justify-content: center;
     align-items: center;
 }
 
-.video-box iframe {
-    width: 100%;
-    height: 100%;
-    max-height: 280px;
+.player-container { width: 95%; max-width: 800px; }
+
+.player-glass {
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 15px;
+    position: relative;
 }
+
+.modal-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+.status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+#video-title { flex: 1; font-size: 13px; font-weight: bold; color: #fff; }
+
+.btn-fechar-voltti {
+    background: rgba(255, 255, 255, 0.1);
+    border: none; color: #fff; padding: 6px 12px;
+    border-radius: 8px; font-size: 11px; font-weight: bold;
+}
+
+.video-wrapper {
+    position: relative; width: 100%; padding-top: 56.25%;
+    border-radius: 15px; overflow: hidden; background: #000;
+}
+
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.glow-effect {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 80%);
+    pointer-events: none;
+}
+
+/* BOTÕES DE EPISÓDIOS */
+.voltti-playlist {
+    margin-top: 15px; display: flex; flex-direction: column; gap: 8px;
+    max-height: 150px; overflow-y: auto;
+}
+
+.btn-episodio {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ccc; padding: 12px; border-radius: 12px;
+    text-align: left; font-size: 13px; transition: 0.3s;
+}
+
+.btn-episodio:active { background: var(--primary); color: #fff; }
