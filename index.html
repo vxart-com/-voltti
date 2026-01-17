@@ -2,55 +2,44 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VOLTTI | Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOLTTI - Streaming</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="logo">VOLTTI</div>
-        <div class="header-right">
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span><span></span><span></span>
-            </div>
+        <div class="search-box">
+            <input type="text" id="inputBusca" placeholder="Pesquisar filme ou gênero..." onkeyup="executarBusca()">
         </div>
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="#" onclick="filtrar('todos')">Início</a></li>
-                <li><a href="#" onclick="filtrar('filme')">Filmes</a></li>
-                <li><a href="#" onclick="filtrar('serie')">Séries</a></li>
-                <li><a href="#" onclick="filtrar('dorama')">Doramas</a></li>
-                <li class="menu-destaque" id="botao-pagar"><a href="pagar.html">ASSINAR MENSAL</a></li>
-            </ul>
-        </nav>
+        <div id="mobile-menu" class="menu-icon">☰</div>
     </header>
 
-    <div class="search-container">
-        <div class="search-box">
-            <input type="text" id="inputBusca" placeholder="Pesquisar filmes ou doramas..." onkeyup="executarBusca()">
-            <span class="search-icon">🔍</span>
+    <nav id="nav-menu">
+        <ul>
+            <li onclick="filtrar('todos')">Início</li>
+            <li onclick="filtrar('filme')">Filmes</li>
+            <li onclick="filtrar('dorama')">Doramas</li>
+            <li id="botao-pagar"><a href="SEU_LINK_DE_PAGAMENTO" target="_blank">Assinar R$ 4,50</a></li>
+        </ul>
+    </nav>
+
+    <div id="player-container">
+        <div class="player-content">
+            <span class="close-btn" onclick="fecharPlayer()">&times; fechar</span>
+            <h2 id="video-title"></h2>
+            <div class="iframe-wrapper">
+                <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div id="lista-eps"></div>
         </div>
     </div>
 
-    <main class="main-content">
-        <section class="video-container">
-            <div class="player-wrapper">
-                <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <h2 id="video-title">Seja bem-vindo à VOLTTI</h2>
-            <div id="lista-eps"></div>
-        </section>
-        <section class="catalog" id="movie-grid"></section>
-    </main>
+    <main id="movie-grid"></main>
 
     <footer>
-        <div class="footer-logo">VOLTTI</div>
-        <div class="footer-links">
-            <a href="https://wa.me/5598981296742" target="_blank">Suporte WhatsApp</a>
-            <a href="#" onclick="localStorage.clear(); location.reload();">Sair / Trocar Conta</a>
-        </div>
-        <p class="copyright">© 2026 VOLTTI - TODOS OS DIREITOS RESERVADOS</p>
+        <p>&copy; 2026 VOLTTI - Todos os direitos reservados</p>
     </footer>
 
     <script src="script.js"></script>
