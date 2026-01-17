@@ -1,88 +1,69 @@
 body {
     background-color: #0f1014;
     color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0; padding: 0;
+    overflow-x: hidden;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 5%;
-    background: #000;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; background: #000;
+    position: sticky; top: 0; z-index: 1000;
 }
 
-.logo { font-size: 24px; font-weight: bold; color: #e50914; }
+.logo { font-size: 26px; font-weight: bold; color: #e50914; letter-spacing: 1px; }
 
 .search-box input {
-    padding: 8px;
-    width: 250px;
-    border-radius: 20px;
-    border: none;
-    outline: none;
+    width: 180px; padding: 10px 15px; border-radius: 20px;
+    border: none; background: #222; color: white; outline: none;
+    transition: 0.3s;
 }
 
-/* Modal do Player */
-#player-container {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
+.search-box input:focus { width: 250px; background: #333; }
+
+/* Menu Lateral */
+#nav-menu {
+    position: fixed; top: 0; right: -250px; width: 250px; height: 100%;
+    background: #000; z-index: 2000; transition: 0.4s; padding-top: 60px;
 }
+#nav-menu.active { right: 0; }
+#nav-menu ul { list-style: none; padding: 0; }
+#nav-menu li { padding: 15px 25px; cursor: pointer; border-bottom: 1px solid #111; }
+#nav-menu li:hover { background: #e50914; }
+.close-menu { position: absolute; top: 20px; left: 20px; font-size: 30px; cursor: pointer; }
 
-.player-content { width: 90%; max-width: 800px; text-align: center; }
-
-.iframe-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* Proporção 16:9 */
-    height: 0;
-}
-
-.iframe-wrapper iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    border-radius: 10px;
-}
-
-.close-btn {
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    float: right;
-    margin-bottom: 10px;
-}
-
-/* Grid de Filmes */
-.genero-secao { padding: 20px 5%; }
+/* Grid e Capas (PROPORÇÃO FIXA) */
+.genero-secao { padding: 20px 0 0 20px; }
 .genero-linha {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding-bottom: 10px;
+    display: flex; overflow-x: auto; gap: 15px; padding: 15px 0;
+    scrollbar-width: none; /* Esconde scroll no Firefox */
 }
+.genero-linha::-webkit-scrollbar { display: none; } /* Esconde scroll no Chrome */
 
 .card {
-    min-width: 160px;
-    cursor: pointer;
+    min-width: 140px; max-width: 140px; cursor: pointer;
     transition: transform 0.3s;
 }
-
-.card:hover { transform: scale(1.05); }
+.card:hover { transform: scale(1.1); z-index: 5; }
 
 .card img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    width: 140px; height: 210px; /* Proporção 2:3 padrão de cinema */
+    object-fit: cover; border-radius: 5px; background: #222;
 }
+.card p { font-size: 13px; text-align: center; margin-top: 8px; color: #ccc; }
 
-.card p { font-size: 14px; margin-top: 8px; text-align: center; }
-
-#nav-menu { display: none; } /* Adicione a lógica de menu que você já usa */
+/* Player Modal */
+#player-container {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95); z-index: 5000; align-items: center; justify-content: center;
+}
+.player-content { width: 95%; max-width: 900px; }
+.iframe-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+.iframe-wrapper iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;
+}
+.close-btn {
+    background: #e50914; color: white; border: none; padding: 8px 15px;
+    border-radius: 5px; cursor: pointer; margin-bottom: 10px; float: right;
+}
