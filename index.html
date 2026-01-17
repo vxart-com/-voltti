@@ -2,46 +2,31 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI - Premium Streaming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOLTTI</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
         <div class="logo">VOLTTI</div>
-        <div class="search-box">
-            <input type="text" id="inputBusca" placeholder="O que vamos assistir?" onkeyup="executarBusca()">
+        <div class="search-container">
+            <input type="text" id="inputBusca" placeholder="Pesquisar..." onkeyup="executarBusca()">
         </div>
-        <div id="mobile-menu" class="menu-icon" onclick="toggleMenu()">☰</div>
     </header>
 
-    <nav id="nav-menu">
-        <span class="close-menu" onclick="toggleMenu()">&times;</span>
-        <ul>
-            <li onclick="filtrar('todos')">Início</li>
-            <li onclick="filtrar('filme')">Filmes</li>
-            <li onclick="filtrar('dorama')">Doramas</li>
-            <li id="botao-pagar"><a href="#" target="_blank">Assinar R$ 4,50</a></li>
-        </ul>
-    </nav>
-
-    <div id="player-container">
-        <div class="player-content">
-            <button class="close-btn" onclick="fecharPlayer()">FECHAR X</button>
-            <h2 id="video-title"></h2>
-            <div class="iframe-wrapper">
-                <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div id="lista-eps"></div>
+    <div id="player-modal">
+        <div class="modal-header">
+            <span id="video-title"></span>
+            <button class="btn-fechar" onclick="fecharPlayer()">FECHAR ×</button>
         </div>
+        <div class="video-box">
+            <iframe id="main-player" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="lista-eps"></div>
     </div>
 
     <main id="movie-grid"></main>
-
-    <footer>
-        <p>&copy; 2026 VOLTTI - Experiência de Cinema</p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
