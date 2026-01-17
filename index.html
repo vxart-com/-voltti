@@ -3,46 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTTI | Experience</title>
+    <title>VOLTTI Mobile</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
+    <div class="bg-gradient"></div>
 
-    <main class="main-content">
-        <header>
+    <main class="app-container">
+        <header class="mobile-header">
             <div class="logo">VOLTTI<span>.</span></div>
-            <nav>
-                <a href="#">Doramas</a>
-                <a href="#">Filmes</a>
-                <a href="#">Novelas</a>
-                <button class="btn-premium">R$ 4,50</button>
-            </nav>
+            <div class="price-tag">R$ 4,50</div>
         </header>
 
-        <section class="featured">
-            <div class="info">
-                <span class="tag">Destaque da Semana</span>
+        <section class="hero-mobile">
+            <div class="hero-content">
+                <span class="status">DESTAQUE</span>
                 <h1>Uma Noite no Museu 2</h1>
-                <p>O guarda Larry Daley mergulha na maior aventura de sua vida quando as peças do Smithsonian ganham vida.</p>
-                <div class="actions">
-                    <a href="http://localhost:8080/watch/2?hash=a2583a" target="_blank" class="play-now">ASSISTIR AGORA</a>
-                    <button class="add-list">+ Minha Lista</button>
+                <p>O guarda Larry Daley mergulha na maior aventura de sua vida.</p>
+                
+                <div class="mobile-actions">
+                    <a href="http://localhost:8080/watch/2?hash=a2583a" class="btn-play">ASSISTIR</a>
+                    <button class="btn-list">+</button>
                 </div>
             </div>
         </section>
 
-        <section class="next-up">
+        <section class="categories-scroll">
+            <div class="cat-chip active">Tudo</div>
+            <div class="cat-chip">Doramas</div>
+            <div class="cat-chip">Séries</div>
+            <div class="cat-chip">Filmes</div>
+        </section>
+
+        <section class="horizontal-list">
             <h3>Próximos na sua lista</h3>
-            <div class="scroll-container">
-                <div class="mini-card active">01</div>
-                <div class="mini-card">02</div>
-                <div class="mini-card">03</div>
-                <div class="mini-card">04</div>
+            <div class="cards-container">
+                <div class="m-card">01</div>
+                <div class="m-card">02</div>
+                <div class="m-card">03</div>
+                <div class="m-card">04</div>
             </div>
         </section>
     </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active">Início</div>
+        <div class="nav-item">Busca</div>
+        <div class="nav-item">Perfil</div>
+    </nav>
 
 </body>
 </html>
